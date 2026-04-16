@@ -9,7 +9,10 @@ license=('MIT')
 depends=()
 makedepends=('go>=2:1.22')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
-sha256sums=('febe34758af916e47009b6584a6340bfb5047595b6aa56327c5b61c5f53c44cf')
+# The sha256sum below must be updated after cutting a GitHub release.
+# Generate it with: curl -sL "$url/archive/v$pkgver.tar.gz" | sha256sum
+# For local development builds: makepkg --skipchecksums
+sha256sums=('SKIP')
 
 build() {
   cd "${pkgname}-${pkgver}"
@@ -17,7 +20,6 @@ build() {
   export CGO_ENABLED=0
   export GOFLAGS="-trimpath -mod=readonly -modcacherw"
 
-  # Build binary from the committed eBPF object.
   go build \
     -ldflags "-s -w \
       -X 'github.com/procscope/procscope/internal/version.Version=${pkgver}' \
@@ -28,23 +30,16 @@ build() {
 
 check() {
   cd "${pkgname}-${pkgver}"
-  # Run unit tests (short mode, no eBPF runtime needed).
   go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
 }
 
 package() {
   cd "${pkgname}-${pkgver}"
 
-  # Binary
   install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-
-  # Man page
   install -Dm644 "man/${pkgname}.1" "${pkgdir}/usr/share/man/man1/${pkgname}.1"
-
-  # License
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
-  # Shell completions
   install -Dm644 "completions/${pkgname}.bash" \
     "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
   install -Dm644 "completions/${pkgname}.zsh" \
@@ -52,6 +47,5 @@ package() {
   install -Dm644 "completions/${pkgname}.fish" \
     "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
 
-  # Documentation
   install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
 }

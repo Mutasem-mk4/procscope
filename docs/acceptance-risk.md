@@ -14,7 +14,7 @@ blockers that prevent it from being submitted to any distro right now.
 | Source builds | ✅ | `go build`, `go vet`, `go test` pass on Windows, Linux cross-build passes |
 | Committed BPF artifact | ✅ | `internal/tracer/procscope_bpfel.o` (68KB) embedded via `go:embed` |
 | Debian packaging skeleton | ✅ | `debian/rules` builds from committed artifact, no `go generate` |
-| Arch PKGBUILD | ✅ | Real sha256sum from `git archive`, no SKIP |
+| Arch PKGBUILD | ⚠️ | Structurally correct; sha256sums=SKIP (see below) |
 | Documentation | ✅ | Honest support matrix, no false claims |
 | Man page | ✅ | `man/procscope.1` |
 | Shell completions | ✅ | bash, zsh, fish |
@@ -33,8 +33,20 @@ The GitHub repository `github.com/procscope/procscope` does not exist yet.
 Every distro submission requires a publicly accessible upstream repository.
 
 **To resolve:** Create the repository on GitHub, push all commits and the
-`v0.1.0` tag. The PKGBUILD sha256sum was computed from `git archive v0.1.0`
-and will match GitHub's tarball for the same commit.
+`v0.1.0` tag.
+
+### 5. PKGBUILD sha256sums=SKIP
+
+The in-tree PKGBUILD uses `sha256sums=('SKIP')` because an in-tree file
+cannot contain its own archive's hash (bootstrap problem). This is standard
+for upstream convenience PKGBUILDs. The actual BlackArch submission will be
+a copy of this PKGBUILD with the real hash filled in.
+
+**To resolve:** After pushing the tag, compute the hash from the GitHub
+tarball:
+```bash
+curl -sL https://github.com/procscope/procscope/archive/v0.1.0.tar.gz | sha256sum
+```
 
 ### 2. No Linux Runtime Verification
 
@@ -85,7 +97,7 @@ maintainers will want a real person's name and reachable email.
 | Requirement | Status |
 |------------|--------|
 | Public GitHub repo | ❌ Not created |
-| PKGBUILD with real sha256 | ✅ Computed from git archive |
+| PKGBUILD with real sha256 | ⚠️ SKIP — fill from GitHub tarball after push |
 | PKGBUILD builds cleanly | ❌ Not verified with makepkg |
 | Tool in `blackarch-forensic` or `blackarch-debugging` | ⚠️ Planned |
 | PR to BlackArch repo | ❌ Not filed |
@@ -105,7 +117,7 @@ maintainers will want a real person's name and reachable email.
 | BPF verifier rejects programs | HIGH | Test on Linux; fix C code if needed |
 | Go struct ↔ BPF struct mismatch | MEDIUM | `binary.Read` will fail loudly; fixable |
 | Packaging tools reject files | LOW | Skeleton follows policy closely |
-| sha256 mismatch on push | LOW | `git archive` is deterministic for same commit |
+| PKGBUILD sha256 = SKIP | LOW | Fill in after cutting GitHub release |
 | Placeholder email rejected | LOW | Simple text replacement |
 
 ## Recommended Next Steps (In Priority Order)
