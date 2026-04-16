@@ -20,16 +20,15 @@ sudo dpkg -i ../procscope_*.deb
 ```
 debian/
 ├── control          # Package metadata, deps, description
-├── rules            # Build rules (dh + go)
+├── rules            # Build rules (dh + go build)
 ├── changelog        # Package changelog
 ├── copyright        # Machine-readable copyright (DEP-5)
 ├── watch            # Upstream version tracking
 ├── source/format    # 3.0 (quilt)
-├── procscope.manpages  # Man page installation
-├── procscope.install   # File installation paths
-├── compat           # Debhelper compat level
 └── tests/
-    └── control      # DEP-8 autopkgtest definitions
+    ├── control      # DEP-8 autopkgtest definitions
+    ├── help-test    # Verify --help works
+    └── smoke-test   # Verify --version works
 ```
 
 The Debian package builds from the committed `internal/tracer/procscope_bpfel.o`

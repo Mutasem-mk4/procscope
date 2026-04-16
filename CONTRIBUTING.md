@@ -7,9 +7,9 @@ Thank you for your interest in contributing to procscope!
 ### Prerequisites
 
 - Go 1.22+
-- Linux (for eBPF development and testing)
-- clang and llvm-strip (for eBPF compilation)
 - Make
+- Linux (for runtime testing)
+- clang and llvm-strip (only when editing `bpf/procscope.c`)
 
 ### Development Setup
 
@@ -17,10 +17,7 @@ Thank you for your interest in contributing to procscope!
 git clone https://github.com/procscope/procscope.git
 cd procscope
 
-# Generate eBPF bindings (Linux only)
-make generate
-
-# Build
+# Build (uses committed BPF object — no code generation needed)
 make build
 
 # Run tests
@@ -28,6 +25,9 @@ make test
 
 # Run linters
 make lint
+
+# Only if you edit bpf/procscope.c (requires Linux + clang):
+make generate
 ```
 
 ## How to Contribute

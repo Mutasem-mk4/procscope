@@ -2,7 +2,6 @@
 
 **Process-scoped runtime investigator for Linux.**
 
-[![CI](https://github.com/procscope/procscope/actions/workflows/ci.yml/badge.svg)](https://github.com/procscope/procscope/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
