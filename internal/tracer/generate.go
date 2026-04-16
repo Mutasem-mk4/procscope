@@ -6,4 +6,6 @@
 // This package is Linux-only and requires kernel 5.8+ with BTF support.
 package tracer
 
-//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -cc clang -cflags "-O2 -g -Wall -Werror" -target bpfel,bpfeb -type event procscope ../../bpf/procscope.c -- -I../../bpf/headers
+// The committed BPF object lives next to this package so source builds and
+// package builds do not need to invoke code generation. Refresh it with
+// `make generate` after editing ../../bpf/procscope.c.

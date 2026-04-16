@@ -23,18 +23,13 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      - name: Install eBPF build dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang llvm libbpf-dev
-
-      - name: Generate eBPF bindings
-        run: |
-          cd internal/tracer
-          go generate ./...
-
       - name: Build
         run: make build
+
+      - name: Cross-build supported targets
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath ./cmd/procscope
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath ./cmd/procscope
 
       - name: Unit tests
         run: go test -v -race -count=1 -short ./...
@@ -51,16 +46,6 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.22'
-
-      - name: Install eBPF build dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang llvm
-
-      - name: Generate eBPF bindings
-        run: |
-          cd internal/tracer
-          go generate ./...
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
@@ -97,12 +82,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang llvm debhelper
-
-      - name: Generate eBPF bindings
-        run: |
-          cd internal/tracer
-          go generate ./...
+          sudo apt-get install -y debhelper
 
       - name: Build binary
         run: make build

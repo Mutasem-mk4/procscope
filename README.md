@@ -55,12 +55,14 @@ procscope will detect missing capabilities at startup and provide actionable gui
 ### From Source
 
 ```bash
-# Prerequisites: Go 1.22+, clang, llvm-strip
+# Prerequisites: Go 1.22+
 git clone https://github.com/procscope/procscope.git
 cd procscope
-make generate  # compile eBPF (requires Linux + clang)
 make build
 sudo make install
+
+# Only if you modify bpf/procscope.c:
+make generate
 ```
 
 ### Debian / Kali / Parrot

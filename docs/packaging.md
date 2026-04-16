@@ -32,6 +32,9 @@ debian/
     └── control      # DEP-8 autopkgtest definitions
 ```
 
+The Debian package builds from the committed `internal/tracer/procscope_bpfel.o`
+artifact and does not run `go generate` during package build.
+
 ### Kali Tool Submission
 
 The repository is structured for a Kali tool request per https://www.kali.org/docs/tools/submitting-tools/:
@@ -63,6 +66,7 @@ makepkg -si
 ### PKGBUILD Notes
 
 - Follows Arch Go packaging guidelines
+- Consumes the committed `internal/tracer/procscope_bpfel.o` artifact instead of invoking `go generate`
 - No network access during build (offline build)
 - Respects system build flags
 - Installs to standard paths (`/usr/bin`, `/usr/share/man`, `/usr/share/licenses`)

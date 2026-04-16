@@ -4,16 +4,13 @@
 
 - Go 1.22 or newer
 - Linux (kernel 5.8+ with BTF for runtime)
-- clang (for compiling eBPF C programs)
-- llvm-strip (optional, for stripping eBPF objects)
+- clang with BPF target support (only when refreshing the committed eBPF object)
+- llvm-strip (optional, when refreshing the committed eBPF object)
 
 ## Quick Build
 
 ```bash
-# 1. Generate eBPF Go bindings (requires Linux + clang)
-make generate
-
-# 2. Build the binary
+# Build the binary from the committed eBPF object
 make build
 
 # The binary is at ./bin/procscope
@@ -36,35 +33,30 @@ go mod verify
 
 This should report `all modules verified`.
 
-### 3. Generate eBPF bindings
-
-```bash
-cd internal/tracer
-go generate ./...
-cd ../..
-```
-
-This runs `bpf2go` which:
-- Compiles `bpf/procscope.c` into BPF ELF objects (`.o`)
-- Generates Go source files (`.go`) that embed the objects
-- Output files are architecture-specific (bpfel for little-endian, bpfeb for big-endian)
-
-If your kernel's `vmlinux.h` differs from the bundled minimal subset, regenerate it:
-
-```bash
-bpftool btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h
-```
-
-### 4. Build
+### 3. Build
 
 ```bash
 CGO_ENABLED=0 go build -trimpath -ldflags "-s -w" -o bin/procscope ./cmd/procscope
 ```
 
-Or simply:
+Fresh checkouts already include the committed BPF object at
+`internal/tracer/procscope_bpfel.o`, so normal source builds and package builds
+do not need to run code generation.
+
+### 4. Refresh the eBPF object after editing `bpf/procscope.c`
 
 ```bash
-make build
+make generate
+```
+
+This recompiles `bpf/procscope.c` into the committed
+`internal/tracer/procscope_bpfel.o` artifact. Use it only when the eBPF C
+source changes.
+
+If your kernel's `vmlinux.h` differs from the bundled minimal subset, refresh it first:
+
+```bash
+bpftool btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h
 ```
 
 ### 5. Test (unit tests, no root needed)
@@ -90,14 +82,16 @@ CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -o bin/procscope-linux-
 ```
 
 Note: eBPF generation (`go generate`) must run on a Linux host.
-Cross-compilation of the Go binary works from any platform after generation.
+Cross-compilation of the Go binary works from any platform because the source
+tree already includes the committed BPF object for the supported little-endian
+targets (amd64, arm64).
 
 ## Packaging
 
 ### Debian / Kali / Parrot
 
 ```bash
-# Build-Depends: debhelper-compat (= 13), golang-go, clang, llvm
+# Build-Depends: debhelper-compat (= 13), golang-go
 dpkg-buildpackage -us -uc -b
 ```
 
@@ -110,10 +104,10 @@ makepkg -sf
 
 ## Troubleshooting
 
-### `go generate` fails with "vmlinux.h: No such file or directory"
+### `make generate` fails with "vmlinux.h: No such file or directory"
 
-Ensure you are running on Linux and the `bpf/headers/vmlinux.h` file exists.
-You may need to regenerate it from your kernel's BTF:
+Ensure the `bpf/headers/vmlinux.h` file exists.
+You may need to regenerate it from a Linux host's kernel BTF:
 
 ```bash
 bpftool btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h

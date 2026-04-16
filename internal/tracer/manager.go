@@ -73,7 +73,7 @@ func (m *Manager) Load() error {
 			"  - Kernel < 5.8 (ring buffer not supported)\n"+
 			"  - BTF not available (/sys/kernel/btf/vmlinux missing)\n"+
 			"  - Insufficient privileges (need CAP_BPF + CAP_PERFMON, or root)\n"+
-			"  - eBPF objects not compiled (run 'make generate')", err)
+			"  - Embedded eBPF object missing or stale (run 'make generate' after editing bpf/procscope.c)", err)
 	}
 
 	if err := spec.LoadAndAssign(&m.objs, &ebpf.CollectionOptions{
@@ -244,7 +244,7 @@ func (m *Manager) parseEvent(raw []byte) (*events.Event, error) {
 		evt.Type = events.EventExit
 		evt.Confidence = events.ConfidenceExact
 		evt.Process = &events.ProcessData{
-			ExitCode: bpfEvt.ExitCode,
+			ExitCode: int32(bpfEvt.ExitCode),
 		}
 	case bpfEventFileOpen:
 		evt.Type = events.EventFileOpen

@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"unsafe"
 
 	"golang.org/x/sys/unix"
 )
@@ -73,11 +72,11 @@ func Check() *CheckResult {
 		data, err := os.ReadFile("/proc/self/status")
 		if err == nil {
 			capEff := parseCapEffective(string(data))
-			result.Capabilities["CAP_BPF"] = hasCapBit(capEff, 39)         // CAP_BPF = 39
-			result.Capabilities["CAP_PERFMON"] = hasCapBit(capEff, 38)     // CAP_PERFMON = 38
+			result.Capabilities["CAP_BPF"] = hasCapBit(capEff, 39)          // CAP_BPF = 39
+			result.Capabilities["CAP_PERFMON"] = hasCapBit(capEff, 38)      // CAP_PERFMON = 38
 			result.Capabilities["CAP_SYS_RESOURCE"] = hasCapBit(capEff, 24) // CAP_SYS_RESOURCE = 24
-			result.Capabilities["CAP_SYS_ADMIN"] = hasCapBit(capEff, 21)   // CAP_SYS_ADMIN = 21
-			result.Capabilities["CAP_SYS_PTRACE"] = hasCapBit(capEff, 19)  // CAP_SYS_PTRACE = 19
+			result.Capabilities["CAP_SYS_ADMIN"] = hasCapBit(capEff, 21)    // CAP_SYS_ADMIN = 21
+			result.Capabilities["CAP_SYS_PTRACE"] = hasCapBit(capEff, 19)   // CAP_SYS_PTRACE = 19
 		}
 
 		// Check if we have the minimum capabilities
@@ -193,15 +192,20 @@ func parseKernelVersion(release string) (int, int) {
 	return major, minor
 }
 
-// utsStr converts a Utsname field (which may be []int8 or []byte depending
-// on platform) to a Go string, stopping at the first null byte.
-func utsStr(raw []int8) string {
-	// Convert int8 slice to byte slice safely
-	b := (*[65]byte)(unsafe.Pointer(&raw[0]))[:]
-	for i, c := range b {
-		if c == 0 {
-			return string(b[:i])
+// utsStr converts a Utsname field to a Go string, stopping at the first null
+// byte. The x/sys unix package exposes these fields as either []byte or []int8
+// depending on the target platform.
+func utsStr[T ~byte | ~int8](raw []T) string {
+	n := 0
+	for ; n < len(raw); n++ {
+		if raw[n] == 0 {
+			break
 		}
 	}
-	return string(b)
+
+	buf := make([]byte, n)
+	for i := 0; i < n; i++ {
+		buf[i] = byte(raw[i])
+	}
+	return string(buf)
 }

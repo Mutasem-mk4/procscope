@@ -5,8 +5,6 @@ Maintainer: procscope contributors <security@procscope.dev>
 Build-Depends:
  debhelper-compat (= 13),
  golang-go (>= 2:1.22~),
- clang,
- llvm,
 Rules-Requires-Root: no
 Standards-Version: 4.7.0
 Homepage: https://github.com/procscope/procscope

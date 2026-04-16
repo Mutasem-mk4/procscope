@@ -28,7 +28,24 @@
 #include "headers/vmlinux.h"
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_tracing.h>
+#include <bpf/bpf_endian.h>
 #include <bpf/bpf_core_read.h>
+
+/*
+ * The bundled vmlinux.h is intentionally minimal, so define the small subset
+ * of BPF map and update constants this program needs when kernel headers don't.
+ */
+#ifndef BPF_MAP_TYPE_HASH
+#define BPF_MAP_TYPE_HASH 1
+#endif
+
+#ifndef BPF_MAP_TYPE_RINGBUF
+#define BPF_MAP_TYPE_RINGBUF 27
+#endif
+
+#ifndef BPF_ANY
+#define BPF_ANY 0
+#endif
 
 char __license[] SEC("license") = "Dual MIT/GPL";
 

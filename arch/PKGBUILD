@@ -7,7 +7,7 @@ arch=('x86_64' 'aarch64')
 url='https://github.com/procscope/procscope'
 license=('MIT')
 depends=('glibc')
-makedepends=('go>=2:1.22' 'clang' 'llvm' 'git')
+makedepends=('go>=2:1.22')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 # NOTE: Update this checksum when releasing. Generate with:
 #   sha256sum procscope-0.1.0.tar.gz
@@ -24,12 +24,7 @@ build() {
   export CGO_ENABLED=0
   export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
 
-  # Generate eBPF bindings
-  cd internal/tracer
-  go generate ./...
-  cd ../..
-
-  # Build binary with version info
+  # Build binary from the committed eBPF object.
   go build \
     -ldflags "-s -w \
       -X 'github.com/procscope/procscope/internal/version.Version=${pkgver}' \
@@ -40,7 +35,7 @@ build() {
 
 check() {
   cd "${pkgname}-${pkgver}"
-  # Run unit tests (short mode, no eBPF runtime needed)
+  # Run unit tests (short mode, no eBPF runtime needed).
   go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
 }
 

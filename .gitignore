@@ -30,11 +30,12 @@ Thumbs.db
 # Build artifacts
 /build/
 
-# Generated eBPF files (regenerate with `make generate`)
+# eBPF artifacts (the committed runtime object is kept in-tree)
 *_bpfel.go
 *_bpfeb.go
-*_bpfel.o
 *_bpfeb.o
+*_bpfel.o
+!internal/tracer/procscope_bpfel.o
 
 # Evidence bundles (output)
 /case-*/

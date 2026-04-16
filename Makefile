@@ -1,5 +1,6 @@
 # procscope — Makefile
-# Requires: Go 1.22+, clang, llvm-strip, bpftool (for vmlinux.h generation)
+# Requires: Go 1.22+
+# Optional for refreshing the committed BPF object: clang, llvm-strip, bpftool
 
 BINARY      := procscope
 MODULE      := github.com/procscope/procscope
@@ -16,25 +17,25 @@ CGO_ENABLED := 0
 LDFLAGS     := -s -w \
   -X '$(MODULE)/internal/version.Version=$(VERSION)' \
   -X '$(MODULE)/internal/version.Commit=$(COMMIT)'
+BPF_SRC     := bpf/procscope.c
+BPF_OBJ     := internal/tracer/procscope_bpfel.o
 
 # eBPF compilation flags
-BPF_CFLAGS  := -O2 -g -Wall -Werror -target bpf
+BPF_CFLAGS  := -O2 -g -Wall -Werror
 
 # Architecture detection
 ARCH        := $(shell uname -m)
 ifeq ($(ARCH),x86_64)
   GOARCH    := amd64
-  BPF_ARCH  := x86
 endif
 ifeq ($(ARCH),aarch64)
   GOARCH    := arm64
-  BPF_ARCH  := arm64
 endif
 
 .PHONY: all build generate test lint clean install uninstall \
         vmlinux fixtures deb arch-pkg help
 
-all: generate build ## Build everything
+all: build ## Build the procscope binary
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -45,8 +46,9 @@ help: ## Show this help
 vmlinux: ## Generate vmlinux.h from running kernel BTF
 	$(BPFTOOL) btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h
 
-generate: ## Generate eBPF Go bindings (requires clang, Linux)
-	cd internal/tracer && $(GO) generate ./...
+generate: ## Refresh the committed eBPF object (requires clang with BPF target support)
+	$(CLANG) $(BPF_CFLAGS) -target bpfel -I./bpf/headers -c $(BPF_SRC) -o $(BPF_OBJ)
+	@which $(STRIP) >/dev/null 2>&1 && $(STRIP) -g $(BPF_OBJ) || true
 
 # --- Build ---
 
