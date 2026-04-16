@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/cilium/ebpf v0.17.3
 	github.com/spf13/cobra v1.8.1
-	golang.org/x/sys v0.28.0
+	golang.org/x/sys v0.30.0
 )
 
 require (

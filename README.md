@@ -32,9 +32,8 @@ sudo procscope --jsonl events.jsonl -- ./tool
 | Category | Events | Confidence |
 |----------|--------|------------|
 | **Process lifecycle** | exec, fork/clone, exit (with codes) | Exact |
-| **File activity** | open, create, rename, unlink, chmod, chown | Best-effort |
+| **File activity** | open, rename, unlink, chmod, chown | Best-effort |
 | **Network activity** | connect, accept, bind, listen (IP:port) | Best-effort |
-| **DNS** | UDP queries to port 53 | Best-effort (limited) |
 | **Privilege transitions** | setuid, setgid, ptrace | Exact / Best-effort |
 | **Namespace changes** | setns, unshare | Best-effort |
 | **Mount operations** | mount | Best-effort |
@@ -187,6 +186,7 @@ See [docs/comparison.md](docs/comparison.md) for honest, detailed comparison.
 
 ## Documentation
 
+- [Building from Source](BUILDING.md)
 - [Architecture](docs/architecture.md)
 - [Support Matrix](docs/support-matrix.md)
 - [Security Model](docs/security-model.md)

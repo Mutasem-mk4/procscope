@@ -1,5 +1,5 @@
 # Binaries
-procscope
+/bin/
 /dist/
 *.exe
 *.dll
@@ -29,7 +29,6 @@ Thumbs.db
 
 # Build artifacts
 /build/
-/bin/
 
 # Generated eBPF files (regenerate with `make generate`)
 *_bpfel.go
