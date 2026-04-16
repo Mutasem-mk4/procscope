@@ -46,10 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Limitations
 
-- DNS visibility limited to userspace UDP queries to port 53
+- DNS query extraction is not implemented in v0.1.0 (event type defined in schema for future use)
 - File paths from openat may be relative when using dirfd != AT_FDCWD
 - Static binaries may not trigger expected syscall probes
-- Container ID extraction is best-effort from cgroup path
+- Container ID extraction is not implemented (schema field reserved for future use)
 - Event drops possible under very high event rates
 - Requires kernel 5.8+ with BTF
 

@@ -9,10 +9,10 @@
 //   - Process lifecycle (exec/fork/exit): exact when eBPF probes are active.
 //   - File activity: best-effort — not all file I/O paths are traced.
 //   - Network activity: best-effort — covers common socket syscalls.
-//   - DNS: best-effort — only userspace UDP DNS to port 53 is partially visible.
 //   - Privilege transitions: best-effort — covers setuid/setgid/ptrace syscalls.
 //   - Namespace changes: best-effort — covers setns/unshare syscalls.
 //   - Mount operations: best-effort — covers mount syscall.
+//   - DNS: NOT implemented in v1 (event type reserved in schema for future use).
 package events
 
 import (
@@ -52,7 +52,7 @@ const (
 	EventNetListen  EventType = "net.listen"
 )
 
-// DNS events (best-effort).
+// DNS events (reserved — not implemented in v1; no eBPF probe captures DNS).
 const (
 	EventDNSQuery EventType = "dns.query"
 )

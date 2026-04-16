@@ -6,7 +6,7 @@
 
 ```bash
 # Install build dependencies
-sudo apt install debhelper dh-golang golang-go
+sudo apt install debhelper golang-go
 
 # Build the package
 dpkg-buildpackage -us -uc -b

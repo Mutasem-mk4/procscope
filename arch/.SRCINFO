@@ -6,7 +6,7 @@ pkgbase = procscope
 	arch = x86_64
 	arch = aarch64
 	license = MIT
-	makedepends = go
+	makedepends = go>=2:1.22
 	depends = glibc
 	source = procscope-0.1.0.tar.gz::https://github.com/procscope/procscope/archive/v0.1.0.tar.gz
 	sha256sums = SKIP
