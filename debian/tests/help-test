@@ -1,0 +1,10 @@
+#!/bin/sh
+# DEP-8 help test: verify help text is coherent
+set -e
+
+procscope --help | grep -q "Launch a command under observation"
+procscope --help | grep -q "\-p.*PID"
+procscope --help | grep -q "\-\-out"
+procscope --help | grep -q "\-\-jsonl"
+
+echo "PASS: help-test"

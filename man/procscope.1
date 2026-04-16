@@ -1,0 +1,124 @@
+.\" procscope(1) - Process-scoped runtime investigator for Linux
+.\"
+.TH PROCSCOPE 1 "April 2026" "procscope 0.1.0" "User Commands"
+.SH NAME
+procscope \- process-scoped runtime investigation tool
+.SH SYNOPSIS
+.B procscope
+[\fIOPTIONS\fR] [\fB\-\-\fR \fICOMMAND\fR [\fIARGS\fR...]]
+.br
+.B procscope
+\fB\-p\fR \fIPID\fR [\fIOPTIONS\fR]
+.br
+.B procscope
+\fB\-n\fR \fINAME\fR [\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B procscope
+launches a command under observation, or attaches to an existing process,
+and observes its runtime behavior at the kernel level using eBPF.
+.PP
+It captures process lifecycle events (exec, fork, exit), file activity,
+network connections, privilege transitions, namespace changes, and mount
+operations. Output is provided as a live terminal timeline, JSONL event
+stream, evidence bundle, and/or Markdown summary report.
+.PP
+Designed for authorized security research, malware triage, reverse
+engineering support, incident response, and deep debugging.
+.SH OPTIONS
+.TP
+\fB\-p\fR, \fB\-\-pid\fR \fIPID\fR
+Attach to an existing process by PID.
+.TP
+\fB\-n\fR, \fB\-\-name\fR \fINAME\fR
+Attach to a process by name (first match).
+.TP
+\fB\-o\fR, \fB\-\-out\fR \fIDIR\fR
+Write evidence bundle to directory DIR.
+.TP
+\fB\-\-jsonl\fR \fIFILE\fR
+Write events as JSONL to FILE. Use \fB\-\fR for stdout.
+.TP
+\fB\-\-summary\fR \fIFILE\fR
+Write Markdown summary report to FILE.
+.TP
+\fB\-\-no\-color\fR
+Disable ANSI color output.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Suppress live terminal timeline output.
+.TP
+\fB\-\-max\-args\fR \fIN\fR
+Maximum number of argv elements to capture (default: 64).
+.TP
+\fB\-\-max\-path\fR \fIN\fR
+Maximum path string length (default: 4096).
+.TP
+\fB\-\-skip\-checks\fR
+Skip privilege and kernel compatibility checks.
+.TP
+\fB\-\-version\fR
+Print version information and exit.
+.SH EXAMPLES
+.TP
+Trace a suspicious binary:
+.B sudo procscope \-\- ./suspicious\-binary
+.TP
+Attach to a running process:
+.B sudo procscope \-p 1234
+.TP
+Generate evidence bundle and report:
+.B sudo procscope \-\-out case\-001 \-\-summary report.md \-\- ./installer.sh
+.TP
+Stream events as JSONL:
+.B sudo procscope \-\-jsonl events.jsonl \-\- ./tool
+.SH REQUIREMENTS
+Linux kernel 5.8+ with BTF support (CONFIG_DEBUG_INFO_BTF=y).
+.PP
+Root privileges or CAP_BPF + CAP_PERFMON + CAP_SYS_RESOURCE capabilities.
+.SH EVIDENCE BUNDLE
+When invoked with \fB\-\-out\fR, procscope creates a directory containing:
+.RS
+.IP \(bu 2
+metadata.json \- investigation metadata
+.IP \(bu 2
+events.jsonl \- complete event stream
+.IP \(bu 2
+process\-tree.txt \- human\-readable process tree
+.IP \(bu 2
+files.json \- file activity summary
+.IP \(bu 2
+network.json \- network activity summary
+.IP \(bu 2
+notable.json \- security\-relevant events
+.IP \(bu 2
+summary.md \- Markdown executive summary
+.RE
+.SH LIMITATIONS
+.IP \(bu 2
+File activity is best\-effort; not all I/O paths are traced.
+.IP \(bu 2
+DNS visibility is limited to userspace UDP queries to port 53.
+.IP \(bu 2
+io_uring and sendfile operations are not captured.
+.IP \(bu 2
+Container metadata is best\-effort from cgroup path parsing.
+.IP \(bu 2
+Event drops may occur under extreme event rates.
+.SH EXIT STATUS
+When tracing a launched command,
+.B procscope
+exits with the same exit code as the traced command.
+When using \fB\-p\fR or \fB\-n\fR, exits 0 on normal Ctrl\-C termination.
+.SH FILES
+Evidence bundles are written to the directory specified by \fB\-\-out\fR.
+No persistent state files are created.
+.SH SEE ALSO
+.BR strace (1),
+.BR bpftrace (8),
+.BR bpftool (8)
+.SH BUGS
+Report bugs at https://github.com/procscope/procscope/issues
+.SH AUTHOR
+procscope contributors
+.SH LICENSE
+MIT License

@@ -1,0 +1,12 @@
+procscope (0.1.0-1) unstable; urgency=medium
+
+  * Initial release.
+  * Process lifecycle tracing (exec, fork, exit)
+  * File activity tracing (openat, rename, unlink, chmod, chown)
+  * Network activity tracing (connect, accept, bind, listen)
+  * Privilege transition detection (setuid, setgid, ptrace)
+  * Namespace change detection (setns, unshare)
+  * Evidence bundle and Markdown report generation
+  * JSONL event stream output
+
+ -- procscope contributors <security@procscope.dev>  Wed, 16 Apr 2026 12:00:00 +0000

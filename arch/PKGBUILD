@@ -1,0 +1,69 @@
+# Maintainer: procscope contributors <security@procscope.dev>
+pkgname=procscope
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Process-scoped runtime investigation tool using eBPF'
+arch=('x86_64' 'aarch64')
+url='https://github.com/procscope/procscope'
+license=('MIT')
+depends=('glibc')
+makedepends=('go>=2:1.22' 'clang' 'llvm' 'git')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
+# NOTE: Update this checksum when releasing. Generate with:
+#   sha256sum procscope-0.1.0.tar.gz
+# For development builds from git, use 'makepkg --skipchecksums'.
+sha256sums=('SKIP')
+# TODO: Replace SKIP with actual hash before distro submission.
+# The final submission MUST have a real sha256sum. This is left as SKIP
+# only because no release tarball exists yet. The maintainer submitting
+# to BlackArch must generate the tarball and fill this in.
+
+build() {
+  cd "${pkgname}-${pkgver}"
+
+  export CGO_ENABLED=0
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+
+  # Generate eBPF bindings
+  cd internal/tracer
+  go generate ./...
+  cd ../..
+
+  # Build binary with version info
+  go build \
+    -ldflags "-s -w \
+      -X 'github.com/procscope/procscope/internal/version.Version=${pkgver}' \
+      -X 'github.com/procscope/procscope/internal/version.Commit=${pkgrel}'" \
+    -o "${pkgname}" \
+    ./cmd/procscope
+}
+
+check() {
+  cd "${pkgname}-${pkgver}"
+  # Run unit tests (short mode, no eBPF runtime needed)
+  go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+
+  # Binary
+  install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+
+  # Man page
+  install -Dm644 "man/${pkgname}.1" "${pkgdir}/usr/share/man/man1/${pkgname}.1"
+
+  # License
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+  # Shell completions
+  install -Dm644 "completions/${pkgname}.bash" \
+    "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
+  install -Dm644 "completions/${pkgname}.zsh" \
+    "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
+  install -Dm644 "completions/${pkgname}.fish" \
+    "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
+
+  # Documentation
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}

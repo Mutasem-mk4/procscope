@@ -1,0 +1,17 @@
+pkgbase = procscope
+	pkgdesc = Process-scoped runtime investigation tool using eBPF
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/procscope/procscope
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	makedepends = go
+	makedepends = clang
+	makedepends = llvm
+	makedepends = git
+	depends = glibc
+	source = procscope-0.1.0.tar.gz::https://github.com/procscope/procscope/archive/v0.1.0.tar.gz
+	sha256sums = SKIP
+
+pkgname = procscope

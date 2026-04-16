@@ -1,0 +1,31 @@
+Source: procscope
+Section: utils
+Priority: optional
+Maintainer: procscope contributors <security@procscope.dev>
+Build-Depends:
+ debhelper-compat (= 13),
+ golang-go (>= 2:1.22~),
+ clang,
+ llvm,
+Rules-Requires-Root: no
+Standards-Version: 4.7.0
+Homepage: https://github.com/procscope/procscope
+Vcs-Browser: https://github.com/procscope/procscope
+Vcs-Git: https://github.com/procscope/procscope.git
+
+Package: procscope
+Architecture: linux-any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Process-scoped runtime investigation tool using eBPF
+ procscope lets you launch a command under observation, or attach to an
+ existing process, and observe its runtime behavior: process lifecycle,
+ file activity, network connections, privilege transitions, namespace
+ changes, and mount operations.
+ .
+ It produces live terminal output, JSONL event streams, evidence bundles,
+ and Markdown investigation reports.
+ .
+ Designed for security research, malware triage, reverse engineering
+ support, incident response, and deep debugging on Linux hosts.
+ .
+ Requires Linux kernel 5.8+ with BTF support.

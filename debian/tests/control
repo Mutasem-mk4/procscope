@@ -1,0 +1,10 @@
+Tests: smoke-test
+Depends: procscope
+Restrictions: needs-root, allow-stderr
+
+Test-Command: procscope --version
+Features: test-name=version-check
+Depends: procscope
+
+Tests: help-test
+Depends: procscope

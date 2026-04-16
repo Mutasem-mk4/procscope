@@ -1,0 +1,67 @@
+# Binaries
+procscope
+/dist/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output of go coverage tool
+*.out
+*.prof
+
+# Go workspace file
+go.work
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/build/
+/bin/
+
+# Generated eBPF files (regenerate with `make generate`)
+*_bpfel.go
+*_bpfeb.go
+*_bpfel.o
+*_bpfeb.o
+
+# Evidence bundles (output)
+/case-*/
+*.jsonl
+*.evidence/
+
+# Test fixtures (compiled)
+test/fixtures/fork_exec
+test/fixtures/file_ops
+test/fixtures/net_connect
+test/fixtures/priv_ops
+test/fixtures/ns_ops
+
+# Debian build artifacts
+/debian/.debhelper/
+/debian/procscope/
+/debian/files
+/debian/*.substvars
+/debian/*.debhelper.log
+*.deb
+*.changes
+*.buildinfo
+*.dsc
+*.tar.*
+
+# Arch build artifacts
+arch/pkg/
+arch/src/
+arch/*.pkg.tar.*
