@@ -1,7 +1,7 @@
 Source: procscope
 Section: utils
 Priority: optional
-Maintainer: procscope contributors <security@procscope.dev>
+Maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
 Build-Depends:
  debhelper-compat (= 13),
  golang-go (>= 2:1.22~),

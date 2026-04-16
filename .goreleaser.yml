@@ -61,9 +61,9 @@ release:
 nfpms:
   - id: deb
     package_name: procscope
-    vendor: procscope contributors
+    vendor: Mutasem-mk4
     homepage: https://github.com/procscope/procscope
-    maintainer: procscope contributors <security@procscope.dev>
+    maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
     description: Process-scoped runtime investigation tool using eBPF
     license: MIT
     formats:

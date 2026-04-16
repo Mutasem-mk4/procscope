@@ -34,6 +34,9 @@ jobs:
       - name: Unit tests
         run: go test -v -race -count=1 -short ./...
 
+      - name: Integration tests (requires eBPF/root)
+        run: sudo go test -v -count=1 -run Integration ./test/integration/...
+
       - name: Vet
         run: go vet ./...
 
@@ -68,8 +71,8 @@ jobs:
       - name: Run govulncheck
         run: govulncheck ./...
 
-  build-packages:
-    name: Package Build Verification
+  build-debian:
+    name: Build Debian Package
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -82,18 +85,46 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y debhelper
+          sudo apt-get install -y debhelper lintian
 
-      - name: Build binary
-        run: make build
+      - name: Build Debian Package
+        run: dpkg-buildpackage -us -uc -b
 
-      - name: Verify binary
-        run: |
-          ./bin/procscope --version
-          ./bin/procscope --help
+      - name: Lint Debian Package
+        run: lintian ../procscope_*.deb
 
-      - name: Upload binary
+      - name: Upload Debian Package
         uses: actions/upload-artifact@v4
         with:
-          name: procscope-linux-amd64
-          path: bin/procscope
+          name: procscope-deb
+          path: ../procscope_*.deb
+
+  build-arch:
+    name: Build Arch Linux Package
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    needs: test
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm git go
+
+      # We can't use actions/checkout@v4 directly in Arch container without nodejs, doing it manually or installing node
+      - name: Setup Node for checkout
+        run: pacman -S --noconfirm nodejs
+
+      - uses: actions/checkout@v4
+
+      - name: Build Arch Package
+        # makepkg cannot be run as root, so we create a build user
+        run: |
+          useradd -m builduser
+          chown -R builduser:builduser .
+          su builduser -c "cd arch && makepkg -sf"
+
+      - name: Upload Arch Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: procscope-pkg-tar-zst
+          path: arch/*.pkg.tar.zst
