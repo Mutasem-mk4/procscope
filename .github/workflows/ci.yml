@@ -91,14 +91,17 @@ jobs:
       - name: Build Debian Package
         run: dpkg-buildpackage -us -uc -b -d
 
+      - name: Move Debian Package
+        run: mv ../procscope_*.deb .
+
       - name: Lint Debian Package
-        run: lintian ../procscope_*.deb || true
+        run: lintian ./procscope_*.deb || true
 
       - name: Upload Debian Package
         uses: actions/upload-artifact@v4
         with:
           name: procscope-deb
-          path: ../procscope_*.deb
+          path: ./procscope_*.deb
 
   build-arch:
     name: Build Arch Linux Package
