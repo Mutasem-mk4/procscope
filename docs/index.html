@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procscope - eBPF Runtime Investigator</title>
+    <meta name="description" content="A blazing fast, process-scoped runtime investigator for Linux, powered by eBPF.">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    <div class="blob-bg blob-3"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">procscope<span class="cursor">_</span></div>
+        <div class="nav-links">
+            <a href="https://github.com/Mutasem-mk4/procscope">GitHub</a>
+            <a href="https://github.com/Mutasem-mk4/procscope/blob/main/docs/architecture.md">Docs</a>
+            <a href="https://github.com/Mutasem-mk4/procscope/releases" class="btn-primary">Download</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="badge">v0.1.4 Released</div>
+            <h1>Surgical OS Observability<br>Powered by <span class="highlight">eBPF</span></h1>
+            <p class="subtitle">A high-performance, purely user-mode agent to trace Linux processes, file activity, and network connections in real-time.</p>
+            
+            <div class="cta-group">
+                <a href="https://github.com/Mutasem-mk4/procscope" class="btn-primary large">View Source</a>
+                <div class="terminal-cmd">
+                    <span>$ curl -sfL https://raw.githubusercontent.com/Mutasem-mk4/procscope/main/install.sh | sh</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card glass">
+                <div class="icon">🔍</div>
+                <h3>Process Scoped</h3>
+                <p>Track everything down to the exact namespace and PID. Identify ephemeral containers and fleeting threats.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="icon">⚡</div>
+                <h3>Zero Overhead</h3>
+                <p>Leverages modern eBPF technology to instrument the Linux kernel at near-zero performance cost.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="icon">🛡️</div>
+                <h3>Security First</h3>
+                <p>Detect unusual file tampering, outbound connections, and reverse-shells using powerful runtime tracing.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Subtle interaction for the terminal
+        const term = document.querySelector('.terminal-cmd');
+        term.addEventListener('click', () => {
+            navigator.clipboard.writeText('curl -sfL https://raw.githubusercontent.com/Mutasem-mk4/procscope/main/install.sh | sh');
+            term.classList.add('copied');
+            setTimeout(() => term.classList.remove('copied'), 2000);
+        });
+    </script>
+</body>
+</html>
