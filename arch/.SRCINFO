@@ -1,13 +1,13 @@
 pkgbase = procscope
 	pkgdesc = Process-scoped runtime investigation tool using eBPF
-	pkgver = 0.1.0
+	pkgver = 0.1.4
 	pkgrel = 1
-	url = https://github.com/procscope/procscope
+	url = https://github.com/Mutasem-mk4/procscope
 	arch = x86_64
 	arch = aarch64
 	license = MIT
 	makedepends = go>=2:1.22
-	source = procscope-0.1.0.tar.gz::https://github.com/procscope/procscope/archive/v0.1.0.tar.gz
-	sha256sums = SKIP
+	source = procscope-0.1.4.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/v0.1.4.tar.gz
+	sha256sums = 1fc242099a2fadeb1cb07957621bef1854222fc761a6e57f026f7d0e7f1f1e08
 
 pkgname = procscope

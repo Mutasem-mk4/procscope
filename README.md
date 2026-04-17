@@ -223,6 +223,7 @@ See [docs/comparison.md](docs/comparison.md) for honest, detailed comparison.
 - [Security Model](docs/security-model.md)
 - [Privacy Model](docs/privacy-model.md)
 - [Packaging Guide](docs/packaging.md)
+- [Distribution Submission Playbook](docs/packaging-submission-playbook.md)
 - [Comparison](docs/comparison.md)
 - [Design Decisions](docs/design-decisions/)
 
