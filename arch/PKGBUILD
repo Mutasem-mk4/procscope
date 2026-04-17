@@ -1,6 +1,6 @@
 # Maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
 pkgname=procscope
-pkgver=0.1.0
+pkgver=0.1.4
 pkgrel=1
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
@@ -12,7 +12,7 @@ source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 # The sha256sum below must be updated after cutting a GitHub release.
 # Generate it with: curl -sL "$url/archive/v$pkgver.tar.gz" | sha256sum
 # For local development builds: makepkg --skipchecksums
-sha256sums=('SKIP')
+sha256sums=('1fc242099a2fadeb1cb07957621bef1854222fc761a6e57f026f7d0e7f1f1e08')
 
 build() {
   cd "${pkgname}-${pkgver}"
