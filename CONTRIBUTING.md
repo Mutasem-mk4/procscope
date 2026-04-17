@@ -121,7 +121,7 @@ See [docs/packaging.md](docs/packaging.md) for packaging and release details.
 
 ## Code of Conduct
 
-Be respectful and constructive. We're building tools for the security community.
+Please follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Be respectful and constructive; we're building tools for the security community.
 
 ## License
 

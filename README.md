@@ -9,6 +9,8 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 
 <p align="center">
   <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
+  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=main&style=for-the-badge&label=CI" alt="CI">
   <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
   <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&color=00ADD8" alt="Go Version">
   <img src="https://img.shields.io/badge/eBPF-Powered-FF4081?style=for-the-badge" alt="eBPF Powered">
@@ -24,6 +26,13 @@ Launch a command under observation — or attach to an existing process — and 
 ## Quick Start 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
+
+### 1-Minute Install (Go 1.22+)
+
+```bash
+go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
+procscope --version
+```
 
 ```bash
 # Trace a command
@@ -52,12 +61,6 @@ sudo procscope --jsonl events.jsonl -- ./tool
 
 > **Honesty note:** procscope does NOT claim to capture all process activity.
 > See [docs/support-matrix.md](docs/support-matrix.md) for exact details on capabilities and blindspots.
-
-## Contributing
-
-`procscope` is heavily community-driven. If you are looking to get your feet wet in **Golang** or **eBPF**, we aggressively label issues with `good-first-issue` specifically for newer contributors.
-Check out the [Issues tab](https://github.com/Mutasem-mk4/procscope/issues) or head to [goodfirstissue.dev](https://goodfirstissue.dev/p/Mutasem-mk4/procscope) to find something to work on!
-
 
 ## Requirements
 
@@ -226,10 +229,15 @@ See [docs/comparison.md](docs/comparison.md) for honest, detailed comparison.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+`procscope` is heavily community-driven; check issues labeled `good-first-issue` to get started quickly.
 
 ## Security
 
 See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+
+## Community
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guidelines.
 
 ## License
 
