@@ -52,7 +52,7 @@ changelog:
 
 release:
   github:
-    owner: procscope
+    owner: Mutasem-mk4
     name: procscope
   draft: false
   prerelease: auto
