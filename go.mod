@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/cilium/ebpf v0.17.3
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.10.2
 	golang.org/x/sys v0.38.0
 	k8s.io/api v0.35.4
 	k8s.io/apimachinery v0.35.4
