@@ -17,12 +17,12 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/procscope/procscope/internal/caps"
-	"github.com/procscope/procscope/internal/events"
-	"github.com/procscope/procscope/internal/output"
-	"github.com/procscope/procscope/internal/process"
-	"github.com/procscope/procscope/internal/tracer"
-	"github.com/procscope/procscope/internal/version"
+	"github.com/Mutasem-mk4/procscope/internal/caps"
+	"github.com/Mutasem-mk4/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/output"
+	"github.com/Mutasem-mk4/procscope/internal/process"
+	"github.com/Mutasem-mk4/procscope/internal/tracer"
+	"github.com/Mutasem-mk4/procscope/internal/version"
 )
 
 // Options holds all CLI flag values.

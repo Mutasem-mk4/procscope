@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/procscope/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/events"
 )
 
 // Manager is the non-Linux stub. All methods return errors indicating

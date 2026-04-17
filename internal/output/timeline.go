@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/procscope/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/events"
 )
 
 // Timeline renders events as a compact live terminal timeline.

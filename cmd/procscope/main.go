@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/procscope/procscope/internal/cli"
+	"github.com/Mutasem-mk4/procscope/internal/cli"
 )
 
 func main() {

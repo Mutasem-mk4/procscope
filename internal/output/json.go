@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/procscope/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/events"
 )
 
 // JSONWriter writes events as JSON or JSONL (newline-delimited JSON).

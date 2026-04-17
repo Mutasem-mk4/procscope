@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/procscope/procscope/internal/events"
-	"github.com/procscope/procscope/internal/version"
+	"github.com/Mutasem-mk4/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/version"
 )
 
 // SummaryWriter generates a Markdown executive summary of an investigation.

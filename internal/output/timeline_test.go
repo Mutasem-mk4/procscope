@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/procscope/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/events"
 )
 
 func TestTimelineRenderEvent(t *testing.T) {

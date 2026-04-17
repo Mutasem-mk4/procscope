@@ -17,7 +17,7 @@ import (
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/ringbuf"
 
-	"github.com/procscope/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/events"
 )
 
 // eBPF event type enum values — must match bpf/procscope.c
