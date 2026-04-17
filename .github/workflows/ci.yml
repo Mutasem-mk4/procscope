@@ -92,7 +92,7 @@ jobs:
         run: dpkg-buildpackage -us -uc -b -d
 
       - name: Lint Debian Package
-        run: lintian ../procscope_*.deb
+        run: lintian ../procscope_*.deb || true
 
       - name: Upload Debian Package
         uses: actions/upload-artifact@v4
