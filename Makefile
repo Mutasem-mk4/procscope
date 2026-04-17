@@ -1,5 +1,5 @@
 # procscope — Makefile
-# Requires: Go 1.22+
+# Requires: Go 1.25+
 # Optional for refreshing the committed BPF object: clang, llvm-strip, bpftool
 
 BINARY      := procscope

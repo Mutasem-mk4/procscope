@@ -6,7 +6,7 @@ pkgbase = procscope
 	arch = x86_64
 	arch = aarch64
 	license = MIT
-	makedepends = go>=2:1.22
+	makedepends = go>=2:1.25
 	source = procscope-0.1.4.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/v0.1.4.tar.gz
 	sha256sums = 1fc242099a2fadeb1cb07957621bef1854222fc761a6e57f026f7d0e7f1f1e08
 

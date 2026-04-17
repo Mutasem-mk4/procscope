@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Go 1.22 or newer
+- Go 1.25 or newer
 - Linux (kernel 5.8+ with BTF for runtime)
 - clang with BPF target support (only when refreshing the committed eBPF object)
 - llvm-strip (optional, when refreshing the committed eBPF object)

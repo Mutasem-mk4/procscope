@@ -7,7 +7,7 @@ arch=('x86_64' 'aarch64')
 url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
 depends=()
-makedepends=('go>=2:1.22')
+makedepends=('go>=2:1.25')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 # The sha256sum below must be updated after cutting a GitHub release.
 # Generate it with: curl -sL "$url/archive/v$pkgver.tar.gz" | sha256sum

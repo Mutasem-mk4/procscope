@@ -6,7 +6,7 @@ Thank you for your interest in contributing to procscope!
 
 ### Prerequisites
 
-- Go 1.22+
+- Go 1.25+
 - Make
 - Linux (for runtime testing)
 - clang and llvm-strip (only when editing `bpf/procscope.c`)

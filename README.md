@@ -27,7 +27,7 @@ Launch a command under observation — or attach to an existing process — and 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
-### 1-Minute Install (Go 1.22+)
+### 1-Minute Install (Go 1.25+)
 
 ```bash
 go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
@@ -91,7 +91,7 @@ sudo mv procscope /usr/local/bin/
 ```
 
 ### 2. Go Install (Source)
-If you have Go 1.22+ installed, you can natively compile and install the tool to your Go bin path effortlessly:
+If you have Go 1.25+ installed, you can natively compile and install the tool to your Go bin path effortlessly:
 
 ```bash
 go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
