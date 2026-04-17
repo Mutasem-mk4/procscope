@@ -17,9 +17,9 @@ jobs:
       matrix:
         go-version: ['1.22', '1.23']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go-version }}
 
@@ -44,14 +44,14 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: '1.22'
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v9
         continue-on-error: true
         with:
           version: latest
@@ -60,9 +60,9 @@ jobs:
     name: Vulnerability Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: '1.22'
 
@@ -77,9 +77,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version: '1.22'
 
@@ -98,7 +98,7 @@ jobs:
         run: lintian ./procscope_*.deb || true
 
       - name: Upload Debian Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: procscope-deb
           path: ./procscope_*.deb
@@ -114,11 +114,11 @@ jobs:
         run: |
           pacman -Syu --noconfirm git go
 
-      # We can't use actions/checkout@v4 directly in Arch container without nodejs, doing it manually or installing node
+      # We can't use actions/checkout@v6 directly in Arch container without nodejs, doing it manually or installing node
       - name: Setup Node for checkout
         run: pacman -S --noconfirm nodejs
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build Arch Package
         # makepkg cannot be run as root, so we create a build user
@@ -128,7 +128,7 @@ jobs:
           su builduser -c "cd arch && makepkg -sf"
 
       - name: Upload Arch Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: procscope-pkg-tar-zst
           path: arch/*.pkg.tar.zst
