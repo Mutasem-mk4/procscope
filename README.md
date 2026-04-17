@@ -2,9 +2,10 @@
   <img src="assets/header.png" alt="procscope header banner" width="100%">
 </p>
 
-# procscope
+# procscope — eBPF Process Tracer for Linux Malware Triage & Incident Response
 
-**Process-scoped runtime investigator for Linux.**
+**Zero-overhead, zero-config eBPF process tracer for Linux.**
+Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons like Falco or Tetragon.
 
 <p align="center">
   <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
@@ -23,7 +24,6 @@ Launch a command under observation — or attach to an existing process — and 
 ## Quick Start 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
-*(Note: Link your GitHub repo to Killercoda to activate this live interactive sandbox!)*
 
 ```bash
 # Trace a command
@@ -55,9 +55,9 @@ sudo procscope --jsonl events.jsonl -- ./tool
 
 ## Contributing
 
-`procscope` is heavily community-driven. If you are looking to get your feet wet in Golang or eBPF, we aggressively label issues with `good-first-issue` specifically for newer contributors. 
+`procscope` is heavily community-driven. If you are looking to get your feet wet in **Golang** or **eBPF**, we aggressively label issues with `good-first-issue` specifically for newer contributors.
 Check out the [Issues tab](https://github.com/Mutasem-mk4/procscope/issues) or head to [goodfirstissue.dev](https://goodfirstissue.dev/p/Mutasem-mk4/procscope) to find something to work on!
-> what is observed, what is missed, and why.
+
 
 ## Requirements
 
