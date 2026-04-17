@@ -98,7 +98,7 @@ jobs:
         run: lintian ./procscope_*.deb || true
 
       - name: Upload Debian Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: procscope-deb
           path: ./procscope_*.deb
@@ -128,7 +128,7 @@ jobs:
           su builduser -c "cd arch && makepkg -sf"
 
       - name: Upload Arch Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: procscope-pkg-tar-zst
           path: arch/*.pkg.tar.zst
