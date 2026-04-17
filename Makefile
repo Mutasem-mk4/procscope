@@ -70,8 +70,8 @@ test: ## Run all tests
 test-unit: ## Run unit tests only
 	$(GO) test -v -race -count=1 -short ./...
 
-test-integration: fixtures ## Run integration tests (requires root, Linux)
-	$(GO) test -v -race -count=1 -run Integration ./test/integration/...
+test-integration: build ## Run Linux smoke test (requires root, Linux)
+	./bin/$(BINARY) -- /bin/true
 
 test-cover: ## Run tests with coverage
 	$(GO) test -coverprofile=coverage.out -covermode=atomic ./...

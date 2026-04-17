@@ -36,7 +36,7 @@ artifact and does not run `go generate` during package build.
 
 ### Kali Tool Submission
 
-The repository is structured for a Kali tool request per https://www.kali.org/docs/tools/submitting-tools/:
+The repository is structured to support a Kali package request and Debian-style sponsorship work. Keep the request grounded in current packaging evidence, not aspirational install commands.
 
 | Required Field | Value |
 |---------------|-------|
@@ -46,12 +46,12 @@ The repository is structured for a Kali tool request per https://www.kali.org/do
 | Description | Process-scoped runtime investigation tool using eBPF |
 | Similar tools | strace, ltrace, sysdig |
 | Activity | Active development |
-| Install | `sudo apt install procscope` |
+| Current install path | GitHub release asset or `go install` |
 | Usage | `sudo procscope -- ./binary` |
 
 ### Parrot Contribution
 
-Per https://parrotsec.org/docs/introduction/community-contributions/, the tool should be packaged to Debian standards first, then submitted via their contribution process.
+Parrot follows a Debian-oriented packaging flow closely enough that the Debian package quality is the main gate. Finish Debian package validation first, then open maintainer outreach with package build logs and a short smoke test transcript.
 
 ## Arch Linux / BlackArch
 
@@ -72,18 +72,21 @@ makepkg -si
 
 ### BlackArch Submission
 
-Per https://github.com/BlackArch/blackarch, submit a PKGBUILD following:
+Prepare the PKGBUILD as if it will be reviewed by Arch maintainers first:
+
 1. Fork the BlackArch repository
-2. Add PKGBUILD to the appropriate category (`blackarch-forensic` or `blackarch-debugging`)
-3. Submit pull request
+2. Regenerate `arch/.SRCINFO`
+3. Run `makepkg` and `namcap`
+4. Add the package to the appropriate category (`blackarch-forensic` or `blackarch-debugging`)
+5. Submit pull request
 
 ## Release Process
 
 ### Version Tagging
 
 ```bash
-git tag -a v0.1.0 -m "Release v0.1.0"
-git push origin v0.1.0
+git tag -a vX.Y.Z -m "Release vX.Y.Z"
+git push origin vX.Y.Z
 ```
 
 ### GoReleaser
@@ -102,9 +105,10 @@ This creates:
 1. Update `CHANGELOG.md`
 2. Run release preflight checks: `python scripts/release_preflight.py --tag vX.Y.Z`
 3. Sync Arch metadata when `arch/PKGBUILD` changes: `./scripts/sync_arch_srcinfo.sh`
-4. Tag the release
-5. Run `goreleaser release`
-6. Build Debian package: `dpkg-buildpackage -us -uc`
-7. Build Arch package: `cd arch && makepkg -sf`
-8. Upload artifacts to GitHub release
-9. Update documentation if needed
+4. Build and smoke test on Linux: `make build && sudo ./bin/procscope -- /bin/true`
+5. Build Debian package: `dpkg-buildpackage -us -uc -b`
+6. Build Arch package: `cd arch && makepkg -sf`
+7. Tag the release
+8. Run `goreleaser release`
+9. Upload artifacts to GitHub release
+10. Update documentation if needed

@@ -101,6 +101,37 @@ func NewCorrelator(investigationID string, rootPID uint32, maxArgs, maxPathLen i
 	return c
 }
 
+// SetRootPID updates the investigation root PID once the real target PID is
+// known. This is used for launch mode, where the traced command PID is not
+// available until after the child process is created.
+func (c *Correlator) SetRootPID(rootPID uint32) {
+	if rootPID == 0 {
+		return
+	}
+
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if rootPID == c.rootPID {
+		return
+	}
+
+	rootProc, ok := c.tracked[c.rootPID]
+	if !ok {
+		rootProc = &TrackedProcess{
+			StartTime: c.startTime,
+		}
+	} else {
+		delete(c.tracked, c.rootPID)
+	}
+
+	rootProc.PID = rootPID
+	rootProc.PPID = 0
+	rootProc.Depth = 0
+	c.rootPID = rootPID
+	c.tracked[rootPID] = rootProc
+}
+
 // Events returns the channel of correlated events for consumers.
 func (c *Correlator) Events() <-chan *Event {
 	return c.events

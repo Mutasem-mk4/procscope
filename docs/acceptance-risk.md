@@ -2,132 +2,116 @@
 
 Last updated: 2026-04-17
 
-## Status: NOT YET SUBMISSION-READY
+## Status: CLOSE, BUT NOT YET SUBMISSION-READY
 
-procscope is structurally complete and honestly documented, but has external
-blockers that prevent it from being submitted to any distro right now.
+`procscope` already has the basic upstream signals distro maintainers expect:
 
-## What Is Ready
+- public source repository
+- tagged releases
+- in-tree Debian packaging
+- in-tree Arch packaging
+- man page, shell completions, and license metadata
+- automated CI and unit tests
 
-| Area | Status | Details |
-|------|--------|---------|
-| Source builds | ✅ | `go build`, `go vet`, `go test` pass on Windows, Linux cross-build passes |
-| Committed BPF artifact | ✅ | `internal/tracer/procscope_bpfel.o` (68KB) embedded via `go:embed` |
-| Debian packaging skeleton | ✅ | `debian/rules` builds from committed artifact, no `go generate` |
-| Arch PKGBUILD | ⚠️ | Structurally correct; sha256sums=SKIP (see below) |
-| Documentation | ✅ | Honest support matrix, no false claims |
-| Man page | ✅ | `man/procscope.1` |
-| Shell completions | ✅ | bash, zsh, fish |
-| License | ✅ | MIT, DEP-5 copyright |
-| Changelog | ✅ | Keep a Changelog format |
-| Security policy | ✅ | Threat model, capabilities table |
-| Unit tests | ✅ | 28/28 pass |
-| Module integrity | ✅ | `go mod verify` passes, `go.sum` committed |
-| CI/CD config | ✅ | GitHub Actions + GoReleaser configured |
+The remaining blockers are mostly about Linux-side verification and release discipline, not missing project structure.
 
-## External Blockers (Cannot Be Resolved Locally)
+## Verified Locally on 2026-04-17
 
-### 1. No Public Repository
+The current `master` branch was checked from a Windows development host:
 
-The GitHub repository `github.com/Mutasem-mk4/procscope` does not exist yet.
-Every distro submission requires a publicly accessible upstream repository.
+- `go test ./...` passes
+- `go vet ./...` passes
+- repo state is clean relative to `origin/master`
 
-**To resolve:** Create the repository on GitHub, push all commits and the
-`v0.1.0` tag.
+This is useful, but it is not enough for distro submission because neither package builds nor runtime eBPF behavior were validated on Linux in this audit.
 
-### 5. PKGBUILD sha256sums=SKIP
+## What Is Already Strong
 
-The in-tree PKGBUILD uses `sha256sums=('SKIP')` because an in-tree file
-cannot contain its own archive's hash (bootstrap problem). This is standard
-for upstream convenience PKGBUILDs. The actual BlackArch submission will be
-a copy of this PKGBUILD with the real hash filled in.
+| Area | Status | Notes |
+|------|--------|-------|
+| Public upstream | ✅ | GitHub repo and release tags exist |
+| Debian metadata | ✅ | `debian/control`, `debian/rules`, `debian/watch`, DEP-8 tests present |
+| Arch metadata | ✅ | `arch/PKGBUILD` and `arch/.SRCINFO` present |
+| Build reproducibility direction | ✅ | committed BPF object, `CGO_ENABLED=0`, `-trimpath` |
+| User docs | ✅ | README, BUILDING, packaging, support matrix, architecture docs |
+| Maintainer docs | ✅ | submission playbook, security policy, contribution guide |
+| Quality gates | ✅ | CI, packaging workflow, release preflight script |
 
-**To resolve:** After pushing the tag, compute the hash from the GitHub
-tarball:
+## Remaining Blockers
+
+### 1. Linux Runtime Validation Is Still Missing
+
+The most important unresolved risk is real-kernel behavior on the target distros:
+
+- eBPF verifier acceptance
+- tracepoint availability across distro kernels
+- capability handling on Kali / Parrot / Arch-family systems
+- end-to-end launch mode and attach mode behavior
+
+Minimum validation to complete before submission:
+
 ```bash
-curl -sL https://github.com/Mutasem-mk4/procscope/archive/v0.1.0.tar.gz | sha256sum
+make build
+sudo ./bin/procscope -- /bin/true
+sudo ./bin/procscope -p <existing-pid>
+sudo ./bin/procscope --out case-001 --summary report.md -- /bin/ls /tmp
 ```
 
-### 2. No Linux Runtime Verification
+### 2. Native Package Tooling Has Not Been Re-Validated on Linux
 
-procscope has never run on a real Linux host. The eBPF programs have been
-compiled but never loaded into a kernel. There may be:
+Package metadata exists, but it still needs actual Linux-side verification:
 
-- BPF verifier rejections
-- Struct layout mismatches between the Go types and BPF event struct
-- Tracepoint attachment failures on specific kernel versions
-- Ring buffer read issues
-
-**To resolve:** Run on a Linux host with kernel 5.8+ and BTF:
 ```bash
-sudo ./bin/procscope -- ls /tmp
+# Debian / Kali / Parrot
+dpkg-buildpackage -us -uc -b
+lintian ../procscope_*.changes
+autopkgtest . -- null
+
+# Arch / BlackArch
+cd arch
+makepkg -sf
+namcap PKGBUILD
+namcap ./*.pkg.tar.zst
 ```
 
-### 3. No Package Build Verification
+### 3. Release Metadata Must Stay Aligned Before the Next Tag
 
-Neither `dpkg-buildpackage` nor `makepkg` has been run against this repo.
-The packaging files are structurally correct based on documentation and
-policy review, but have not been validated by the actual packaging tools.
+This repo had version drift across tags, package metadata, and README examples.
+That kind of inconsistency slows down maintainer review quickly.
 
-**To resolve:** On Debian/Kali: `dpkg-buildpackage -us -uc -b` then
-`lintian ../procscope_*.deb`. On Arch: `cd arch && makepkg -sf`.
+Before the next release, confirm all of these point to the same version:
 
-### 4. Placeholder Maintainer Identity
+- `CHANGELOG.md`
+- `debian/changelog`
+- `arch/PKGBUILD`
+- `arch/.SRCINFO`
+- README release references
 
-All packaging files use `procscope contributors <security@procscope.dev>`.
-This is a placeholder — the domain and email do not exist. Distro
-maintainers will want a real person's name and reachable email.
+### 4. A Reachable Maintainer Address Is Still Recommended
 
-**To resolve:** Replace with a real name and email before submission.
+The current package metadata uses a GitHub noreply address. That is acceptable for source hosting, but distro maintainers often prefer a stable contact address for packaging follow-up.
 
-## Distro-Specific Submission Requirements
+### 5. Submission Still Depends on Human Maintainer Review
 
-### Kali Linux
+Even a technically clean package can be declined or delayed if:
 
-| Requirement | Status |
-|------------|--------|
-| Public GitHub repo | ❌ Not created |
-| Debian package builds | ❌ Not verified |
-| Tool demonstrates value | ⚠️ Not runtime-tested |
-| Active upstream | ❌ No public commit history |
-| Kali bug tracker request | ❌ Not filed |
+- the tool category is unclear
+- the use case overlaps heavily with existing packages
+- upstream appears inactive
+- there is no maintainer responsiveness after submission
 
-### BlackArch
+## Distro-Specific Readiness
 
-| Requirement | Status |
-|------------|--------|
-| Public GitHub repo | ❌ Not created |
-| PKGBUILD with real sha256 | ⚠️ SKIP — fill from GitHub tarball after push |
-| PKGBUILD builds cleanly | ❌ Not verified with makepkg |
-| Tool in `blackarch-forensic` or `blackarch-debugging` | ⚠️ Planned |
-| PR to BlackArch repo | ❌ Not filed |
+| Distro | Current Readiness | Main Gap |
+|--------|-------------------|----------|
+| Kali Linux | Near-ready | needs Debian package validation on Linux and submission request |
+| Parrot OS | Near-ready | needs Debian package validation on Linux and maintainer outreach |
+| BlackArch | Near-ready | needs Linux `makepkg` / `namcap` validation and PR submission |
 
-### Parrot Security
+## Recommended Next Steps
 
-| Requirement | Status |
-|------------|--------|
-| Debian-standard package | ❌ dpkg-buildpackage not verified |
-| Public upstream | ❌ Not created |
-| Community contribution submission | ❌ Not filed |
-
-## Risk Summary
-
-| Risk | Severity | Mitigation |
-|------|----------|------------|
-| BPF verifier rejects programs | HIGH | Test on Linux; fix C code if needed |
-| Go struct ↔ BPF struct mismatch | MEDIUM | `binary.Read` will fail loudly; fixable |
-| Packaging tools reject files | LOW | Skeleton follows policy closely |
-| PKGBUILD sha256 = SKIP | LOW | Fill in after cutting GitHub release |
-| Placeholder email rejected | LOW | Simple text replacement |
-
-## Recommended Next Steps (In Priority Order)
-
-1. Create `github.com/Mutasem-mk4/procscope` and push
-2. Boot a Kali/Ubuntu VM with kernel 5.8+ and BTF
-3. Run `make build && sudo ./bin/procscope -- ls /tmp`
-4. Fix any BPF verifier or struct mismatch issues
-5. Run `dpkg-buildpackage` and `lintian`
-6. Run `makepkg` on Arch
-7. Replace placeholder maintainer email
-8. File Kali bug tracker tool request
-9. Submit BlackArch PKGBUILD PR
+1. Validate runtime behavior on a real Kali or Debian host and on an Arch-based host.
+2. Build and lint the Debian and Arch packages on Linux, not Windows.
+3. Cut the next release only after package metadata and changelogs are aligned.
+4. Use the submission playbook in [`docs/packaging-submission-playbook.md`](packaging-submission-playbook.md).
+5. Open distro requests with concise evidence: release tag, checksums, CI status, package build logs, and one reproducible smoke test.

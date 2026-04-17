@@ -244,15 +244,16 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		}
 		targetPID = pid
 
-		// Re-create correlator with actual PID
-		correlator = events.NewCorrelator(investigationID, targetPID, opts.MaxArgs, opts.MaxPathLen)
-		if watcher != nil {
-			correlator.SetK8sResolver(watcher)
-		}
+		// Replace the placeholder root PID with the actual child PID before the
+		// process performs its first exec, so launch mode keeps the root event.
+		correlator.SetRootPID(targetPID)
 
 		// Track in eBPF
 		if err := mgr.TrackPID(targetPID); err != nil {
 			return fmt.Errorf("failed to track PID %d: %w", targetPID, err)
+		}
+		if err := launcher.Continue(); err != nil {
+			return fmt.Errorf("failed to resume command: %w", err)
 		}
 
 		fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)

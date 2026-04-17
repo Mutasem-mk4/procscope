@@ -243,3 +243,25 @@ func TestCorrelatorNilEvent(t *testing.T) {
 		t.Error("nil event should not be accepted")
 	}
 }
+
+func TestCorrelatorSetRootPID(t *testing.T) {
+	c := NewCorrelator("test-010", 1, 64, 4096)
+	defer c.Close()
+
+	c.SetRootPID(4242)
+
+	if c.IsTracked(1) {
+		t.Error("placeholder root PID should no longer be tracked")
+	}
+	if !c.IsTracked(4242) {
+		t.Error("new root PID should be tracked")
+	}
+
+	root := c.RootProcess()
+	if root == nil {
+		t.Fatal("root process should exist")
+	}
+	if root.PID != 4242 {
+		t.Fatalf("root PID = %d, want 4242", root.PID)
+	}
+}

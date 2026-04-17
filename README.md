@@ -10,7 +10,7 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 <p align="center">
   <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
   <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=main&style=for-the-badge&label=CI" alt="CI">
+  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=for-the-badge&label=CI" alt="CI">
   <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
   <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&color=00ADD8" alt="Go Version">
   <img src="https://img.shields.io/badge/eBPF-Powered-FF4081?style=for-the-badge" alt="eBPF Powered">
@@ -70,35 +70,48 @@ sudo procscope --jsonl events.jsonl -- ./tool
 
 procscope will detect missing capabilities at startup and provide actionable guidance.
 
+## Packaging Status
+
+| Channel | Status |
+|---------|--------|
+| GitHub releases | Available |
+| `go install` | Available |
+| Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; not yet shipped by the distro |
+| Arch / BlackArch package | `arch/PKGBUILD` maintained in-tree; not yet shipped by BlackArch |
+
 ## Installation
 
 Note: Running procscope usually requires `sudo` (eBPF capabilities).
 
-### 1. Direct Download (Recommended)
-You can directly download the pre-compiled `.deb` package or static binary straight from our automated GitHub pipelines:
-
-**For Debian / Kali / Parrot OS:**
-```bash
-wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.4_linux_amd64.deb
-sudo dpkg -i procscope_0.1.4_linux_amd64.deb
-```
-
-**For other Linux Distros (Static Binary):**
-```bash
-wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.4_linux_amd64.tar.gz
-tar -xvf procscope_0.1.4_linux_amd64.tar.gz
-sudo mv procscope /usr/local/bin/
-```
-
-### 2. Go Install (Source)
-If you have Go 1.25+ installed, you can natively compile and install the tool to your Go bin path effortlessly:
+### 1. Go Install
 
 ```bash
 go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
 ```
 
-### 3. Native Package Managers (Pending Upstream Integration)
-We are actively tracking upstream approvals for major distributions. Once merged:
+### 2. Direct Download
+
+Download the release asset that matches your architecture from:
+
+- https://github.com/Mutasem-mk4/procscope/releases/latest
+
+Current release assets include:
+
+- Debian package (`.deb`)
+- Linux tarballs for `amd64` and `arm64`
+
+### 3. Build from Source
+
+```bash
+git clone https://github.com/Mutasem-mk4/procscope.git
+cd procscope
+make build
+sudo install -m755 bin/procscope /usr/local/bin/procscope
+```
+
+### 4. Native Package Managers
+
+These commands are the target install experience after distro acceptance.
 
 **BlackArch Linux:**
 ```bash
@@ -220,6 +233,7 @@ See [docs/comparison.md](docs/comparison.md) for honest, detailed comparison.
 - [Building from Source](BUILDING.md)
 - [Architecture](docs/architecture.md)
 - [Support Matrix](docs/support-matrix.md)
+- [Acceptance Risk Assessment](docs/acceptance-risk.md)
 - [Security Model](docs/security-model.md)
 - [Privacy Model](docs/privacy-model.md)
 - [Packaging Guide](docs/packaging.md)

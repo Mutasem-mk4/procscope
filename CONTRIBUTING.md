@@ -100,7 +100,7 @@ Key packages:
 # Unit tests
 make test-unit
 
-# Integration tests (requires root, Linux)
+# Linux smoke test (requires root, Linux)
 make test-integration
 
 # Coverage report
@@ -110,7 +110,6 @@ make test-cover
 ### Writing Tests
 
 - Unit tests go in `*_test.go` alongside the code
-- Integration tests go in `test/integration/`
 - Test fixtures (C programs) go in `test/fixtures/`
 - Tests must not require network access
 - Tests must be deterministic

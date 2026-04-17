@@ -1,6 +1,7 @@
 # Distribution Submission Playbook
 
 This playbook tracks what is required to keep `procscope` eligible for security-focused distributions.
+It is a readiness checklist, not a guarantee of acceptance.
 
 ## BlackArch
 
@@ -13,6 +14,7 @@ Checklist:
 - Keep build reproducible (`CGO_ENABLED=0`, trimmed paths, deterministic source fetch).
 - Include man page, shell completions, and license in package install stage.
 - Run `namcap` and review warnings before submission updates.
+- Validate on a real Arch or BlackArch host before opening the PR.
 
 ## Kali Linux
 
@@ -25,6 +27,7 @@ Checklist:
 - Ensure package metadata reflects stable ABI and runtime requirements.
 - Provide a concise threat-model and incident-response use case in package description.
 - Keep changelog entries specific and release-aligned.
+- Build and test on a Debian-family Linux host before opening maintainer outreach.
 
 ## Parrot OS
 
@@ -36,6 +39,7 @@ Checklist:
 - Keep dependency surface minimal and explicit.
 - Maintain reproducible binaries and complete source availability.
 - Keep release notes security-focused and operationally useful.
+- Treat Debian package quality as the primary submission gate.
 
 ## Release Gate (Must Pass)
 
@@ -45,6 +49,7 @@ Before tag/release:
 - Packaging quality workflow green (`.github/workflows/packaging-quality.yml`)
 - Arch metadata synced
 - Debian metadata validated
+- Linux smoke test complete
 - Release notes include packaging-impact section
 
 ## Maintainer Outreach Notes
@@ -55,3 +60,4 @@ When opening distro requests:
 - Link to stable release, checksums, and signed tags if available.
 - Include evidence of CI + packaging validation.
 - Provide a quick smoke test command and expected output.
+- Avoid promising distro availability until the package is actually merged.

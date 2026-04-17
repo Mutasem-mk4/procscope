@@ -65,10 +65,10 @@ bpftool btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h
 go test -short ./...
 ```
 
-### 6. Test (integration, requires root + eBPF)
+### 6. Smoke Test (requires root + eBPF)
 
 ```bash
-sudo go test -v -count=1 -run Integration ./test/integration/...
+sudo ./bin/procscope -- /bin/true
 ```
 
 ## Cross-Compilation

@@ -43,6 +43,14 @@ def main() -> int:
     expect_contains("arch/PKGBUILD", pkgbuild, f"pkgver={version}", errors)
     expect_contains("arch/.SRCINFO", srcinfo, f"\tpkgver = {version}", errors)
 
+    readme = read_text(ROOT / "README.md")
+    for found in re.findall(r"procscope[_-](\d+\.\d+\.\d+)", readme):
+        if found != version:
+            errors.append(
+                "README.md contains a hardcoded release reference for "
+                f"{found}, expected {version}"
+            )
+
     if errors:
         print("release preflight failed:")
         for err in errors:
