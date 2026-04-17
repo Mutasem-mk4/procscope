@@ -1,0 +1,28 @@
+{
+  "title": "Interactive Malware Triage with procscope",
+  "description": "Learn how to instantly trace a malicious reverse shell payload using procscope's eBPF kernel hooks without installing a heavy EDR daemon.",
+  "difficulty": "Beginner",
+  "time": "5 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Tracing a Suspicious Binary",
+        "text": "step1.md",
+        "background": "background.sh"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "Mutasem Kharma"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "ubuntu2204"
+  }
+}
