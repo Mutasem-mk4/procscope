@@ -7,6 +7,7 @@
 **Process-scoped runtime investigator for Linux.**
 
 <p align="center">
+  <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
   <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
   <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&color=00ADD8" alt="Go Version">
   <img src="https://img.shields.io/badge/eBPF-Powered-FF4081?style=for-the-badge" alt="eBPF Powered">
