@@ -31,14 +31,17 @@ jobs:
 
       - name: Validate .SRCINFO is in sync
         run: |
+          useradd -m builduser || true
           cp arch/PKGBUILD /tmp/PKGBUILD
-          bash -lc "cd /tmp && makepkg --printsrcinfo > /tmp/generated.SRCINFO"
+          chown builduser:builduser /tmp/PKGBUILD
+          su builduser -c "cd /tmp && makepkg --printsrcinfo > /tmp/generated.SRCINFO"
           diff -u /tmp/generated.SRCINFO arch/.SRCINFO
 
       - name: Run namcap checks
         run: |
           cp arch/PKGBUILD /tmp/PKGBUILD
-          bash -lc "cd /tmp && makepkg --nobuild --nodeps"
+          chown builduser:builduser /tmp/PKGBUILD
+          su builduser -c "cd /tmp && makepkg --nobuild --nodeps"
           namcap /tmp/PKGBUILD || true
 
   debian-lint:
