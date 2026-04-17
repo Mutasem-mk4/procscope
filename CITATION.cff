@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: procscope
+message: >-
+  If you use procscope in academic or security research, please cite it using
+  the metadata in this file.
+type: software
+authors:
+  - family-names: Kharma
+    given-names: Mutasem
+    alias: Mutasem-mk4
+    orcid: ""
+repository-code: "https://github.com/Mutasem-mk4/procscope"
+url: "https://killercoda.com/mutasem04/scenario/procscope-scenario"
+abstract: >-
+  procscope is a zero-config, single-binary eBPF process tracer for Linux
+  designed for malware triage and incident response. It intercepts kernel
+  tracepoints to produce a clean timeline of process lifecycle, file, network,
+  and privilege events for a targeted PID tree — without the overhead of strace
+  ptrace attachment or the deployment complexity of system-wide EDR daemons
+  such as Falco or Tetragon.
+keywords:
+  - eBPF
+  - Linux
+  - process tracing
+  - malware triage
+  - incident response
+  - security
+  - golang
+  - container security
+  - kubernetes
+  - syscall tracing
+license: MIT
+version: 1.1.0
+date-released: "2026-04-17"

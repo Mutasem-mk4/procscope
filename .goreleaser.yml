@@ -1,0 +1,79 @@
+# GoReleaser configuration
+# https://goreleaser.com
+
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: procscope
+    main: ./cmd/procscope
+    binary: procscope
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X 'github.com/Mutasem-mk4/procscope/internal/version.Version={{.Version}}'
+      - -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit={{.ShortCommit}}'
+    flags:
+      - -trimpath
+
+archives:
+  - id: default
+    format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+      - CHANGELOG.md
+      - man/procscope.1
+      - completions/*
+      - docs/**/*
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - Merge pull request
+      - Merge branch
+
+release:
+  github:
+    owner: Mutasem-mk4
+    name: procscope
+  draft: false
+  prerelease: auto
+  name_template: "v{{.Version}}"
+
+nfpms:
+  - id: deb
+    package_name: procscope
+    vendor: Mutasem-mk4
+    homepage: https://github.com/Mutasem-mk4/procscope
+    maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
+    description: Process-scoped runtime investigation tool using eBPF
+    license: MIT
+    formats:
+      - deb
+    contents:
+      - src: man/procscope.1
+        dst: /usr/share/man/man1/procscope.1
+      - src: completions/procscope.bash
+        dst: /usr/share/bash-completion/completions/procscope
+      - src: completions/procscope.zsh
+        dst: /usr/share/zsh/vendor-completions/_procscope
+      - src: completions/procscope.fish
+        dst: /usr/share/fish/vendor_completions.d/procscope.fish

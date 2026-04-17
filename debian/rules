@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+export CGO_ENABLED = 0
+
+# Version from changelog
+VERSION := $(shell dpkg-parsechangelog -S Version)
+
+LDFLAGS := -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=$(VERSION)' \
+           -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=debian'
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	@# No configure step needed
+
+override_dh_auto_build:
+	# Build binary from the committed eBPF object
+	go build -trimpath -ldflags "-s -w $(LDFLAGS)" -o bin/procscope ./cmd/procscope
+
+override_dh_auto_test:
+	# Run unit tests — these do not require eBPF runtime
+	go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
+
+override_dh_auto_install:
+	install -Dm755 bin/procscope debian/procscope/usr/bin/procscope
+	install -Dm644 man/procscope.1 debian/procscope/usr/share/man/man1/procscope.1
+	install -Dm644 completions/procscope.bash \
+		debian/procscope/usr/share/bash-completion/completions/procscope
+	install -Dm644 completions/procscope.zsh \
+		debian/procscope/usr/share/zsh/vendor-completions/_procscope
+	install -Dm644 completions/procscope.fish \
+		debian/procscope/usr/share/fish/vendor_completions.d/procscope.fish
+
+override_dh_auto_clean:
+	rm -rf bin/
+	dh_auto_clean
+
+# Skip dwz tool — static Go binaries don't have DWARF to compress
+override_dh_dwz:
+
+# Skip strip — Go builds with -s -w already strip
+override_dh_strip:

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ═══════════ PRIMARY META ═══════════ -->
+    <title>procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma</title>
+    <meta name="description" content="procscope is a zero-config, single-binary eBPF process tracer for Linux malware triage and incident response. Built by Mutasem Kharma. Trace syscalls, network, file and privilege events per-process without strace overhead.">
+    <meta name="keywords" content="procscope, Mutasem Kharma, Mutasem, Kharma, eBPF, process tracer, malware triage, Linux security, incident response, strace alternative, Falco alternative, Tracee alternative, container security, Kubernetes security, syscall monitoring, runtime security, Go security tool, open source security">
+    <meta name="author" content="Mutasem Kharma">
+    <meta name="creator" content="Mutasem Kharma">
+    <meta name="publisher" content="Mutasem Kharma">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    <link rel="canonical" href="https://mutasem-mk4.github.io/procscope/">
+
+    <!-- ═══════════ OPEN GRAPH (Facebook, LinkedIn, Slack, Discord) ═══════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="procscope — Zero-Overhead eBPF Process Tracer for Linux">
+    <meta property="og:description" content="Trace malware behavior in real time with zero overhead. Single binary, zero config. Built by Mutasem Kharma.">
+    <meta property="og:url" content="https://mutasem-mk4.github.io/procscope/">
+    <meta property="og:site_name" content="procscope by Mutasem Kharma">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="procscope — eBPF Process Tracer for Linux Malware Triage">
+    <meta property="og:locale" content="en_US">
+
+    <!-- ═══════════ TWITTER CARD ═══════════ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mutasem_mk4">
+    <meta name="twitter:creator" content="@mutasem_mk4">
+    <meta name="twitter:title" content="procscope — Zero-Overhead eBPF Process Tracer">
+    <meta name="twitter:description" content="Trace malware behavior in real time with zero overhead. A single binary, zero-config eBPF tracer for Linux incident response.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png">
+    <meta name="twitter:image:alt" content="procscope by Mutasem Kharma">
+
+    <!-- ═══════════ ADDITIONAL ENGINES ═══════════ -->
+    <!-- Yandex -->
+    <meta name="yandex-verification" content="">
+    <!-- Bing/DuckDuckGo -->
+    <meta name="msvalidate.01" content="">
+
+    <!-- ═══════════ THEME & ICONS ═══════════ -->
+    <meta name="theme-color" content="#0d0d0d">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+
+    <!-- ═══════════ SCHEMA.ORG (Google, Bing, Yandex Rich Results) ═══════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "procscope",
+          "alternateName": ["procscope eBPF tracer", "procscope malware triage"],
+          "description": "Zero-overhead eBPF process tracer for Linux malware triage and incident response. Traces syscalls, network connections, file activity and privilege escalations per-process tree.",
+          "applicationCategory": "SecurityApplication",
+          "applicationSubCategory": "Malware Analysis",
+          "operatingSystem": "Linux",
+          "processorRequirements": "x86_64, ARM64",
+          "softwareRequirements": "Linux kernel 5.8+ with BTF support",
+          "programmingLanguage": "Go",
+          "license": "https://opensource.org/licenses/MIT",
+          "url": "https://mutasem-mk4.github.io/procscope/",
+          "downloadUrl": "https://github.com/Mutasem-mk4/procscope/releases/latest",
+          "installUrl": "https://github.com/Mutasem-mk4/procscope#installation",
+          "codeRepository": "https://github.com/Mutasem-mk4/procscope",
+          "image": "https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png",
+          "screenshot": "https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png",
+          "softwareVersion": "1.1.0",
+          "datePublished": "2026-04-17",
+          "author": {
+            "@type": "Person",
+            "@id": "#mutasem-kharma",
+            "name": "Mutasem Kharma",
+            "alternateName": ["Mutasem", "Kharma", "Mutasem-mk4"],
+            "url": "https://github.com/Mutasem-mk4",
+            "sameAs": [
+              "https://github.com/Mutasem-mk4",
+              "https://dev.to/mutasem04",
+              "https://twitter.com/mutasem_mk4"
+            ]
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "keywords": [
+            "eBPF", "process tracing", "malware triage", "Linux security",
+            "incident response", "strace alternative", "Falco alternative",
+            "container security", "Kubernetes", "runtime security",
+            "Mutasem Kharma", "procscope"
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "#mutasem-kharma",
+          "name": "Mutasem Kharma",
+          "alternateName": ["Mutasem", "Kharma", "Mutasem-mk4", "mutasem04"],
+          "jobTitle": "Security Engineer & Open-Source Toolsmith",
+          "description": "Security engineer specializing in eBPF, Linux Kernel Security, and automated vulnerability research. Creator of procscope, Vex, AuthSniper, and Specter-OS.",
+          "url": "https://github.com/Mutasem-mk4",
+          "sameAs": [
+            "https://github.com/Mutasem-mk4",
+            "https://dev.to/mutasem04",
+            "https://twitter.com/mutasem_mk4",
+            "https://killercoda.com/mutasem04"
+          ],
+          "knowsAbout": [
+            "eBPF", "Linux Kernel Security", "Malware Analysis",
+            "Penetration Testing", "Bug Bounty", "Golang",
+            "Container Security", "Kubernetes Security",
+            "Offensive Security", "Automated Vulnerability Research"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "procscope by Mutasem Kharma",
+          "url": "https://mutasem-mk4.github.io/procscope/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://github.com/Mutasem-mk4/procscope/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    <div class="blob-bg blob-3"></div>
+
+    <nav class="navbar" aria-label="Main Navigation">
+        <div class="nav-brand">procscope<span class="cursor">_</span></div>
+        <div class="nav-links">
+            <a href="https://github.com/Mutasem-mk4/procscope">GitHub</a>
+            <a href="https://github.com/Mutasem-mk4/procscope/blob/master/docs/architecture.md">Docs</a>
+            <a href="https://killercoda.com/mutasem04/scenario/procscope-scenario">Try Live</a>
+            <a href="https://github.com/Mutasem-mk4/procscope/releases" class="btn-primary">Download</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="badge">v1.1.0 — Now with Kubernetes Pod Resolution</div>
+            <h1>Surgical Process Tracing<br>Powered by <span class="highlight">eBPF</span></h1>
+            <p class="subtitle">A zero-overhead, single-binary process tracer for Linux malware triage and incident response. Built by <strong>Mutasem Kharma</strong>.</p>
+
+            <div class="cta-group">
+                <a href="https://killercoda.com/mutasem04/scenario/procscope-scenario" class="btn-primary large">Try in Browser — Free</a>
+                <a href="https://github.com/Mutasem-mk4/procscope" class="btn-primary large" style="background:transparent;border:2px solid #4CAF50;">View Source</a>
+            </div>
+            <div class="terminal-cmd">
+                <span>$ sudo procscope -- ./suspicious-binary</span>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card glass">
+                <div class="icon">🔍</div>
+                <h3>Process Scoped</h3>
+                <p>Track a single PID tree — not the entire host. See exactly what one binary does without drowning in noise.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="icon">⚡</div>
+                <h3>Zero Overhead</h3>
+                <p>eBPF kernel-level filtering means zero performance impact. No ptrace. No anti-debug detection by malware.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="icon">🛡️</div>
+                <h3>Incident Ready</h3>
+                <p>Auto-generates evidence bundles, Markdown reports, and JSONL streams for your SOC team or HackerOne submission.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="icon">☸️</div>
+                <h3>K8s Aware</h3>
+                <p>Automatically resolves container IDs to Kubernetes Pod names and Namespaces. No CRDs, no DaemonSets.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Invisible SEO content for long-tail keyword matching -->
+    <footer style="padding:2rem;text-align:center;color:#333;font-size:0.8rem;">
+        <p>procscope is an open-source security tool created by <a href="https://github.com/Mutasem-mk4" style="color:#4CAF50;">Mutasem Kharma</a>.</p>
+        <p>Alternative to strace, Falco, Tracee, and Tetragon for targeted process investigation on Linux.</p>
+        <p>Also by Mutasem Kharma: <a href="https://github.com/Mutasem-mk4/Vex" style="color:#4CAF50;">Vex</a> (BOLA scanner), <a href="https://github.com/Mutasem-mk4/AuthSniper" style="color:#4CAF50;">AuthSniper</a> (recon framework), <a href="https://github.com/Mutasem-mk4/Specter-OS" style="color:#4CAF50;">Specter-OS</a> (AI security agent).</p>
+        <nav aria-label="Footer">
+            <a href="https://github.com/Mutasem-mk4" style="color:#4CAF50;">GitHub</a> ·
+            <a href="https://dev.to/mutasem04" style="color:#4CAF50;">Dev.to</a> ·
+            <a href="https://twitter.com/mutasem_mk4" style="color:#4CAF50;">Twitter</a> ·
+            <a href="https://killercoda.com/mutasem04/scenario/procscope-scenario" style="color:#4CAF50;">Interactive Lab</a>
+        </nav>
+    </footer>
+
+    <script>
+        const term = document.querySelector('.terminal-cmd');
+        term.addEventListener('click', () => {
+            navigator.clipboard.writeText('sudo procscope -- ./suspicious-binary');
+            term.classList.add('copied');
+            setTimeout(() => term.classList.remove('copied'), 2000);
+        });
+    </script>
+</body>
+</html>

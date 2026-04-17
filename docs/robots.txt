@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mutasem-mk4.github.io/procscope/sitemap.xml

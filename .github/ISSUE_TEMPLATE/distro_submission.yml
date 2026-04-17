@@ -1,0 +1,50 @@
+name: Distro Submission Tracking
+description: Track submission status for Kali, Parrot, or BlackArch
+title: "[distro] "
+labels:
+  - packaging
+  - distribution
+body:
+  - type: dropdown
+    id: distro
+    attributes:
+      label: Distribution
+      options:
+        - Kali Linux
+        - Parrot OS
+        - BlackArch
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Target procscope version
+      placeholder: "0.1.4"
+    validations:
+      required: true
+
+  - type: textarea
+    id: submission_links
+    attributes:
+      label: Submission links
+      description: Link issue/PR/email thread URL(s) for the submission
+      placeholder: "https://..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Readiness checklist
+      options:
+        - label: Packaging Quality workflow is green
+        - label: Release artifacts and checksums are published
+        - label: Changelog includes this version
+        - label: Arch metadata and Debian metadata are aligned
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes from maintainer feedback
+      description: Capture requested changes and follow-ups

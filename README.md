@@ -1,93 +1,263 @@
-# kharma.mutasem-project
+<p align="center">
+  <img src="assets/header.png" alt="procscope header banner" width="100%">
+</p>
 
+# procscope — eBPF Process Tracer for Linux Malware Triage & Incident Response
 
+**Zero-overhead, zero-config eBPF process tracer for Linux.**
+Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons like Falco or Tetragon.
 
-## Getting started
+<p align="center">
+  <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
+  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=for-the-badge&label=CI" alt="CI">
+  <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
+  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&color=00ADD8" alt="Go Version">
+  <img src="https://img.shields.io/badge/eBPF-Powered-FF4081?style=for-the-badge" alt="eBPF Powered">
+  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=for-the-badge&color=000000" alt="License">
+</p>
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**Designed for:** security research, malware triage, reverse engineering support, incident response, and deep debugging.
 
-## Add your files
+**Not designed for:** EDR, SIEM, Kubernetes-first monitoring, policy enforcement, or whole-system tracing.
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+## Quick Start 
 
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
+
+### 1-Minute Install (Go 1.25+)
+
+```bash
+go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
+procscope --version
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/kharma.mutasem-group/kharma.mutasem-project.git
-git branch -M main
-git push -uf origin main
+
+```bash
+# Trace a command
+sudo procscope -- ./suspicious-binary
+
+# Attach to a running process
+sudo procscope -p 1234
+
+# Save evidence bundle + Markdown report
+sudo procscope --out case-001 --summary report.md -- ./installer.sh
+
+# Stream events as JSONL
+sudo procscope --jsonl events.jsonl -- ./tool
 ```
 
-## Integrate with your tools
+## What procscope Observes
 
-* [Set up project integrations](https://gitlab.com/kharma.mutasem-group/kharma.mutasem-project/-/settings/integrations)
+| Category | Events | Confidence |
+|----------|--------|------------|
+| **Process lifecycle** | exec, fork/clone, exit (with codes) | Exact |
+| **File activity** | open, rename, unlink, chmod, chown | Best-effort |
+| **Network activity** | connect, accept, bind, listen (IP:port) | Best-effort |
+| **Privilege transitions** | setuid, setgid, ptrace | Exact / Best-effort |
+| **Namespace changes** | setns, unshare | Best-effort |
+| **Mount operations** | mount | Best-effort |
 
-## Collaborate with your team
+> **Honesty note:** procscope does NOT claim to capture all process activity.
+> See [docs/support-matrix.md](docs/support-matrix.md) for exact details on capabilities and blindspots.
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## Requirements
 
-## Test and Deploy
+- **Linux kernel 5.8+** with BTF (`CONFIG_DEBUG_INFO_BTF=y`)
+- **Root** or `CAP_BPF` + `CAP_PERFMON` + `CAP_SYS_RESOURCE`
+- **Architectures:** amd64, arm64
 
-Use the built-in continuous integration in GitLab.
+procscope will detect missing capabilities at startup and provide actionable guidance.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+## Packaging Status
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+| Channel | Status |
+|---------|--------|
+| GitHub releases | Available |
+| `go install` | Available |
+| Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; not yet shipped by the distro |
+| Arch / BlackArch package | `arch/PKGBUILD` maintained in-tree; not yet shipped by BlackArch |
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Note: Running procscope usually requires `sudo` (eBPF capabilities).
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### 1. Go Install
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```bash
+go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
+```
+
+### 2. Direct Download
+
+Download the release asset that matches your architecture from:
+
+- https://github.com/Mutasem-mk4/procscope/releases/latest
+
+Current release assets include:
+
+- Debian package (`.deb`)
+- Linux tarballs for `amd64` and `arm64`
+
+### 3. Build from Source
+
+```bash
+git clone https://github.com/Mutasem-mk4/procscope.git
+cd procscope
+make build
+sudo install -m755 bin/procscope /usr/local/bin/procscope
+```
+
+### 4. Native Package Managers
+
+These commands are the target install experience after distro acceptance.
+
+**BlackArch Linux:**
+```bash
+sudo pacman -S procscope
+```
+
+**Kali Linux & Parrot OS:**
+```bash
+sudo apt update && sudo apt install procscope
+```
+
+## Output Formats
+
+### Live Timeline
+
+Compact, color-coded terminal output during investigation:
+
+```
+TIME         PID   COMM            EVENT              DETAILS
+[+    0ms]   1234  suspicious      process.exec       /tmp/suspicious-binary
+[+   12ms]   1234  suspicious      file.open          /etc/passwd [read]
+[+   15ms]   1234  suspicious      net.connect        ipv4 → 93.184.216.34:443
+[+   18ms] ! 1234  suspicious      priv.setuid        uid 1000 → 0
+[+   20ms]   1235  sh              process.exec       /bin/sh
+[+   25ms]   1235  sh              process.exit        exit_code=0
+[+   30ms]   1234  suspicious      process.exit        exit_code=0
+```
+
+### JSONL Event Stream
+
+Machine-readable, one event per line:
+
+```bash
+procscope --jsonl events.jsonl -- ./command
+```
+
+### Evidence Bundle
+
+Structured directory for incident response:
+
+```
+case-001/
+├── metadata.json       # Investigation metadata
+├── events.jsonl        # Complete event stream
+├── process-tree.txt    # Human-readable process tree
+├── files.json          # File activity summary
+├── network.json        # Network activity summary
+├── notable.json        # Security-relevant events
+└── summary.md          # Markdown executive summary
+```
+
+### Markdown Summary
+
+Team-ready report with overview, process tree, event breakdown, file/network activity tables, notable events, and honest limitations.
+
+## Configuration & Flags
+
+| Flag | Short | Description | Default |
+|------|-------|-------------|---------|
+| `--pid` | `-p` | Attach to existing PID | — |
+| `--name` | `-n` | Attach by process name | — |
+| `--out` | `-o` | Evidence bundle directory | — |
+| `--jsonl` | | JSONL output file | — |
+| `--summary` | | Markdown summary file | — |
+| `--no-color` | | Disable ANSI colors | false |
+| `--quiet` | `-q` | Suppress live timeline | false |
+| `--max-args` | | Max argv elements | 64 |
+| `--max-path` | | Max path string length | 4096 |
+| `--skip-checks` | | Skip privilege checks | false |
+
+## Safe Defaults
+
+- **No environment dumping** — env vars are not captured by default
+- **No secret capture** — payload/body content is not traced
+- **Bounded lengths** — arguments and paths are truncated at configurable limits
+- **Pattern-based redaction** — values matching `password`, `token`, `secret`, etc. are redacted
+
+## Architecture
+
+```
+┌───────────────────────────────────────┐
+│              CLI (cobra)              │
+├──────────┬────────────┬───────────────┤
+│ Launcher │  Attacher  │  Cap Check    │
+├──────────┴────────────┴───────────────┤
+│           Event Correlator            │
+│   (process tree, investigation ID)    │
+├───────────────────────────────────────┤
+│          eBPF Tracer Manager          │
+│   (load, attach, ring buffer read)    │
+├───────────────────────────────────────┤
+│        eBPF Programs (kernel)         │
+│  tracepoints: sched, syscalls, etc.   │
+├───────────────────────────────────────┤
+│            Output Layer               │
+│  timeline │ JSON │ bundle │ summary   │
+└───────────────────────────────────────┘
+```
+
+See [docs/architecture.md](docs/architecture.md) for detailed design.
+
+## Comparison with Other Tools
+
+| Feature | procscope | Tracee | Tetragon | Inspektor Gadget | strace |
+|---------|-----------|--------|----------|------------------|--------|
+| **Focus** | Process-scoped investigation | Runtime security | K8s observability | K8s debugging | Syscall tracing |
+| **Scope** | Single process tree | System-wide | System/pod-wide | System/pod-wide | Single process |
+| **Setup** | Zero config | Policy config | CRDs | kubectl | Zero config |
+| **Evidence bundle** | ✓ | ✗ | ✗ | ✗ | ✗ |
+| **Markdown report** | ✓ | ✗ | ✗ | ✗ | ✗ |
+| **Process tree** | ✓ auto-follows forks | ✓ | ✓ | ✓ | `-f` flag |
+| **K8s-native** | ✗ | ✓ | ✓ | ✓ | ✗ |
+| **Policy engine** | ✗ | ✓ | ✓ | ✗ | ✗ |
+
+See [docs/comparison.md](docs/comparison.md) for honest, detailed comparison.
+
+## Documentation
+
+- [Building from Source](BUILDING.md)
+- [Architecture](docs/architecture.md)
+- [Support Matrix](docs/support-matrix.md)
+- [Acceptance Risk Assessment](docs/acceptance-risk.md)
+- [Security Model](docs/security-model.md)
+- [Privacy Model](docs/privacy-model.md)
+- [Packaging Guide](docs/packaging.md)
+- [Distribution Submission Playbook](docs/packaging-submission-playbook.md)
+- [Comparison](docs/comparison.md)
+- [Design Decisions](docs/design-decisions/)
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+`procscope` is heavily community-driven; check issues labeled `good-first-issue` to get started quickly.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Security
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+
+## Community
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guidelines.
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+[MIT](LICENSE)
+
+---
+
+**procscope** is a process-first local investigator. It is not an EDR, not a SIEM, and not a policy engine. It is designed to answer one question well: *what did this process actually do?*

@@ -1,0 +1,10 @@
+Tests: cli-sanity
+Depends: procscope
+Restrictions: allow-stderr
+
+Tests: install-layout
+Depends: procscope
+
+Tests: runtime-smoke
+Depends: procscope
+Restrictions: needs-root, isolation-machine, allow-stderr

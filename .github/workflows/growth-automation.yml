@@ -1,0 +1,70 @@
+name: Growth Automation
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  broadcast:
+    name: Generate and publish launch copy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate launch copy bundle
+        run: |
+          python scripts/release_broadcast.py \
+            --tag "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}"
+
+      - name: Publish to configured channels
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/release_broadcast.py \
+            --tag "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}" \
+            --publish
+
+      - name: Commit generated marketing artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/marketing/autogen
+          git diff --cached --quiet && exit 0
+          git commit -m "docs: add autogen launch copy for ${{ github.event.release.tag_name }}"
+          git push
+
+      - name: Create manual posting checklist issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Launch checklist: ${{ github.event.release.tag_name }}" \
+            --label "documentation" \
+            --body "$(cat <<'EOF'
+          ## Manual Channel Checklist
+
+          Even with automation, these channels still perform best with manual posting and active replies:
+
+          - [ ] Hacker News `Show HN` submission
+          - [ ] Reddit launch post in one relevant subreddit
+          - [ ] 24-hour reply window for comments/questions
+
+          Auto-generated copy is available in `docs/marketing/autogen`.
+          EOF
+          )"

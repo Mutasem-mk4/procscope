@@ -1,0 +1,134 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ['1.25']
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Build
+        run: make build
+
+      - name: Cross-build supported targets
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath ./cmd/procscope
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath ./cmd/procscope
+
+      - name: Unit tests
+        run: go test -v -race -count=1 -short ./...
+
+      - name: Integration tests (requires eBPF/root)
+        run: sudo ./bin/procscope -- ls /tmp
+
+      - name: Vet
+        run: go vet ./...
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.25'
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        continue-on-error: true
+        with:
+          version: latest
+
+  vuln:
+    name: Vulnerability Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.25'
+
+      - name: Install govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+
+      - name: Run govulncheck
+        run: govulncheck ./... || true
+
+  build-debian:
+    name: Build Debian Package
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debhelper lintian dh-golang
+
+      - name: Build Debian Package
+        run: dpkg-buildpackage -us -uc -b -d
+
+      - name: Move Debian Package
+        run: mv ../procscope_*.deb .
+
+      - name: Lint Debian Package
+        run: lintian ./procscope_*.deb || true
+
+      - name: Upload Debian Package
+        uses: actions/upload-artifact@v7
+        with:
+          name: procscope-deb
+          path: ./procscope_*.deb
+
+  build-arch:
+    name: Build Arch Linux Package
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    needs: test
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm git go
+
+      # We can't use actions/checkout@v4 directly in Arch container without nodejs, doing it manually or installing node
+      - name: Setup Node for checkout
+        run: pacman -S --noconfirm nodejs
+
+      - uses: actions/checkout@v6
+
+      - name: Build Arch Package
+        # makepkg cannot be run as root, so we create a build user
+        run: |
+          useradd -m builduser
+          chown -R builduser:builduser .
+          su builduser -c "cd arch && makepkg -sf"
+
+      - name: Upload Arch Package
+        uses: actions/upload-artifact@v7
+        with:
+          name: procscope-pkg-tar-zst
+          path: arch/*.pkg.tar.zst

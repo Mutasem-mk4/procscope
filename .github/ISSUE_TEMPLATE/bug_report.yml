@@ -1,0 +1,30 @@
+name: 🐛 Bug Report
+description: Report a kernel trace or general procscope defect.
+title: "[Bug] <title here>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! 
+        Remember, procscope is built on eBPF, so issues often stem from kernel compatibility.
+  - type: textarea
+    id: overview
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Kernel Version
+      description: What is the output of `uname -r`?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Output
+      description: Please paste the panic or terminal output that occurred.
+      render: shell

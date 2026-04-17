@@ -1,0 +1,16 @@
+#!/bin/sh
+# DEP-8 CLI sanity test: verify version and core help text from the installed package.
+set -eu
+
+pkg_version="$(dpkg-query -W -f='${Version}' procscope)"
+version_output="$(procscope --version)"
+
+printf '%s\n' "$version_output" | grep -F "procscope ${pkg_version} (commit debian)"
+
+help_output="$(procscope --help)"
+printf '%s\n' "$help_output" | grep -F "Launch a command under observation"
+printf '%s\n' "$help_output" | grep -F -- "--jsonl"
+printf '%s\n' "$help_output" | grep -F -- "--summary"
+printf '%s\n' "$help_output" | grep -F -- "completion [bash|zsh|fish]"
+
+echo "PASS: cli-sanity"
