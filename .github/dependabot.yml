@@ -2,18 +2,40 @@ version: 2
 updates:
   - package-ecosystem: "gomod"
     directory: "/"
+    target-branch: "master"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
+      day: "monday"
+      time: "04:00"
+    open-pull-requests-limit: 4
+    groups:
+      gomod-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      gomod-major:
+        update-types:
+          - "major"
     labels:
       - "dependencies"
       - "security"
 
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "master"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
+      day: "monday"
+      time: "04:10"
+    open-pull-requests-limit: 4
+    groups:
+      actions-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      actions-major:
+        update-types:
+          - "major"
     labels:
       - "dependencies"
       - "ci"
