@@ -51,33 +51,42 @@ procscope will detect missing capabilities at startup and provide actionable gui
 
 ## Installation
 
-### From Source
+Note: Running procscope usually requires `sudo` (eBPF capabilities).
 
+### 1. Direct Download (Recommended)
+You can directly download the pre-compiled `.deb` package or static binary straight from our automated GitHub pipelines:
+
+**For Debian / Kali / Parrot OS:**
 ```bash
-# Prerequisites: Go 1.22+
-git clone https://github.com/Mutasem-mk4/procscope.git
-cd procscope
-make build
-sudo make install
-
-# Only if you modify bpf/procscope.c:
-make generate
+wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.0_linux_amd64.deb
+sudo dpkg -i procscope_0.1.0_linux_amd64.deb
 ```
 
-### Debian / Kali / Parrot
-
+**For other Linux Distros (Static Binary):**
 ```bash
-sudo apt install procscope  # once packaged
-# Or build locally:
-dpkg-buildpackage -us -uc -b
-sudo dpkg -i ../procscope_*.deb
+wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.0_linux_amd64.tar.gz
+tar -xvf procscope_0.1.0_linux_amd64.tar.gz
+sudo mv procscope /usr/local/bin/
 ```
 
-### Arch / BlackArch
+### 2. Go Install (Source)
+If you have Go 1.22+ installed, you can natively compile and install the tool to your Go bin path effortlessly:
 
 ```bash
-cd arch/
-makepkg -si
+go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
+```
+
+### 3. Native Package Managers (Pending Upstream Integration)
+We are actively tracking upstream approvals for major distributions. Once merged:
+
+**BlackArch Linux:**
+```bash
+sudo pacman -S procscope
+```
+
+**Kali Linux & Parrot OS:**
+```bash
+sudo apt update && sudo apt install procscope
 ```
 
 ## Output Formats
