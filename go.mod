@@ -1,4 +1,4 @@
-module github.com/procscope/procscope
+module github.com/Mutasem-mk4/procscope
 
 go 1.22.0
 
