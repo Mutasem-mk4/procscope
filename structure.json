@@ -1,0 +1,7 @@
+{
+  "scenarios": [
+    {
+      "path": "malware-triage"
+    }
+  ]
+}
