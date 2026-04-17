@@ -20,7 +20,10 @@ Launch a command under observation — or attach to an existing process — and 
 
 **Not designed for:** EDR, SIEM, Kubernetes-first monitoring, policy enforcement, or whole-system tracing.
 
-## Quick Start
+## Quick Start 
+
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/)
+*(Note: Upload the `killercoda/` directory to your Killercoda profile to activate the live link!)*
 
 ```bash
 # Trace a command
@@ -48,7 +51,12 @@ sudo procscope --jsonl events.jsonl -- ./tool
 | **Mount operations** | mount | Best-effort |
 
 > **Honesty note:** procscope does NOT claim to capture all process activity.
-> See [docs/support-matrix.md](docs/support-matrix.md) for exact details on
+> See [docs/support-matrix.md](docs/support-matrix.md) for exact details on capabilities and blindspots.
+
+## Contributing
+
+`procscope` is heavily community-driven. If you are looking to get your feet wet in Golang or eBPF, we aggressively label issues with `good-first-issue` specifically for newer contributors. 
+Check out the [Issues tab](https://github.com/Mutasem-mk4/procscope/issues) or head to [goodfirstissue.dev](https://goodfirstissue.dev/p/Mutasem-mk4/procscope) to find something to work on!
 > what is observed, what is missed, and why.
 
 ## Requirements
