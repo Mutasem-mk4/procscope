@@ -100,9 +100,11 @@ This creates:
 ### Manual Release Checklist
 
 1. Update `CHANGELOG.md`
-2. Tag the release
-3. Run `goreleaser release`
-4. Build Debian package: `dpkg-buildpackage -us -uc`
-5. Build Arch package: `cd arch && makepkg -sf`
-6. Upload artifacts to GitHub release
-7. Update documentation if needed
+2. Run release preflight checks: `python scripts/release_preflight.py --tag vX.Y.Z`
+3. Sync Arch metadata when `arch/PKGBUILD` changes: `./scripts/sync_arch_srcinfo.sh`
+4. Tag the release
+5. Run `goreleaser release`
+6. Build Debian package: `dpkg-buildpackage -us -uc`
+7. Build Arch package: `cd arch && makepkg -sf`
+8. Upload artifacts to GitHub release
+9. Update documentation if needed

@@ -14,6 +14,7 @@ on:
       - 'debian/**'
       - '.goreleaser.yml'
       - '.github/workflows/packaging-quality.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read

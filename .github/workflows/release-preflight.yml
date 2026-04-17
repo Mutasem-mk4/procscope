@@ -1,0 +1,41 @@
+name: Release Preflight
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to validate (e.g. v0.1.4)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Validate release packaging consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Resolve tag
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run preflight checks
+        run: |
+          python scripts/release_preflight.py --tag "${{ steps.vars.outputs.tag }}"
