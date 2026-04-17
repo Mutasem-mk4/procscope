@@ -4,7 +4,7 @@ pkgver=0.1.0
 pkgrel=1
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
-url='https://github.com/procscope/procscope'
+url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
 depends=()
 makedepends=('go>=2:1.22')
@@ -22,8 +22,8 @@ build() {
 
   go build \
     -ldflags "-s -w \
-      -X 'github.com/procscope/procscope/internal/version.Version=${pkgver}' \
-      -X 'github.com/procscope/procscope/internal/version.Commit=${pkgrel}'" \
+      -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=${pkgver}' \
+      -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=${pkgrel}'" \
     -o "${pkgname}" \
     ./cmd/procscope
 }

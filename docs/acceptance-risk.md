@@ -29,7 +29,7 @@ blockers that prevent it from being submitted to any distro right now.
 
 ### 1. No Public Repository
 
-The GitHub repository `github.com/procscope/procscope` does not exist yet.
+The GitHub repository `github.com/Mutasem-mk4/procscope` does not exist yet.
 Every distro submission requires a publicly accessible upstream repository.
 
 **To resolve:** Create the repository on GitHub, push all commits and the
@@ -45,7 +45,7 @@ a copy of this PKGBUILD with the real hash filled in.
 **To resolve:** After pushing the tag, compute the hash from the GitHub
 tarball:
 ```bash
-curl -sL https://github.com/procscope/procscope/archive/v0.1.0.tar.gz | sha256sum
+curl -sL https://github.com/Mutasem-mk4/procscope/archive/v0.1.0.tar.gz | sha256sum
 ```
 
 ### 2. No Linux Runtime Verification
@@ -122,7 +122,7 @@ maintainers will want a real person's name and reachable email.
 
 ## Recommended Next Steps (In Priority Order)
 
-1. Create `github.com/procscope/procscope` and push
+1. Create `github.com/Mutasem-mk4/procscope` and push
 2. Boot a Kali/Ubuntu VM with kernel 5.8+ and BTF
 3. Run `make build && sudo ./bin/procscope -- ls /tmp`
 4. Fix any BPF verifier or struct mismatch issues

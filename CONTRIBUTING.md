@@ -14,7 +14,7 @@ Thank you for your interest in contributing to procscope!
 ### Development Setup
 
 ```bash
-git clone https://github.com/procscope/procscope.git
+git clone https://github.com/Mutasem-mk4/procscope.git
 cd procscope
 
 # Build (uses committed BPF object — no code generation needed)

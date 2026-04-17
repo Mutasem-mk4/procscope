@@ -55,7 +55,7 @@ procscope will detect missing capabilities at startup and provide actionable gui
 
 ```bash
 # Prerequisites: Go 1.22+
-git clone https://github.com/procscope/procscope.git
+git clone https://github.com/Mutasem-mk4/procscope.git
 cd procscope
 make build
 sudo make install

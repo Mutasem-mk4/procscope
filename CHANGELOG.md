@@ -53,5 +53,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Event drops possible under very high event rates
 - Requires kernel 5.8+ with BTF
 
-[Unreleased]: https://github.com/procscope/procscope/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/procscope/procscope/releases/tag/v0.1.0
+[Unreleased]: https://github.com/Mutasem-mk4/procscope/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Mutasem-mk4/procscope/releases/tag/v0.1.0

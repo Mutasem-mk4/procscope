@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: procscope
 Upstream-Contact: 140179052+Mutasem-mk4@users.noreply.github.com
-Source: https://github.com/procscope/procscope
+Source: https://github.com/Mutasem-mk4/procscope
 
 Files: *
 Copyright: 2026 Mutasem-mk4

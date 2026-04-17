@@ -6,8 +6,8 @@ export CGO_ENABLED = 0
 # Version from changelog
 VERSION := $(shell dpkg-parsechangelog -S Version)
 
-LDFLAGS := -X 'github.com/procscope/procscope/internal/version.Version=$(VERSION)' \
-           -X 'github.com/procscope/procscope/internal/version.Commit=debian'
+LDFLAGS := -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=$(VERSION)' \
+           -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=debian'
 
 %:
 	dh $@

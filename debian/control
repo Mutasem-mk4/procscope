@@ -7,9 +7,9 @@ Build-Depends:
  golang-go (>= 2:1.22~),
 Rules-Requires-Root: no
 Standards-Version: 4.7.0
-Homepage: https://github.com/procscope/procscope
-Vcs-Browser: https://github.com/procscope/procscope
-Vcs-Git: https://github.com/procscope/procscope.git
+Homepage: https://github.com/Mutasem-mk4/procscope
+Vcs-Browser: https://github.com/Mutasem-mk4/procscope
+Vcs-Git: https://github.com/Mutasem-mk4/procscope.git
 
 Package: procscope
 Architecture: linux-any

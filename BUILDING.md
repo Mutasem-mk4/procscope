@@ -21,7 +21,7 @@ make build
 ### 1. Clone
 
 ```bash
-git clone https://github.com/procscope/procscope.git
+git clone https://github.com/Mutasem-mk4/procscope.git
 cd procscope
 ```
 

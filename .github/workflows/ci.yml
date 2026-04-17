@@ -86,10 +86,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y debhelper lintian
+          sudo apt-get install -y debhelper lintian dh-golang
 
       - name: Build Debian Package
-        run: dpkg-buildpackage -us -uc -b
+        run: dpkg-buildpackage -us -uc -b -d
 
       - name: Lint Debian Package
         run: lintian ../procscope_*.deb
