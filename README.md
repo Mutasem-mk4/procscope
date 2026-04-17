@@ -58,14 +58,14 @@ You can directly download the pre-compiled `.deb` package or static binary strai
 
 **For Debian / Kali / Parrot OS:**
 ```bash
-wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.1_linux_amd64.deb
-sudo dpkg -i procscope_0.1.1_linux_amd64.deb
+wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.4_linux_amd64.deb
+sudo dpkg -i procscope_0.1.4_linux_amd64.deb
 ```
 
 **For other Linux Distros (Static Binary):**
 ```bash
-wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.1_linux_amd64.tar.gz
-tar -xvf procscope_0.1.1_linux_amd64.tar.gz
+wget https://github.com/Mutasem-mk4/procscope/releases/latest/download/procscope_0.1.4_linux_amd64.tar.gz
+tar -xvf procscope_0.1.4_linux_amd64.tar.gz
 sudo mv procscope /usr/local/bin/
 ```
 
