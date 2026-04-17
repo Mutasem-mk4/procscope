@@ -1,10 +1,10 @@
-Tests: smoke-test
+Tests: cli-sanity
 Depends: procscope
-Restrictions: needs-root, allow-stderr
+Restrictions: allow-stderr
 
-Test-Command: procscope --version
-Features: test-name=version-check
+Tests: install-layout
 Depends: procscope
 
-Tests: help-test
+Tests: runtime-smoke
 Depends: procscope
+Restrictions: needs-root, isolation-machine, allow-stderr
