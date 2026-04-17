@@ -37,6 +37,7 @@ type Options struct {
 	SummaryPath string
 	NoColor     bool
 	Quiet       bool
+	JSON        bool
 
 	// Tuning
 	MaxArgs    int
@@ -93,6 +94,7 @@ Examples:
 	f.Uint32VarP(&opts.PID, "pid", "p", 0, "Attach to an existing process by PID")
 	f.StringVarP(&opts.ProcessName, "name", "n", "", "Attach to a process by name (first match)")
 	f.StringVarP(&opts.OutputDir, "out", "o", "", "Evidence bundle output directory")
+	f.BoolVarP(&opts.JSON, "json", "j", false, "Stream events as structured JSON logs to stdout instead of timeline")
 	f.StringVar(&opts.JSONLPath, "jsonl", "", "Write events as JSONL to file (use - for stdout)")
 	f.StringVar(&opts.SummaryPath, "summary", "", "Write Markdown summary to file")
 	f.BoolVar(&opts.NoColor, "no-color", false, "Disable colored output")
@@ -108,6 +110,14 @@ Examples:
 }
 
 func run(cmd *cobra.Command, args []string, opts *Options) error {
+	// If native JSON logging is enabled via -j/--json
+	if opts.JSON {
+		opts.Quiet = true // suppress human-readable timeline
+		if opts.JSONLPath == "" {
+			opts.JSONLPath = "-" // default json output to stdout
+		}
+	}
+
 	// Determine mode: launch command or attach to PID
 	hasCommand := cmd.ArgsLenAtDash() >= 0 || len(args) > 0
 	hasPID := opts.PID != 0
