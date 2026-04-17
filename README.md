@@ -22,8 +22,8 @@ Launch a command under observation — or attach to an existing process — and 
 
 ## Quick Start 
 
-[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/)
-*(Note: Upload the `killercoda/` directory to your Killercoda profile to activate the live link!)*
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/malware-triage)
+*(Note: Link your GitHub repo to Killercoda to activate this live interactive sandbox!)*
 
 ```bash
 # Trace a command
