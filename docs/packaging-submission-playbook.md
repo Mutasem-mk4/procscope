@@ -28,6 +28,7 @@ Checklist:
 - Provide a concise threat-model and incident-response use case in package description.
 - Keep changelog entries specific and release-aligned.
 - Build and test on a Debian-family Linux host before opening maintainer outreach.
+- Keep DEP-8 coverage meaningful: CLI, installed assets, and a guarded runtime smoke test.
 
 ## Parrot OS
 
@@ -50,6 +51,7 @@ Before tag/release:
 - Arch metadata synced
 - Debian metadata validated
 - Linux smoke test complete
+- DEP-8 autopkgtests updated when CLI or package layout changes
 - Release notes include packaging-impact section
 
 ## Maintainer Outreach Notes

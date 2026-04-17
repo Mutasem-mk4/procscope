@@ -26,13 +26,24 @@ debian/
 ├── watch            # Upstream version tracking
 ├── source/format    # 3.0 (quilt)
 └── tests/
-    ├── control      # DEP-8 autopkgtest definitions
-    ├── help-test    # Verify --help works
-    └── smoke-test   # Verify --version works
+    ├── control          # DEP-8 autopkgtest definitions
+    ├── cli-sanity       # Verify version string + core CLI help
+    ├── install-layout   # Verify shipped manpage + completions
+    └── runtime-smoke    # Launch-mode smoke test on root+BTF hosts
 ```
 
 The Debian package builds from the committed `internal/tracer/procscope_bpfel.o`
 artifact and does not run `go generate` during package build.
+
+### Current DEP-8 Coverage
+
+The in-tree autopkgtests now cover three different review concerns:
+
+- `cli-sanity`: package version wiring and top-level CLI UX
+- `install-layout`: binary, man page, and shell completion installation paths
+- `runtime-smoke`: launch mode on kernels that provide root access and BTF
+
+The runtime smoke test is intentionally guarded so unsupported CI kernels do not create false negatives for packaging review.
 
 ### Kali Tool Submission
 
@@ -48,6 +59,13 @@ The repository is structured to support a Kali package request and Debian-style 
 | Activity | Active development |
 | Current install path | GitHub release asset or `go install` |
 | Usage | `sudo procscope -- ./binary` |
+
+Before opening Kali packaging outreach, have these artifacts ready:
+
+- `dpkg-buildpackage -us -uc -b` output from a Debian-family host
+- `lintian` results with any remaining warnings explained
+- `autopkgtest` results for the DEP-8 suite
+- one short runtime transcript showing `procscope --out ... -- /bin/true`
 
 ### Parrot Contribution
 

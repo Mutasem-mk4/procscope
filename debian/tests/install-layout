@@ -1,0 +1,16 @@
+#!/bin/sh
+# DEP-8 installed-files test: verify the package ships its expected operator-facing assets.
+set -eu
+
+command -v procscope >/dev/null
+
+test -s /usr/bin/procscope
+test -s /usr/share/man/man1/procscope.1
+test -s /usr/share/bash-completion/completions/procscope
+test -s /usr/share/zsh/vendor-completions/_procscope
+test -s /usr/share/fish/vendor_completions.d/procscope.fish
+
+dpkg -L procscope | grep -qx /usr/bin/procscope
+dpkg -L procscope | grep -qx /usr/share/man/man1/procscope.1
+
+echo "PASS: install-layout"
