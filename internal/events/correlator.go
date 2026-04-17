@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 	"time"
+
+	"github.com/Mutasem-mk4/procscope/internal/process"
 )
 
 // Correlator maintains a process tree rooted at the investigation target
@@ -36,6 +38,21 @@ type Correlator struct {
 
 	// maxPathLen is the maximum path string length to retain.
 	maxPathLen int
+
+	// resolver is an optional Kubernetes metadata resolver.
+	resolver K8sResolver
+}
+
+// K8sResolver maps a container ID to a Kubernetes namespace and pod name.
+type K8sResolver interface {
+	Resolve(containerID string) (namespace, pod string, found bool)
+}
+
+// SetK8sResolver attaches a Kubernetes resolver to the Correlator.
+func (c *Correlator) SetK8sResolver(r K8sResolver) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.resolver = r
 }
 
 // TrackedProcess records metadata about a tracked process in the tree.
@@ -50,6 +67,12 @@ type TrackedProcess struct {
 	Exited    bool
 	Children  []uint32
 	Depth     int // depth in process tree from root
+
+	// Cached context
+	ContainerID   string
+	K8sNamespace  string
+	K8sPodName    string
+	ContextCached bool
 }
 
 // NewCorrelator creates a new event correlator for an investigation.
@@ -128,6 +151,23 @@ func (c *Correlator) Submit(evt *Event) bool {
 		c.mu.Unlock()
 		return false
 	}
+
+	// Ensure context is resolved once per process
+	if !proc.ContextCached {
+		proc.ContainerID = process.GetContainerID(proc.PID)
+		if c.resolver != nil && proc.ContainerID != "" {
+			if ns, pName, ok := c.resolver.Resolve(proc.ContainerID); ok {
+				proc.K8sNamespace = ns
+				proc.K8sPodName = pName
+			}
+		}
+		proc.ContextCached = true
+	}
+
+	// Map context to event
+	evt.ContainerID = proc.ContainerID
+	evt.K8sNamespace = proc.K8sNamespace
+	evt.K8sPodName = proc.K8sPodName
 
 	// Enrich event with investigation context
 	evt.InvestigationID = c.investigationID

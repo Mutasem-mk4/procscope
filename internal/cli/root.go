@@ -19,6 +19,7 @@ import (
 
 	"github.com/Mutasem-mk4/procscope/internal/caps"
 	"github.com/Mutasem-mk4/procscope/internal/events"
+	"github.com/Mutasem-mk4/procscope/internal/k8s"
 	"github.com/Mutasem-mk4/procscope/internal/output"
 	"github.com/Mutasem-mk4/procscope/internal/process"
 	"github.com/Mutasem-mk4/procscope/internal/tracer"
@@ -38,6 +39,7 @@ type Options struct {
 	NoColor     bool
 	Quiet       bool
 	JSON        bool
+	K8s         bool
 
 	// Tuning
 	MaxArgs    int
@@ -99,6 +101,7 @@ Examples:
 	f.StringVar(&opts.SummaryPath, "summary", "", "Write Markdown summary to file")
 	f.BoolVar(&opts.NoColor, "no-color", false, "Disable colored output")
 	f.BoolVarP(&opts.Quiet, "quiet", "q", false, "Suppress live timeline (only write to files)")
+	f.BoolVar(&opts.K8s, "k8s", false, "Enable Kubernetes Pod metadata resolution via local API Server (requires RBAC)")
 	f.IntVar(&opts.MaxArgs, "max-args", 64, "Maximum number of argv elements to capture")
 	f.IntVar(&opts.MaxPathLen, "max-path", 4096, "Maximum path string length")
 	f.BoolVar(&opts.SkipChecks, "skip-checks", false, "Skip privilege and kernel checks (use at own risk)")
@@ -208,6 +211,19 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	}
 	correlator := events.NewCorrelator(investigationID, targetPID, opts.MaxArgs, opts.MaxPathLen)
 
+	// Spin up Kubernetes watcher if requested
+	var watcher *k8s.Watcher
+	if opts.K8s {
+		fmt.Fprintln(os.Stderr, "🔄 Initializing Kubernetes pod metadata watcher...")
+		var err error
+		watcher, err = k8s.NewWatcher(ctx)
+		if err != nil {
+			return fmt.Errorf("kubernetes initialization failed: %w", err)
+		}
+		correlator.SetK8sResolver(watcher)
+		fmt.Fprintln(os.Stderr, "✅ Kubernetes integration established")
+	}
+
 	// Initialize eBPF tracer
 	mgr := tracer.NewManager(correlator)
 	if err := mgr.Load(); err != nil {
@@ -230,6 +246,9 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 
 		// Re-create correlator with actual PID
 		correlator = events.NewCorrelator(investigationID, targetPID, opts.MaxArgs, opts.MaxPathLen)
+		if watcher != nil {
+			correlator.SetK8sResolver(watcher)
+		}
 
 		// Track in eBPF
 		if err := mgr.TrackPID(targetPID); err != nil {

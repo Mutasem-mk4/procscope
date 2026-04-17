@@ -114,6 +114,10 @@ type Event struct {
 	CgroupID    uint64 `json:"cgroup_id,omitempty"`
 	ContainerID string `json:"container_id,omitempty"`
 
+	// Kubernetes context
+	K8sPodName   string `json:"k8s_pod_name,omitempty"`
+	K8sNamespace string `json:"k8s_namespace,omitempty"`
+
 	// Type-specific data — exactly one populated per event
 	Process   *ProcessData   `json:"process,omitempty"`
 	File      *FileData      `json:"file,omitempty"`
