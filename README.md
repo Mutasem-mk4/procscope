@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/header.png" alt="procscope header banner" width="100%">
+  <img src="assets/header.jpeg" alt="procscope header banner" width="100%">
 </p>
 
 # procscope — eBPF Process Tracer for Linux Malware Triage & Incident Response
