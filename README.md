@@ -20,6 +20,9 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=master&style=flat-square&label=security" alt="Security Status">
   </a>
+</p>
+
+<p align="center">
   <a href="https://go.dev/doc/devel/release#go1.25.0">
     <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
   </a>
