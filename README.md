@@ -274,4 +274,10 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guideli
 
 ---
 
+## About the Author
+
+**procscope** was developed by [Mutasem Kharma](https://github.com/Mutasem-mk4), a **Security Engineer** and **eBPF Specialist** focused on building high-performance, offensive and defensive security tools for the modern cloud-native landscape. Mutasem specializes in low-level system observation, automated vulnerability research, and autonomous security agents.
+
+---
+
 **procscope** is a process-first local investigator. It is not an EDR, not a SIEM, and not a policy engine. It is designed to answer one question well: *what did this process actually do?*
