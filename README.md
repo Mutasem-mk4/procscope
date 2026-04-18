@@ -8,13 +8,30 @@
 Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons like Falco or Tetragon.
 
 <p align="center">
-  <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
-  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=for-the-badge&label=CI" alt="CI">
-  <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
-  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&color=00ADD8" alt="Go Version">
-  <img src="https://img.shields.io/badge/eBPF-Powered-FF4081?style=for-the-badge" alt="eBPF Powered">
-  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=for-the-badge&color=000000" alt="License">
+  <a href="https://github.com/Mutasem-mk4/procscope/releases">
+    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=flat-square&label=release" alt="Latest Release">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=main&style=flat-square&label=ci" alt="CI Status">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/packaging-quality.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml?branch=main&style=flat-square&label=packaging" alt="Packaging Status">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=main&style=flat-square&label=security" alt="Security Status">
+  </a>
+  <a href="https://go.dev/doc/devel/release#go1.25.0">
+    <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&label=license" alt="License">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/releases">
+    <img src="https://img.shields.io/badge/linux-amd64%20%7C%20arm64-2F6FEB?style=flat-square" alt="Supported Linux Architectures">
+  </a>
+  <a href="https://github.com/avelino/awesome-go">
+    <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D?style=flat-square&logo=go" alt="Awesome Go Mentioned">
+  </a>
 </p>
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
