@@ -23,12 +23,12 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 </p>
 
 <p align="center">
-  <a href="https://github.com/Mutasem-mk4/procscope">
-    <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
-  </a>
+  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
   <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&label=license" alt="License">
   <img src="https://img.shields.io/badge/linux-amd64%20%7C%20arm64-2F6FEB?style=flat-square" alt="Supported Linux Architectures">
-  <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D?style=flat-square&logo=go" alt="Awesome Go Mentioned">
+  <a href="https://github.com/avelino/awesome-go">
+    <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D?style=flat-square&logo=go" alt="Awesome Go Mentioned">
+  </a>
 </p>
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
