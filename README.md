@@ -12,13 +12,13 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
     <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=flat-square&label=release" alt="Latest Release">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=main&style=flat-square&label=ci" alt="CI Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=master&style=flat-square&label=ci" alt="CI Status">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/packaging-quality.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml?branch=main&style=flat-square&label=packaging" alt="Packaging Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml?branch=master&style=flat-square&label=packaging" alt="Packaging Status">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=main&style=flat-square&label=security" alt="Security Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=master&style=flat-square&label=security" alt="Security Status">
   </a>
   <a href="https://go.dev/doc/devel/release#go1.25.0">
     <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
