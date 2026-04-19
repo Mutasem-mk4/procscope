@@ -24,7 +24,10 @@ jobs:
           go-version: ${{ matrix.go-version }}
 
       - name: Build
-        run: make build
+        run: |
+          sudo apt-get update && sudo apt-get install -y clang llvm libbpf-dev
+          make generate
+          make build
 
       - name: Cross-build supported targets
         run: |
@@ -58,7 +61,7 @@ jobs:
         uses: golangci/golangci-lint-action@55c2c1448f86e01eaae002a5a3a9624417608d84 # v6
         continue-on-error: true
         with:
-          version: latest
+          version: v1.64.5
 
   vuln:
     name: Vulnerability Check
@@ -71,7 +74,7 @@ jobs:
           go-version: '1.24'
 
       - name: Install govulncheck
-        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+        run: go install golang.org/x/vuln/cmd/govulncheck@v1.2.1
 
       - name: Run govulncheck
         run: govulncheck ./... || true
