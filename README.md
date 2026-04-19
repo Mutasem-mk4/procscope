@@ -11,24 +11,13 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <a href="https://github.com/Mutasem-mk4/procscope/releases">
     <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope-style=flat-square&label=release" alt="Latest Release">
   </a>
-  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml-branch=master&style=flat-square&label=ci" alt="CI Status">
-  </a>
-  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/packaging-quality.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml-branch=master&style=flat-square&label=packaging" alt="Packaging Status">
-  </a>
-  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml-branch=master&style=flat-square&label=security" alt="Security Status">
-  </a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope-style=flat-square&label=g✨ alt="Go Version">
-  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope-style=flat-square&label=license" alt="License">
-  <img src="https://img.shields.io/badge/linux-amd64%20%7C%20arm64-2F6FEB-style=flat-square" alt="Supported Linux Architectures">
-  <a href="https://github.com/avelino/awesome-g✨>
-    <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D-style=flat-square&logo=g✨ alt="Awesome Go Mentioned">
-  </a>
+  <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
+  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI">
+  <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
+  <img src="https://img.shields.io/badge/Heuristics-Enabled-orange?style=for-the-badge" alt="Heuristics Enabled">
+  <img src="https://img.shields.io/badge/Latency-%3C50%C2%B5s-blue?style=for-the-badge" alt="Latency">
+  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=for-the-badge&color=000000" alt="License">
 </p>
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
@@ -41,7 +30,7 @@ Launch a command under observation — or attach to an existing process — and 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F-style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
-### 1-Minute Install (Go 1.25+)
+### 1-Minute Install (Go 1.24+)
 
 ```bash
 go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest

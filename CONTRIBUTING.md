@@ -7,7 +7,7 @@ Thank you for your interest in improving `procscope`! As a security-focused proj
 1. **Fork the repository** on GitHub.
 2. **Clone your fork** locally: `git clone https://github.com/YOUR-USERNAME/procscope.git`
 3. **Create a new branch** for your feature or fix: `git checkout -b feature/your-feature-name`
-4. **Install dependencies**: Ensure you have Go 1.25+ and the BPF toolchain (`clang`, `llvm`, `libbpf-dev`) installed.
+4. **Install dependencies**: Ensure you have Go 1.24+ and the BPF toolchain (`clang`, `llvm`, `libbpf-dev`) installed.
 
 ## Development Workflow
 
