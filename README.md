@@ -9,25 +9,25 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 
 <p align="center">
   <a href="https://github.com/Mutasem-mk4/procscope/releases">
-    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=flat-square&label=release" alt="Latest Release">
+    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope-style=flat-square&label=release" alt="Latest Release">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=master&style=flat-square&label=ci" alt="CI Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml-branch=master&style=flat-square&label=ci" alt="CI Status">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/packaging-quality.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml?branch=master&style=flat-square&label=packaging" alt="Packaging Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/packaging-quality.yml-branch=master&style=flat-square&label=packaging" alt="Packaging Status">
   </a>
   <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=master&style=flat-square&label=security" alt="Security Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml-branch=master&style=flat-square&label=security" alt="Security Status">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=flat-square&label=go" alt="Go Version">
-  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&label=license" alt="License">
-  <img src="https://img.shields.io/badge/linux-amd64%20%7C%20arm64-2F6FEB?style=flat-square" alt="Supported Linux Architectures">
-  <a href="https://github.com/avelino/awesome-go">
-    <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D?style=flat-square&logo=go" alt="Awesome Go Mentioned">
+  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope-style=flat-square&label=g✨ alt="Go Version">
+  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope-style=flat-square&label=license" alt="License">
+  <img src="https://img.shields.io/badge/linux-amd64%20%7C%20arm64-2F6FEB-style=flat-square" alt="Supported Linux Architectures">
+  <a href="https://github.com/avelino/awesome-g✨>
+    <img src="https://img.shields.io/badge/awesome--go-mentioned-1F883D-style=flat-square&logo=g✨ alt="Awesome Go Mentioned">
   </a>
 </p>
 
@@ -39,7 +39,7 @@ Launch a command under observation — or attach to an existing process — and 
 
 ## Quick Start 
 
-[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F-style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
 ### 1-Minute Install (Go 1.25+)
 
@@ -280,4 +280,4 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guideli
 
 ---
 
-**procscope** is a process-first local investigator. It is not an EDR, not a SIEM, and not a policy engine. It is designed to answer one question well: *what did this process actually do?*
+**procscope** is a process-first local investigator. It is not an EDR, not a SIEM, and not a policy engine. It is designed to answer one question well: *what did this process actually do-*
