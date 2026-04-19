@@ -9,12 +9,13 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 
 <p align="center">
   <a href="https://github.com/Mutasem-mk4/procscope/releases">
-    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope-style=flat-square&label=release" alt="Latest Release">
+    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2&label=release" alt="Latest Release">
   </a>
-  <a href="https://github.com/avelino/awesome-go"><img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go"></a>
+  <a href="https://github.com/avelino/awesome-go">
+    <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go">
+  </a>
   <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
   <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=master&style=for-the-badge&label=CI" alt="CI">
-  <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2" alt="Release">
   <img src="https://img.shields.io/badge/Heuristics-Enabled-orange?style=for-the-badge" alt="Heuristics Enabled">
   <img src="https://img.shields.io/badge/Latency-%3C50%C2%B5s-blue?style=for-the-badge" alt="Latency">
   <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=for-the-badge&color=000000" alt="License">
