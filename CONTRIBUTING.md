@@ -1,127 +1,49 @@
 # Contributing to procscope
 
-Thank you for your interest in contributing to procscope!
+Thank you for your interest in improving `procscope`! As a security-focused project, we value high-quality contributions that maintain the integrity and performance of the tool.
 
 ## Getting Started
 
-### Prerequisites
+1. **Fork the repository** on GitHub.
+2. **Clone your fork** locally: `git clone https://github.com/YOUR-USERNAME/procscope.git`
+3. **Create a new branch** for your feature or fix: `git checkout -b feature/your-feature-name`
+4. **Install dependencies**: Ensure you have Go 1.25+ and the BPF toolchain (`clang`, `llvm`, `libbpf-dev`) installed.
 
-- Go 1.25+
-- Make
-- Linux (for runtime testing)
-- clang and llvm-strip (only when editing `bpf/procscope.c`)
+## Development Workflow
 
-### Development Setup
-
+### Building from Source
 ```bash
-git clone https://github.com/Mutasem-mk4/procscope.git
-cd procscope
-
-# Build (uses committed BPF object — no code generation needed)
 make build
-
-# Run tests
-make test
-
-# Run linters
-make lint
-
-# Only if you edit bpf/procscope.c (requires Linux + clang):
-make generate
 ```
 
-## How to Contribute
+### Running Tests
+All contributions must pass existing tests and include new tests where applicable.
+```bash
+# Run unit tests
+go test -v ./...
 
-### Bug Reports
-
-Open a GitHub issue with:
-- procscope version (`procscope --version`)
-- Linux kernel version (`uname -r`)
-- Distribution name and version
-- Exact steps to reproduce
-- Expected vs actual behavior
-- Relevant output or logs
-
-### Feature Requests
-
-Open a GitHub issue describing:
-- The use case / problem
-- Proposed solution
-- Why existing features don't cover it
-
-### Code Contributions
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass: `make test`
-6. Ensure linting is clean: `make lint`
-7. Commit with clear messages
-8. Open a pull request
+# Run integration tests (requires root/CAP_SYS_ADMIN)
+sudo ./bin/procscope -- ls /tmp
+```
 
 ### Code Style
-
-- Follow standard Go conventions (`go fmt`, `go vet`)
-- Keep functions focused and testable
-- Document exported types and functions
-- Use meaningful variable names
-- eBPF C code follows kernel coding style
-
-### Commit Messages
-
-Follow conventional commit format:
-```
-type: short description
-
-Longer explanation if needed.
-
-Fixes #123
-```
-
-Types: `feat`, `fix`, `docs`, `test`, `refactor`, `ci`, `build`, `perf`
-
-## Architecture
-
-See [docs/architecture.md](docs/architecture.md) for codebase structure.
-
-Key packages:
-- `internal/tracer/` — eBPF program management
-- `internal/events/` — Event types and correlation
-- `internal/process/` — Process tree and launching
-- `internal/output/` — Rendering (timeline, JSON, bundle, summary)
-- `internal/caps/` — Capability detection
-- `internal/redact/` — Redaction controls
-- `bpf/` — eBPF C programs
-
-## Testing
-
+We use `golangci-lint` to maintain code quality. Please run the linter before submitting a PR:
 ```bash
-# Unit tests
-make test-unit
-
-# Linux smoke test (requires root, Linux)
-make test-integration
-
-# Coverage report
-make test-cover
+golangci-lint run
 ```
 
-### Writing Tests
+## Pull Request Process
 
-- Unit tests go in `*_test.go` alongside the code
-- Test fixtures (C programs) go in `test/fixtures/`
-- Tests must not require network access
-- Tests must be deterministic
+1. Ensure your code follows the existing style and architectural patterns.
+2. **Sign your commits**: We require signed commits to ensure provenance and security.
+3. Update the `README.md` or documentation if you're adding new features.
+4. Submit the PR against the `master` branch.
+5. At least one maintainer review is required before merging.
 
-## Release Process
+## Security Contributions
 
-See [docs/packaging.md](docs/packaging.md) for packaging and release details.
+If you find a security vulnerability, please do **NOT** open a public issue. Follow the instructions in [SECURITY.md](SECURITY.md) to report it privately.
 
-## Code of Conduct
+## Community & Governance
 
-Please follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Be respectful and constructive; we're building tools for the security community.
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the MIT License.
+`procscope` is an open-source project maintained by [Mutasem Kharma](https://github.com/Mutasem-mk4). We are committed to a transparent and welcoming environment for all contributors.
