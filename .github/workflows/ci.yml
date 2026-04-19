@@ -10,37 +10,54 @@ permissions:
   contents: read
 
 jobs:
+  generate-bpf:
+    name: Generate eBPF Object
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.2.0
+        with:
+          go-version: '1.25'
+      - name: Install toolchain
+        run: sudo apt-get update && sudo apt-get install -y clang llvm libbpf-dev
+      - name: Generate BPF
+        run: make generate
+      - name: Upload BPF object
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: procscope-bpf-object
+          path: internal/tracer/procscope_bpfel.o
+          retention-days: 1
+
   test:
     name: Test
+    needs: generate-bpf
     runs-on: ubuntu-latest
     strategy:
       matrix:
         go-version: ['1.25']
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
-
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.2.0
         with:
           go-version: ${{ matrix.go-version }}
-
+      - name: Download BPF object
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: procscope-bpf-object
+          path: internal/tracer
       - name: Build
         run: make build
-
       - name: Cross-build supported targets
         run: |
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath ./cmd/procscope
           CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath ./cmd/procscope
-
       - name: Unit tests
         run: go test -v -race -count=1 -short ./...
-
       - name: Integration tests (requires eBPF/root)
-        # Standard GH runners might lack BTF or specific kernel features.
-        # We run version check first to ensure binary is functional.
         run: |
           ./bin/procscope --version
-          sudo ./bin/procscope -- ls /tmp || echo "Warning: Integration test failed or eBPF not supported in this kernel"
-
+          sudo ./bin/procscope -- ls /tmp || echo "Warning: Integration test failed"
       - name: Vet
         run: go vet ./...
 
@@ -49,58 +66,52 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
-
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.2.0
         with:
           go-version: '1.24'
-
       - name: golangci-lint
         uses: golangci/golangci-lint-action@55c2c1448f86e01eaae002a5a3a9624417608d84 # v6
         continue-on-error: true
         with:
-          version: latest
+          version: v1.64.5
 
   vuln:
     name: Vulnerability Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
-
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.2.0
         with:
           go-version: '1.24'
-
       - name: Install govulncheck
-        run: go install golang.org/x/vuln/cmd/govulncheck@latest
-
+        run: go install golang.org/x/vuln/cmd/govulncheck@v1.2.0
       - name: Run govulncheck
         run: govulncheck ./... || true
 
   build-debian:
     name: Build Debian Package
+    needs: generate-bpf
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
-
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.2.0
         with:
           go-version: '1.24'
-
+      - name: Download BPF object
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: procscope-bpf-object
+          path: internal/tracer
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y debhelper lintian dh-golang
-
       - name: Build Debian Package
         run: dpkg-buildpackage -us -uc -b -d
-
       - name: Move Debian Package
         run: mv ../procscope_*.deb .
-
       - name: Lint Debian Package
         run: lintian ./procscope_*.deb || true
-
       - name: Upload Debian Package
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -109,28 +120,24 @@ jobs:
 
   build-arch:
     name: Build Arch Linux Package
+    needs: generate-bpf
     runs-on: ubuntu-latest
     container:
       image: archlinux:base-devel
-    needs: test
     steps:
       - name: Install dependencies
-        run: |
-          pacman -Syu --noconfirm git go
-
-      # We can't use actions/checkout@v4 directly in Arch container without nodejs, doing it manually or installing node
-      - name: Setup Node for checkout
-        run: pacman -S --noconfirm nodejs
-
+        run: pacman -Syu --noconfirm git go nodejs
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.2.2
-
+      - name: Download BPF object
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: procscope-bpf-object
+          path: internal/tracer
       - name: Build Arch Package
-        # makepkg cannot be run as root, so we create a build user
         run: |
           useradd -m builduser
           chown -R builduser:builduser .
           su builduser -c "cd arch && makepkg -sf"
-
       - name: Upload Arch Package
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
