@@ -267,7 +267,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guideli
 
 ## About the Author
 
-**procscope** was developed by [Mutasem Kharma](https://github.com/Mutasem-mk4), a **Security Engineer** and **eBPF Specialist** focused on building high-performance, offensive and defensive security tools for the modern cloud-native landscape. Mutasem specializes in low-level system observation, automated vulnerability research, and autonomous security agents.
+**procscope** was developed by [Mutasem Kharma (معتصم خرما)](https://github.com/Mutasem-mk4), a **Security Engineer** and **eBPF Specialist** focused on building high-performance, offensive and defensive security tools for the modern cloud-native landscape. Mutasem specializes in low-level system observation, automated vulnerability research, and autonomous security agents.
 
 ---
 
