@@ -11,6 +11,9 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <a href="https://github.com/Mutasem-mk4/procscope/releases">
     <img src="https://img.shields.io/github/v/tag/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2&label=release" alt="Latest Release">
   </a>
+  <a href="https://blackarch.org/">
+    <img src="https://img.shields.io/badge/BlackArch%20Linux-000000?style=for-the-badge&logo=archlinux&logoColor=B00000" alt="BlackArch Linux">
+  </a>
   <a href="https://github.com/avelino/awesome-go">
     <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go">
   </a>
@@ -82,7 +85,7 @@ procscope will detect missing capabilities at startup and provide actionable gui
 | GitHub releases | Available |
 | `go install` | Available |
 | Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; not yet shipped by the distro |
-| Arch / BlackArch package | `arch/PKGBUILD` maintained in-tree; not yet shipped by BlackArch |
+| Arch / BlackArch package | Available in BlackArch |
 
 ## Installation
 
