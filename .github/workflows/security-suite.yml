@@ -27,14 +27,14 @@ jobs:
         language: ['go']
     steps:
       - uses: actions/checkout@v4
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: ${{ matrix.language }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.25'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
       - name: Install toolchain
         run: sudo apt-get update && sudo apt-get install -y clang llvm libbpf-dev
       - name: Generate eBPF
@@ -42,7 +42,7 @@ jobs:
       - name: Build
         run: make build
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@ce64ddcb0d8d890d2df4a9d1c04ff297367dea2a # v3
+        uses: github/codeql-action/analyze@v3
 
   dependency-review:
     name: Dependency Review
@@ -69,7 +69,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Run analysis
-        uses: ossf/scorecard-action@v2
+        uses: ossf/scorecard-action@v2.4.3
         with:
           results_file: results.sarif
           results_format: sarif
