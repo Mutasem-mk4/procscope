@@ -6,11 +6,11 @@ pkgbase = procscope
 	arch = x86_64
 	arch = aarch64
 	groups = blackarch
+	groups = blackarch-defensive
 	groups = blackarch-forensic
-	groups = blackarch-scanner
 	license = MIT
-	makedepends = go>=2:1.25
+	makedepends = go>=1.25
 	source = procscope-1.1.0.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/v1.1.0.tar.gz
-	sha256sums = 7efcd3b031115637b2bac1c2243786e2f6430445743ff42c5b5f7f680fa3d624
+	sha512sums = f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd
 
 pkgname = procscope
