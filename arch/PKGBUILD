@@ -1,19 +1,17 @@
-# Maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
 pkgname=procscope
 pkgver=1.1.0
 pkgrel=1
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
+groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
 url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
-groups=('blackarch' 'blackarch-forensic' 'blackarch-scanner')
-depends=()
-makedepends=('go>=2:1.25')
+makedepends=('go>=1.25')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
-# The sha256sum below must be updated after cutting a GitHub release.
-# Generate it with: curl -sL "$url/archive/v$pkgver.tar.gz" | sha256sum
-# For local development builds: makepkg --skipchecksums
-sha256sums=('7efcd3b031115637b2bac1c2243786e2f6430445743ff42c5b5f7f680fa3d624')
+sha512sums=('f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd')
 
 build() {
   cd "${pkgname}-${pkgver}"
@@ -24,13 +22,14 @@ build() {
   go build \
     -ldflags "-s -w \
       -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=${pkgver}' \
-      -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=${pkgrel}'" \
+      -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=blackarch'" \
     -o "${pkgname}" \
     ./cmd/procscope
 }
 
 check() {
   cd "${pkgname}-${pkgver}"
+
   go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
 }
 
@@ -48,5 +47,5 @@ package() {
   install -Dm644 "completions/${pkgname}.fish" \
     "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
 
-  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+  install -Dm644 README.md -t "${pkgdir}/usr/share/doc/${pkgname}"
 }

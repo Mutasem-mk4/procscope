@@ -5,28 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ═══════════ PRIMARY META ═══════════ -->
-    <title>procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma</title>
-    <meta name="description" content="procscope is a zero-config, single-binary eBPF process tracer for Linux malware triage and incident response. Built by Mutasem Kharma. Trace syscalls, network, file and privilege events per-process without strace overhead.">
-    <meta name="keywords" content="procscope, Mutasem Kharma, Mutasem, Kharma, eBPF, process tracer, malware triage, Linux security, incident response, strace alternative, Falco alternative, Tracee alternative, container security, Kubernetes security, syscall monitoring, runtime security, Go security tool, open source security">
-    <meta name="author" content="Mutasem Kharma">
-    <meta name="creator" content="Mutasem Kharma">
-    <meta name="publisher" content="Mutasem Kharma">
+    <title>procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)</title>
+    <meta name="description" content="procscope is a zero-config, single-binary eBPF process tracer for Linux malware triage and incident response. Built by Mutasem Kharma (معتصم خرما). Trace syscalls, network, file and privilege events per-process without strace overhead.">
+    <meta name="keywords" content="procscope, Mutasem Kharma, معتصم خرما, Mutasem, Kharma, معتصم, خرما, eBPF, process tracer, malware triage, Linux security, incident response, strace alternative, Falco alternative, Tracee alternative, container security, Kubernetes security, syscall monitoring, runtime security, Go security tool, open source security">
+    <meta name="author" content="Mutasem Kharma (معتصم خرما)">
+    <meta name="creator" content="Mutasem Kharma (معتصم خرما)">
+    <meta name="publisher" content="Mutasem Kharma (معتصم خرما)">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
     <link rel="canonical" href="https://mutasem-mk4.github.io/procscope/">
 
+    <!-- JSON-LD for Search Engines & LLMs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "procscope",
+      "operatingSystem": "Linux",
+      "applicationCategory": "SecurityApplication",
+      "description": "Zero-overhead eBPF process tracer for Linux malware triage and incident response.",
+      "author": {
+        "@type": "Person",
+        "name": "Mutasem Kharma",
+        "alternateName": "معتصم خرما",
+        "url": "https://github.com/Mutasem-mk4",
+        "sameAs": [
+          "https://www.linkedin.com/in/mutasem-kharma-668499289/",
+          "https://twitter.com/mutasem_mk4",
+          "https://dev.to/mutasem04",
+          "https://mutasem-portfolio.vercel.app/"
+        ]
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Mutasem Kharma",
+        "alternateName": "معتصم خرما"
+      }
+    }
+    </script>
+
     <!-- ═══════════ OPEN GRAPH (Facebook, LinkedIn, Slack, Discord) ═══════════ -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="procscope — Zero-Overhead eBPF Process Tracer for Linux">
-    <meta property="og:description" content="Trace malware behavior in real time with zero overhead. Single binary, zero config. Built by Mutasem Kharma.">
+    <meta property="og:title" content="procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)">
+    <meta property="og:description" content="Trace malware behavior in real time with zero overhead. Single binary, zero config. Built by Mutasem Kharma (معتصم خرما).">
     <meta property="og:url" content="https://mutasem-mk4.github.io/procscope/">
-    <meta property="og:site_name" content="procscope by Mutasem Kharma">
+    <meta property="og:site_name" content="procscope by Mutasem Kharma (معتصم خرما)">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="procscope — eBPF Process Tracer for Linux Malware Triage">
+    <meta property="og:image:alt" content="procscope — eBPF Process Tracer for Linux by Mutasem Kharma (معتصم خرما)">
     <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_JO">
 
     <!-- ═══════════ TWITTER CARD ═══════════ -->
     <meta name="twitter:card" content="summary_large_image">
@@ -194,7 +224,12 @@
     <footer style="padding:2rem;text-align:center;color:#333;font-size:0.8rem;">
         <p>procscope is an open-source security tool created by <a href="https://github.com/Mutasem-mk4" style="color:#4CAF50;">Mutasem Kharma</a>.</p>
         <p>Alternative to strace, Falco, Tracee, and Tetragon for targeted process investigation on Linux.</p>
-        <p>Also by Mutasem Kharma: <a href="https://github.com/Mutasem-mk4/Vex" style="color:#4CAF50;">Vex</a> (BOLA scanner), <a href="https://github.com/Mutasem-mk4/AuthSniper" style="color:#4CAF50;">AuthSniper</a> (recon framework), <a href="https://github.com/Mutasem-mk4/Specter-OS" style="color:#4CAF50;">Specter-OS</a> (AI security agent).</p>
+        <p>Also by Mutasem Kharma (معتصم خرما): 
+            <a href="https://github.com/Mutasem-mk4/gspy" style="color:#4CAF50;">gspy</a> (Go eBPF DFIR),
+            <a href="https://github.com/Mutasem-mk4/Vex" style="color:#4CAF50;">Vex</a> (BOLA scanner), 
+            <a href="https://github.com/Mutasem-mk4/AuthSniper" style="color:#4CAF50;">AuthSniper</a> (Recon), 
+            <a href="https://github.com/Mutasem-mk4/Specter-OS" style="color:#4CAF50;">Specter-OS</a> (AI Agent).
+        </p>
         <nav aria-label="Footer">
             <a href="https://github.com/Mutasem-mk4" style="color:#4CAF50;">GitHub</a> ·
             <a href="https://dev.to/mutasem04" style="color:#4CAF50;">Dev.to</a> ·
