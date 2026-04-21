@@ -9,7 +9,7 @@ pkgbase = procscope
 	groups = blackarch-defensive
 	groups = blackarch-forensic
 	license = MIT
-	makedepends = go>=1.25
+	makedepends = go>=1.26.2
 	source = procscope-1.1.0.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/v1.1.0.tar.gz
 	sha512sums = f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd
 
