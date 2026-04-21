@@ -9,7 +9,7 @@ arch=('x86_64' 'aarch64')
 groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
 url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
-makedepends=('go>=1.25')
+makedepends=('go>=1.26.2')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 sha512sums=('f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd')
 
