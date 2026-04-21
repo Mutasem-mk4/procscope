@@ -8,18 +8,13 @@
 Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons like Falco or Tetragon.
 
 <p align="center">
-  <a href="https://github.com/Mutasem-mk4/procscope/releases">
-    <img src="https://img.shields.io/github/v/tag/Mutasem-mk4/procscope?style=for-the-badge&color=8A2BE2&label=release" alt="Latest Release">
-  </a>
-  <a href="https://github.com/avelino/awesome-go">
-    <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=for-the-badge&logo=go" alt="Awesome Go">
-  </a>
-  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=for-the-badge&color=F9A825" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=for-the-badge&label=CI" alt="CI">
-  <img src="https://img.shields.io/github/go-mod/go-version/Mutasem-mk4/procscope?style=for-the-badge&label=go" alt="Go Version">
-  <img src="https://img.shields.io/badge/Heuristics-Enabled-orange?style=for-the-badge" alt="Heuristics Enabled">
-  <img src="https://img.shields.io/badge/Latency-%3C50%C2%B5s-blue?style=for-the-badge" alt="Latency">
-  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=for-the-badge&color=000000" alt="License">
+  <a href="https://github.com/Mutasem-mk4/procscope/releases"><img src="https://img.shields.io/github/v/tag/Mutasem-mk4/procscope?style=flat&color=8A2BE2&label=release" alt="Latest Release"></a>
+  <a href="https://blackarch.org/"><img src="https://img.shields.io/badge/BlackArch-000000?style=flat&logo=archlinux&logoColor=B00000" alt="BlackArch Linux"></a>
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?branch=master&style=flat&label=build" alt="Build Status"></a>
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/security-suite.yml"><img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=master&style=flat&label=security" alt="Security Status"></a>
+  <a href="https://goreportcard.com/report/github.com/Mutasem-mk4/procscope"><img src="https://goreportcard.com/badge/github.com/Mutasem-mk4/procscope?style=flat" alt="Go Report Card"></a>
+  <a href="https://github.com/Mutasem-mk4/procscope/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat&color=black" alt="License"></a>
+  <img src="https://img.shields.io/badge/eBPF-Powered-blue?style=flat" alt="eBPF">
 </p>
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, namespace changes, and more.
@@ -30,7 +25,7 @@ Launch a command under observation — or attach to an existing process — and 
 
 ## Quick Start 
 
-[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=for-the-badge&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=flat-square&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
 ### 1-Minute Install (Go 1.24+)
 
@@ -82,7 +77,7 @@ procscope will detect missing capabilities at startup and provide actionable gui
 | GitHub releases | Available |
 | `go install` | Available |
 | Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; not yet shipped by the distro |
-| Arch / BlackArch package | `arch/PKGBUILD` maintained in-tree; not yet shipped by BlackArch |
+| Arch / BlackArch package | Available in BlackArch |
 
 ## Installation
 
@@ -267,7 +262,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guideli
 
 ## About the Author
 
-**procscope** was developed by [Mutasem Kharma](https://github.com/Mutasem-mk4), a **Security Engineer** and **eBPF Specialist** focused on building high-performance, offensive and defensive security tools for the modern cloud-native landscape. Mutasem specializes in low-level system observation, automated vulnerability research, and autonomous security agents.
+**procscope** was developed by [Mutasem Kharma (معتصم خرما)](https://github.com/Mutasem-mk4), a **Security Engineer** and **eBPF Specialist** focused on building high-performance, offensive and defensive security tools for the modern cloud-native landscape. Mutasem specializes in low-level system observation, automated vulnerability research, and autonomous security agents.
 
 ---
 
