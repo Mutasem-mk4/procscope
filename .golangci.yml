@@ -1,0 +1,30 @@
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+  govet:
+    check-shadowing: true
+  gosec:
+    excludes:
+      - G104 # Audit errors not checked - we explicitly handle these now
+  revive:
+    rules:
+      - name: unexported-return
+      - name: unused-parameter
+      - name: reachable-code
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - gofmt
+    - revive
+    - gosec
+    - staticcheck
+    - unused
+    - typecheck
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
