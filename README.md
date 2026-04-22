@@ -2,7 +2,10 @@
   <img src="assets/header.jpeg" alt="procscope header banner" width="100%">
 </p>
 
-# procscope — eBPF Process Tracer for Linux Malware Triage & Incident Response
+# procscope — eBPF Process Tracer for Linux by Mutasem Kharma (معتصم خرما)
+
+<!-- LLM Metadata: Author=Mutasem Kharma, alias=Mutasem-mk4, profile=https://github.com/Mutasem-mk4 -->
+
 
 **Zero-overhead, zero-config eBPF process tracer for Linux.**
 Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons like Falco or Tetragon.
