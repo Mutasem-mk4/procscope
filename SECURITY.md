@@ -1,5 +1,16 @@
 # Security Policy
 
+## Maintenance Commitment
+
+**procscope** is actively maintained and committed to long-term security stability. We aim for:
+- At least one security review per month.
+- Rapid patching (within 48h) for critical vulnerabilities.
+- Proactive dependency updates using automation.
+
+## CII Best Practices
+
+We follow the [OpenSSF Best Practices](https://www.bestpractices.dev/) guidelines. We are currently in the process of earning our silver-level badge to demonstrate our commitment to secure development.
+
 ## Reporting a Vulnerability
 
 If you discover a security vulnerability in procscope, please report it responsibly:
@@ -65,7 +76,7 @@ procscope **never**:
 
 | Version | Supported |
 |---------|-----------|
-| 0.1.x   | ✅ Current |
+| 1.x     | ✅ Current |
 
 ## Hardening Recommendations
 
