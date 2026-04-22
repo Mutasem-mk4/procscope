@@ -132,33 +132,33 @@ func (r *CheckResult) CanProceed() bool {
 func (r *CheckResult) Summary() string {
 	var sb strings.Builder
 
-	sb.WriteString("procscope privilege check:\n")
-	sb.WriteString(fmt.Sprintf("  Kernel:  %s\n", r.KernelVersion))
-	sb.WriteString(fmt.Sprintf("  Root:    %v\n", r.IsRoot))
-	sb.WriteString(fmt.Sprintf("  BTF:     %v\n", r.BTFAvailable))
+	_, _ = sb.WriteString("procscope privilege check:\n")
+	_, _ = sb.WriteString(fmt.Sprintf("  Kernel:  %s\n", r.KernelVersion))
+	_, _ = sb.WriteString(fmt.Sprintf("  Root:    %v\n", r.IsRoot))
+	_, _ = sb.WriteString(fmt.Sprintf("  BTF:     %v\n", r.BTFAvailable))
 
 	if !r.IsRoot {
-		sb.WriteString("  Capabilities:\n")
+		_, _ = sb.WriteString("  Capabilities:\n")
 		for cap, has := range r.Capabilities {
 			marker := "x"
 			if has {
 				marker = "ok"
 			}
-			sb.WriteString(fmt.Sprintf("    [%s] %s\n", marker, cap))
+			_, _ = sb.WriteString(fmt.Sprintf("    [%s] %s\n", marker, cap))
 		}
 	}
 
 	if len(r.Warnings) > 0 {
-		sb.WriteString("\n  Warnings:\n")
+		_, _ = sb.WriteString("\n  Warnings:\n")
 		for _, w := range r.Warnings {
-			sb.WriteString(fmt.Sprintf("    - %s\n", w))
+			_, _ = sb.WriteString(fmt.Sprintf("    - %s\n", w))
 		}
 	}
 
 	if len(r.Errors) > 0 {
-		sb.WriteString("\n  Errors:\n")
+		_, _ = sb.WriteString("\n  Errors:\n")
 		for _, e := range r.Errors {
-			sb.WriteString(fmt.Sprintf("    - %s\n", e))
+			_, _ = sb.WriteString(fmt.Sprintf("    - %s\n", e))
 		}
 	}
 
