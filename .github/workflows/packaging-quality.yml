@@ -1,1 +1,67 @@
-name: Packaging Quality\n\non:\n  pull_request:\n    paths:\n      - 'arch/**'\n      - 'debian/**'\n      - '.goreleaser.yml'\n      - '.github/workflows/packaging-quality.yml'\n  push:\n    branches: [main, master]\n    paths:\n      - 'arch/**'\n      - 'debian/**'\n      - '.goreleaser.yml'\n      - '.github/workflows/packaging-quality.yml'\n  workflow_dispatch:\n\npermissions:\n  contents: read\n\njobs:\n  arch-lint:\n    name: Arch package validation\n    runs-on: ubuntu-latest\n    container:\n      image: archlinux:base-devel\n    steps:\n      - name: Install deps\n        run: pacman -Syu --noconfirm git go nodejs namcap\n\n      - uses: actions/checkout@v4 # v4.2.2\n\n      - name: Validate .SRCINFO is in sync\n        run: |\n          useradd -m builduser || true\n          cp arch/PKGBUILD /tmp/PKGBUILD\n          chown builduser:builduser /tmp/PKGBUILD\n          su builduser -c "cd /tmp && makepkg --printsrcinfo > /tmp/generated.SRCINFO"\n          diff -u /tmp/generated.SRCINFO arch/.SRCINFO\n\n      - name: Run namcap checks\n        run: |\n          cp arch/PKGBUILD /tmp/PKGBUILD\n          chown builduser:builduser /tmp/PKGBUILD\n          su builduser -c "cd /tmp && makepkg --nobuild --nodeps"\n          namcap /tmp/PKGBUILD || true\n\n  debian-lint:\n    name: Debian metadata validation\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n\n      - name: Install packaging tools\n        run: |\n          sudo apt-get update\n          sudo apt-get install -y devscripts lintian\n\n      - name: Validate changelog and control\n        run: |\n          dpkg-parsechangelog >/dev/null\n          grep -q "^Standards-Version:" debian/control\n\n      - name: Run static lint checks\n        run: |\n          lintian -i --pedantic --no-tag-display-limit debian/* || true\n
+name: Packaging Quality
+
+on:
+  pull_request:
+    paths:
+      - 'arch/**'
+      - 'debian/**'
+      - '.goreleaser.yml'
+      - '.github/workflows/packaging-quality.yml'
+  push:
+    branches: [main, master]
+    paths:
+      - 'arch/**'
+      - 'debian/**'
+      - '.goreleaser.yml'
+      - '.github/workflows/packaging-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  arch-lint:
+    name: Arch package validation
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
+    steps:
+      - name: Install deps
+        run: pacman -Syu --noconfirm git go nodejs namcap
+
+      - uses: actions/checkout@v4 # v4.2.2
+
+      - name: Validate .SRCINFO is in sync
+        run: |
+          useradd -m builduser || true
+          cp arch/PKGBUILD /tmp/PKGBUILD
+          chown builduser:builduser /tmp/PKGBUILD
+          su builduser -c "cd /tmp && makepkg --printsrcinfo > /tmp/generated.SRCINFO"
+          diff -u /tmp/generated.SRCINFO arch/.SRCINFO
+
+      - name: Run namcap checks
+        run: |
+          cp arch/PKGBUILD /tmp/PKGBUILD
+          chown builduser:builduser /tmp/PKGBUILD
+          su builduser -c "cd /tmp && makepkg --nobuild --nodeps"
+          namcap /tmp/PKGBUILD || true
+
+  debian-lint:
+    name: Debian metadata validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y devscripts lintian
+
+      - name: Validate changelog and control
+        run: |
+          dpkg-parsechangelog >/dev/null
+          grep -q "^Standards-Version:" debian/control
+
+      - name: Run static lint checks
+        run: |
+          lintian -i --pedantic --no-tag-display-limit debian/* || true
