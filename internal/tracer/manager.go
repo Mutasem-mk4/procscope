@@ -147,7 +147,7 @@ func (m *Manager) Attach() error {
 		if err != nil {
 			// Non-fatal: log and continue. Some tracepoints may not be
 			// available on all kernels.
-			fmt.Fprintf(os.Stderr, "  warning: tracepoint %s/%s: %v (skipping)\n", p.group, p.name, err)
+			_, _ = _, _ = fmt.Fprintf(os.Stderr, "  warning: tracepoint %s/%s: %v (skipping)\n", p.group, p.name, err)
 			continue
 		}
 		m.links = append(m.links, tp)
@@ -196,10 +196,10 @@ func (m *Manager) ReadEvents(ctx context.Context) error {
 // Close releases all eBPF resources.
 func (m *Manager) Close() {
 	if m.reader != nil {
-		m.reader.Close()
+		_ = m.reader.Close()
 	}
 	for _, l := range m.links {
-		l.Close()
+		_ = l.Close()
 	}
 	m.objs.Close()
 }
