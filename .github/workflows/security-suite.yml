@@ -1,1 +1,80 @@
-name: Security Suite\n\non:\n  push:\n    branches: [main, master]\n  pull_request:\n    branches: [main, master]\n  schedule:\n    - cron: '23 3 * * 1'\n  workflow_dispatch:\n\npermissions:\n  contents: read\n  actions: read\n\njobs:\n  codeql:\n    name: CodeQL Analysis\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n      actions: read\n      security-events: write\n    strategy:\n      fail-fast: false\n      matrix:\n        language: ['go']\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n      - name: Setup Go\n        uses: actions/setup-go@v5 # v5.3.0\n        with:\n          go-version: '1.26.2'\n      - name: Initialize CodeQL\n        uses: github/codeql-action/init@v3 # v3.28.10\n        with:\n          languages: ${{ matrix.language }}\n      - name: Install toolchain\n        run: sudo apt-get update && sudo apt-get install -y clang llvm libbpf-dev\n      - name: Generate eBPF\n        run: make generate\n      - name: Build\n        run: make build\n      - name: Perform CodeQL Analysis\n        uses: github/codeql-action/analyze@v3 # v3.28.10\n\n  dependency-review:\n    name: Dependency Review\n    if: github.event_name == 'pull_request' && vars.ENABLE_DEPENDENCY_REVIEW == 'true'\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n      pull-requests: write\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n      - uses: actions/dependency-review-action@v4 # v4.9.1\n\n  scorecard:\n    name: OpenSSF Scorecard\n    if: github.event_name != 'pull_request'\n    runs-on: ubuntu-latest\n    permissions:\n      security-events: write\n      id-token: write\n      contents: read\n      actions: read\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n        with:\n          persist-credentials: false\n      - name: Run analysis\n        uses: ossf/scorecard-action@v2.4.3 # v2.4.3\n        with:\n          results_file: results.sarif\n          results_format: sarif\n          publish_results: true\n      - name: Upload SARIF\n        uses: github/codeql-action/upload-sarif@v3 # v3.28.10\n        with:\n          sarif_file: results.sarif\n
+name: Security Suite
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['go']
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+      - name: Setup Go
+        uses: actions/setup-go@v5 # v5.3.0
+        with:
+          go-version: '1.26.2'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3 # v3.28.10
+        with:
+          languages: ${{ matrix.language }}
+      - name: Install toolchain
+        run: sudo apt-get update && sudo apt-get install -y clang llvm libbpf-dev
+      - name: Generate eBPF
+        run: make generate
+      - name: Build
+        run: make build
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3 # v3.28.10
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request' && vars.ENABLE_DEPENDENCY_REVIEW == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+      - uses: actions/dependency-review-action@v4 # v4.9.1
+
+  scorecard:
+    name: OpenSSF Scorecard
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Run analysis
+        uses: ossf/scorecard-action@v2.4.3 # v2.4.3
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3 # v3.28.10
+        with:
+          sarif_file: results.sarif
