@@ -19,7 +19,10 @@ import (
 func main() {
 	rootCmd := cli.NewRootCommand()
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		if exitErr, ok := err.(*cli.ExitError); ok {
+			os.Exit(exitErr.Code)
+		}
+		_, _ = fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
 	}
 }
