@@ -1,1 +1,72 @@
-name: Growth Automation\n\non:\n  release:\n    types: [published]\n  workflow_dispatch:\n\npermissions:\n  contents: read\n\njobs:\n  broadcast:\n    name: Generate and publish launch copy\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n      issues: write\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n        with:\n          fetch-depth: 0\n\n      - uses: actions/setup-python@v5 # v5.5.0\n        with:\n          python-version: '3.11'\n\n      - name: Generate launch copy bundle\n        run: |\n          python scripts/release_broadcast.py \\n            --tag "${{ github.event.release.tag_name }}" \\n            --repo "${{ github.repository }}"\n\n      - name: Publish to configured channels\n        env:\n          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}\n          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}\n          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}\n          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}\n        run: |\n          python scripts/release_broadcast.py \\n            --tag "${{ github.event.release.tag_name }}" \\n            --repo "${{ github.repository }}" \\n            --publish\n\n      - name: Commit generated marketing artifacts\n        run: |\n          git config user.name "github-actions[bot]"\n          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"\n          git add docs/marketing/autogen\n          git diff --cached --quiet && exit 0\n          git commit -m "docs: add autogen launch copy for ${{ github.event.release.tag_name }}"\n          git push\n\n      - name: Create manual posting checklist issue\n        env:\n          GH_TOKEN: ${{ github.token }}\n        run: |\n          gh issue create \\n            --title "Launch checklist: ${{ github.event.release.tag_name }}" \\n            --label "documentation" \\n            --body "$(cat <<'EOF'\n          ## Manual Channel Checklist\n\n          Even with automation, these channels still perform best with manual posting and active replies:\n\n          - [ ] Hacker News `Show HN` submission\n          - [ ] Reddit launch post in one relevant subreddit\n          - [ ] 24-hour reply window for comments/questions\n\n          Auto-generated copy is available in `docs/marketing/autogen`.\n          EOF\n          )"\n
+name: Growth Automation
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  broadcast:
+    name: Generate and publish launch copy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5 # v5.5.0
+        with:
+          python-version: '3.11'
+
+      - name: Generate launch copy bundle
+        run: |
+          python scripts/release_broadcast.py \
+            --tag "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}"
+
+      - name: Publish to configured channels
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python scripts/release_broadcast.py \
+            --tag "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}" \
+            --publish
+
+      - name: Commit generated marketing artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/marketing/autogen
+          git diff --cached --quiet && exit 0
+          git commit -m "docs: add autogen launch copy for ${{ github.event.release.tag_name }}"
+          git push
+
+      - name: Create manual posting checklist issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Launch checklist: ${{ github.event.release.tag_name }}" \
+            --label "documentation" \
+            --body "$(cat <<'EOF'
+          ## Manual Channel Checklist
+
+          Even with automation, these channels still perform best with manual posting and active replies:
+
+          - [ ] Hacker News `Show HN` submission
+          - [ ] Reddit launch post in one relevant subreddit
+          - [ ] 24-hour reply window for comments/questions
+
+          Auto-generated copy is available in `docs/marketing/autogen`.
+          EOF
+          )"
