@@ -1,1 +1,41 @@
-name: Release Preflight\n\non:\n  push:\n    tags:\n      - 'v*'\n  workflow_dispatch:\n    inputs:\n      tag:\n        description: "Tag to validate (e.g. v0.1.4)"\n        required: true\n        type: string\n\npermissions:\n  contents: read\n\njobs:\n  preflight:\n    name: Validate release packaging consistency\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4 # v4.2.2\n        with:\n          fetch-depth: 0\n\n      - uses: actions/setup-python@v5 # v5.5.0\n        with:\n          python-version: '3.11'\n\n      - name: Resolve tag\n        id: vars\n        run: |\n          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then\n            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"\n          else\n            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"\n          fi\n\n      - name: Run preflight checks\n        run: |\n          python scripts/release_preflight.py --tag "${{ steps.vars.outputs.tag }}"\n
+name: Release Preflight
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to validate (e.g. v0.1.4)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Validate release packaging consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5 # v5.5.0
+        with:
+          python-version: '3.11'
+
+      - name: Resolve tag
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run preflight checks
+        run: |
+          python scripts/release_preflight.py --tag "${{ steps.vars.outputs.tag }}"
