@@ -15,15 +15,15 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4 # v4.2.2
+      - uses: actions/checkout@v6 # v4.2.2
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-go@v5 # v5.3.0
+      - uses: actions/setup-go@v6 # v5.3.0
         with:
           go-version: '1.26.2'
 
-      - uses: actions/setup-python@v5 # v5.5.0
+      - uses: actions/setup-python@v6 # v5.5.0
         with:
           python-version: '3.11'
 
@@ -32,7 +32,7 @@ jobs:
           python scripts/release_preflight.py --tag "${GITHUB_REF_NAME}"
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6 # v6.4.0
+        uses: goreleaser/goreleaser-action@v7 # v6.4.0
         with:
           version: '~> v2'
           args: release --clean

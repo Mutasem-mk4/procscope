@@ -29,7 +29,7 @@ jobs:
       - name: Install deps
         run: pacman -Syu --noconfirm git go nodejs namcap
 
-      - uses: actions/checkout@v4 # v4.2.2
+      - uses: actions/checkout@v6 # v4.2.2
 
       - name: Validate .SRCINFO is in sync
         run: |
@@ -50,7 +50,7 @@ jobs:
     name: Debian metadata validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # v4.2.2
+      - uses: actions/checkout@v6 # v4.2.2
 
       - name: Install packaging tools
         run: |
