@@ -96,14 +96,22 @@ procscope will detect missing capabilities at startup and provide actionable gui
 |---------|--------|
 | GitHub releases | Available |
 | `go install` | Available |
-| Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; not yet shipped by the distro |
+| **Homebrew (macOS/Linux)** | **Available via `Mutasem-mk4/kharma` tap** |
 | Arch / BlackArch package | Available in BlackArch |
+| Debian / Kali / Parrot packages | Packaging metadata maintained in-tree; pending distro inclusion |
 
 ## Installation
 
 Note: Running procscope usually requires `sudo` (eBPF capabilities).
 
-### 1. Go Install
+### 1. Homebrew (Recommended)
+
+```bash
+brew tap Mutasem-mk4/kharma
+brew install procscope
+```
+
+### 2. Go Install
 
 ```bash
 go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
