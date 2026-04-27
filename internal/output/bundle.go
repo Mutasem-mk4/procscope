@@ -122,8 +122,8 @@ func (b *Bundle) writeEventsJSONL() error {
 		if err != nil {
 			continue
 		}
-		_, _ = _, _ = f.Write(data)
-		_, _ = _, _ = f.Write([]byte("\n"))
+		f.Write(data)
+		f.Write([]byte("\n"))
 	}
 	return nil
 }
@@ -137,9 +137,9 @@ func (b *Bundle) writeProcessTree() error {
 	}
 	defer func() { _ = f.Close() }()
 
-	_, _ = _, _ = fmt.Fprintf(f, "Process Tree — Investigation %s\n", b.Correlator.InvestigationID())
-	_, _ = _, _ = fmt.Fprintf(f, "Root PID: %d\n", b.TargetPID)
-	_, _ = _, _ = fmt.Fprintf(f, "═══════════════════════════════════════════════════════\n\n")
+	fmt.Fprintf(f, "Process Tree — Investigation %s\n", b.Correlator.InvestigationID())
+	fmt.Fprintf(f, "Root PID: %d\n", b.TargetPID)
+	fmt.Fprintf(f, "═══════════════════════════════════════════════════════\n\n")
 
 	// Sort by PID for deterministic output
 	sort.Slice(procs, func(i, j int) bool {
@@ -155,9 +155,9 @@ func (b *Bundle) writeProcessTree() error {
 		if p.Exited {
 			status = fmt.Sprintf("exited(%d)", p.ExitCode)
 		}
-		_, _ = _, _ = fmt.Fprintf(f, "%s[%d] %s — ppid=%d %s\n", indent, p.PID, p.Comm, p.PPID, status)
+		fmt.Fprintf(f, "%s[%d] %s — ppid=%d %s\n", indent, p.PID, p.Comm, p.PPID, status)
 		if len(p.Args) > 0 {
-			_, _ = _, _ = fmt.Fprintf(f, "%s  args: %v\n", indent, p.Args)
+			fmt.Fprintf(f, "%s  args: %v\n", indent, p.Args)
 		}
 	}
 	return nil

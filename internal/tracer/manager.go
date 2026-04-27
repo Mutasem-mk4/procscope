@@ -147,7 +147,7 @@ func (m *Manager) Attach() error {
 		if err != nil {
 			// Non-fatal: log and continue. Some tracepoints may not be
 			// available on all kernels.
-			_, _ = _, _ = fmt.Fprintf(os.Stderr, "  warning: tracepoint %s/%s: %v (skipping)\n", p.group, p.name, err)
+			fmt.Fprintf(os.Stderr, "  warning: tracepoint %s/%s: %v (skipping)\n", p.group, p.name, err)
 			continue
 		}
 		m.links = append(m.links, tp)
