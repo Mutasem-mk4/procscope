@@ -20,3 +20,12 @@ func NewRootCommand() *cobra.Command {
 		},
 	}
 }
+
+// ExitError represents an error that should result in a specific exit code.
+type ExitError struct {
+	Code int
+}
+
+func (e *ExitError) Error() string {
+	return fmt.Sprintf("exit status %d", e.Code)
+}
