@@ -179,7 +179,7 @@ func printNode(sb *strings.Builder, node *TreeNode, prefix string, isLast bool) 
 	if node.Cmdline != "" && node.Cmdline != node.Comm {
 		display = node.Cmdline
 	}
-	_, _ = _, _ = fmt.Fprintf(sb, "%s%s[%d] %s\n", prefix, connector, node.PID, display)
+	fmt.Fprintf(sb, "%s%s[%d] %s\n", prefix, connector, node.PID, display)
 
 	childPrefix := prefix
 	if prefix != "" {

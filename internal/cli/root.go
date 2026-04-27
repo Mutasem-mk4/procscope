@@ -138,12 +138,12 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	if !opts.SkipChecks {
 		result := caps.Check()
 		if !result.CanProceed() {
-			_, _ = _, _ = _, _ = fmt.Fprintln(os.Stderr, result.Summary())
+			fmt.Fprintln(os.Stderr, result.Summary())
 			return fmt.Errorf("privilege check failed — use --skip-checks to override (may cause load failures)")
 		}
 		if len(result.Warnings) > 0 {
 			for _, w := range result.Warnings {
-				_, _ = _, _ = _, _ = fmt.Fprintf(os.Stderr, "⚠ %s\n", w)
+				fmt.Fprintf(os.Stderr, "⚠ %s\n", w)
 			}
 		}
 	}
@@ -188,7 +188,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		}
 		targetPID = pids[0]
 		if len(pids) > 1 {
-			_, _ = _, _ = fmt.Fprintf(os.Stderr, "⚠ Multiple processes match '%s', attaching to PID %d\n",
+			fmt.Fprintf(os.Stderr, "⚠ Multiple processes match '%s', attaching to PID %d\n",
 				opts.ProcessName, targetPID)
 		}
 	}
@@ -201,7 +201,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
 		<-sigCh
-		_, _ = _, _ = fmt.Fprintln(os.Stderr, "\n⏹ Stopping investigation...")
+		fmt.Fprintln(os.Stderr, "\n⏹ Stopping investigation...")
 		cancel()
 	}()
 
@@ -214,14 +214,14 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	// Spin up Kubernetes watcher if requested
 	var watcher *k8s.Watcher
 	if opts.K8s {
-		_, _ = _, _ = fmt.Fprintln(os.Stderr, "🔄 Initializing Kubernetes pod metadata watcher...")
+		fmt.Fprintln(os.Stderr, "🔄 Initializing Kubernetes pod metadata watcher...")
 		var err error
 		watcher, err = k8s.NewWatcher(ctx)
 		if err != nil {
 			return fmt.Errorf("kubernetes initialization failed: %w", err)
 		}
 		correlator.SetK8sResolver(watcher)
-		_, _ = _, _ = fmt.Fprintln(os.Stderr, "✅ Kubernetes integration established")
+		fmt.Fprintln(os.Stderr, "✅ Kubernetes integration established")
 	}
 
 	// Initialize eBPF tracer
@@ -256,9 +256,9 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 			return fmt.Errorf("failed to resume command: %w", err)
 		}
 
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "   Command: %s\n", commandLine)
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "   PID: %d\n\n", targetPID)
+		fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
+		fmt.Fprintf(os.Stderr, "   Command: %s\n", commandLine)
+		fmt.Fprintf(os.Stderr, "   PID: %d\n\n", targetPID)
 	} else {
 		// Attach mode: track existing PID and children
 		if err := mgr.TrackPID(targetPID); err != nil {
@@ -276,9 +276,9 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 			}
 		}
 
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "   Attached to PID: %d\n", targetPID)
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "   Press Ctrl+C to stop.\n\n")
+		fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
+		fmt.Fprintf(os.Stderr, "   Attached to PID: %d\n", targetPID)
+		fmt.Fprintf(os.Stderr, "   Press Ctrl+C to stop.\n\n")
 	}
 
 	// Set up output sinks
@@ -296,7 +296,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	timeline := output.NewTimeline(colorize)
 
 	if !opts.Quiet {
-		_, _ = _, _ = fmt.Fprintln(os.Stderr, timeline.Header())
+		fmt.Fprintln(os.Stderr, timeline.Header())
 	}
 
 	// Collect all events for bundle/summary
@@ -319,7 +319,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		for evt := range correlator.Events() {
 			// Timeline output
 			if !opts.Quiet {
-				_, _ = _, _ = fmt.Fprintln(os.Stderr, timeline.RenderEvent(evt))
+				fmt.Fprintln(os.Stderr, timeline.RenderEvent(evt))
 			}
 
 			// JSONL output
@@ -364,10 +364,10 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	endTime := time.Now()
 
 	// Print summary stats
-	_, _ = _, _ = fmt.Fprintf(os.Stderr, "\n%s\n", correlator.Summary())
+	fmt.Fprintf(os.Stderr, "\n%s\n", correlator.Summary())
 
 	if readerErr != nil && ctx.Err() == nil {
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "⚠ Event reader error: %v\n", readerErr)
+		fmt.Fprintf(os.Stderr, "⚠ Event reader error: %v\n", readerErr)
 	}
 
 	// Write evidence bundle
@@ -390,7 +390,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		if err := bundle.Write(); err != nil {
 			return fmt.Errorf("failed to write evidence bundle: %w", err)
 		}
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "📁 Evidence bundle: %s/\n", opts.OutputDir)
+		fmt.Fprintf(os.Stderr, "📁 Evidence bundle: %s/\n", opts.OutputDir)
 	}
 
 	// Write standalone summary
@@ -404,7 +404,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		if err := sw.WriteToFile(opts.SummaryPath); err != nil {
 			return fmt.Errorf("failed to write summary: %w", err)
 		}
-		_, _ = _, _ = fmt.Fprintf(os.Stderr, "📝 Summary: %s\n", opts.SummaryPath)
+		fmt.Fprintf(os.Stderr, "📝 Summary: %s\n", opts.SummaryPath)
 	}
 
 	// Report exit code if we launched a process
