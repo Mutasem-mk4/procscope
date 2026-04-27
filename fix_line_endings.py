@@ -14,6 +14,7 @@ def check_and_convert(file_path):
 
 files_to_check = [
     'arch/PKGBUILD',
+    'arch/.SRCINFO',
     'Makefile',
 ]
 
