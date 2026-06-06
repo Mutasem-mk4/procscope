@@ -13,7 +13,7 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
 <p align="center">
   <!-- Distribution & Recognition -->
   <a href="https://github.com/Mutasem-mk4/procscope/releases">
-    <img src="https://img.shields.io/github/v/tag/Mutasem-mk4/procscope?style=flat-square&color=8A2BE2&label=release" alt="Latest Release">
+    <img src="https://badgen.net/github/release/Mutasem-mk4/procscope?color=8A2BE2&label=release&style=flat-square" alt="Latest Release">
   </a>
   <a href="https://blackarch.org/">
     <img src="https://img.shields.io/badge/BlackArch-000000?style=flat-square&logo=archlinux&logoColor=B00000" alt="BlackArch Linux">
