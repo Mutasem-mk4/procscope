@@ -27,7 +27,6 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <br>
   <!-- Quality & Security -->
   <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=flat-square&label=CI" alt="CI Status">
-  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?branch=fix/scorecard-action&style=flat-square&label=security" alt="Security Suite Status">
   <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=000000" alt="License">
   <br>
   <!-- Engineering Core -->
