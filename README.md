@@ -28,11 +28,7 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <!-- Quality & Security -->
   <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=flat-square&label=CI" alt="CI Status">
   <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/security-suite.yml?style=flat-square&label=security" alt="Security Suite Status">
-  <a href="https://securityscorecards.dev/viewer/?uri=github.com/Mutasem-mk4/procscope">
-    <img src="https://img.shields.io/ossf/scorecard/github.com/Mutasem-mk4/procscope?label=openssf%20scorecard&style=flat-square" alt="OpenSSF Scorecard">
-  </a>
   <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=000000" alt="License">
-  <img src="https://badgen.net/github/stars/Mutasem-mk4/procscope?color=f9a825&style=flat-square" alt="GitHub Stars">
   <br>
   <!-- Engineering Core -->
   <img src="https://img.shields.io/badge/eBPF-Powered-blue?style=flat-square" alt="Powered by eBPF">
@@ -298,3 +294,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community participation guideli
 ---
 
 **procscope** is a process-first local investigator. It is not an EDR, not a SIEM, and not a policy engine. It is designed to answer one question well: *what did this process actually do-*
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Mutasem-mk4/procscope&type=Date)](https://star-history.com/#Mutasem-mk4/procscope&Date)
