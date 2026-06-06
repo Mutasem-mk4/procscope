@@ -32,7 +32,7 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
     <img src="https://img.shields.io/ossf/scorecard/github.com/Mutasem-mk4/procscope?label=openssf%20scorecard&style=flat-square" alt="OpenSSF Scorecard">
   </a>
   <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=000000" alt="License">
-  <img src="https://img.shields.io/github/stars/Mutasem-mk4/procscope?style=flat-square&color=F9A825" alt="GitHub Stars">
+  <img src="https://badgen.net/github/stars/Mutasem-mk4/procscope?color=f9a825&style=flat-square" alt="GitHub Stars">
   <br>
   <!-- Engineering Core -->
   <img src="https://img.shields.io/badge/eBPF-Powered-blue?style=flat-square" alt="Powered by eBPF">

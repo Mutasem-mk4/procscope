@@ -26,13 +26,13 @@ jobs:
       matrix:
         language: ['go']
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Setup Go
         uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
-          go-version: '1.26.2'
+          go-version: '1.26.4'
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d # v3.28.10
+        uses: github/codeql-action/init@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
         with:
           languages: ${{ matrix.language }}
       - name: Install toolchain
@@ -42,7 +42,7 @@ jobs:
       - name: Build
         run: make build
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d # v3.28.10
+        uses: github/codeql-action/analyze@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
 
   dependency-review:
     name: Dependency Review
@@ -52,8 +52,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/dependency-review-action@3b130772ee3668fd52773ca48e71f6f514205f61 # v5.0.0
 
   scorecard:
     name: OpenSSF Scorecard
@@ -65,7 +65,7 @@ jobs:
       contents: read
       actions: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
       - name: Run analysis
@@ -75,6 +75,6 @@ jobs:
           results_format: sarif
           publish_results: true
       - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d # v3.28.10
+        uses: github/codeql-action/upload-sarif@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
         with:
           sarif_file: results.sarif
