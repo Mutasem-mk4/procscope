@@ -17,6 +17,8 @@ jobs:
   codeql:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
       contents: read
       actions: read
@@ -32,7 +34,7 @@ jobs:
         with:
           go-version: '1.26.4'
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
+        uses: github/codeql-action/init@1a818fd5f97ed0ee9a823421bd5b171add01227f # v4.36.2
         with:
           languages: ${{ matrix.language }}
       - name: Install toolchain
@@ -42,7 +44,7 @@ jobs:
       - name: Build
         run: make build
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
+        uses: github/codeql-action/analyze@1a818fd5f97ed0ee9a823421bd5b171add01227f # v4.36.2
 
   dependency-review:
     name: Dependency Review
@@ -59,6 +61,8 @@ jobs:
     name: OpenSSF Scorecard
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
       security-events: write
       id-token: write
@@ -73,8 +77,8 @@ jobs:
         with:
           results_file: results.sarif
           results_format: sarif
-          publish_results: true
+          publish_results: ${{ github.ref == 'refs/heads/master' }}
       - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@8272c299f21ca24af15dfe9ac0971ba969e5e0d5 # v3.36.2
+        uses: github/codeql-action/upload-sarif@1a818fd5f97ed0ee9a823421bd5b171add01227f # v4.36.2
         with:
           sarif_file: results.sarif
