@@ -10,25 +10,32 @@
 Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons.
 
 <p align="center">
-  <a href="https://github.com/Mutasem-mk4/procscope/releases">
-    <img src="https://img.shields.io/github/v/tag/Mutasem-mk4/procscope?style=flat-square&color=8A2BE2&label=release" alt="Latest Release">
-  </a>
+  <!-- Ecosystem & Distribution -->
   <a href="https://blackarch.org/">
-    <img src="https://img.shields.io/badge/BlackArch-000000?style=flat-square&logo=archlinux&logoColor=B00000" alt="BlackArch Linux">
+    <img src="https://img.shields.io/badge/BlackArch-000000?style=flat-square&logo=arch-linux&logoColor=white" alt="BlackArch Linux">
   </a>
   <a href="https://github.com/avelino/awesome-go">
-    <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-15C213?style=flat-square&logo=go" alt="Awesome Go">
+    <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Awesome Go">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/releases">
+    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=flat-square&color=8A2BE2&logo=github" alt="Latest Release">
+  </a>
+  <br>
+  <!-- Build & Quality -->
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=flat-square&label=Build&logo=github-actions&logoColor=white" alt="CI Status">
   </a>
   <a href="https://goreportcard.com/report/github.com/Mutasem-mk4/procscope">
-    <img src="https://goreportcard.com/badge/github.com/Mutasem-mk4/procscope?style=flat-square" alt="Go Report Card">
+    <img src="https://img.shields.io/badge/Go_Report-A+-15C213?style=flat-square&logo=go" alt="Go Report Card">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=gray&logo=open-source-initiative&logoColor=white" alt="License">
   </a>
   <br>
-  <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=flat-square&label=CI" alt="CI Status">
-  <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=000000" alt="License">
-  <br>
-  <img src="https://img.shields.io/badge/eBPF-Powered-blue?style=flat-square" alt="Powered by eBPF">
-  <img src="https://img.shields.io/badge/Latency-%3C50%C2%B5s-blue?style=flat-square" alt="Latency">
-  <img src="https://img.shields.io/badge/Heuristics-Enabled-orange?style=flat-square" alt="Heuristics Enabled">
+  <!-- Performance & Engineering -->
+  <img src="https://img.shields.io/badge/Observation-eBPF-00599C?style=flat-square&logo=linux&logoColor=white" alt="eBPF Powered">
+  <img src="https://img.shields.io/badge/Performance-%3C50%C2%B5s-blue?style=flat-square&logo=speedtest&logoColor=white" alt="Latency">
+  <img src="https://img.shields.io/badge/Logic-Heuristics-orange?style=flat-square&logo=knowledge-base&logoColor=white" alt="Heuristics Enabled">
 </p>
 
 Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, and more.
