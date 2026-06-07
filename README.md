@@ -86,6 +86,10 @@ See [Support Matrix](docs/support-matrix.md) for details.
 
 `procscope` is community-driven. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) to get involved.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Mutasem-mk4/procscope&type=Date)](https://star-history.com/#Mutasem-mk4/procscope&Date)
+
 ## License
 
 [MIT](LICENSE)
