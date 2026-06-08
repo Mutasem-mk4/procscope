@@ -55,7 +55,7 @@ sudo procscope -- ./suspicious-binary
 
 [Full Installation Guide](docs/install.md) | [Usage & Output Formats](docs/usage.md)
 
-## Capabilities
+## Features & Capabilities
 
 | Category | Events | Details |
 |----------|--------|---------|
@@ -64,8 +64,10 @@ sudo procscope -- ./suspicious-binary
 | **Network** | connect, accept, bind, listen | [Support Matrix](docs/support-matrix.md) |
 | **Privileges** | setuid, setgid, ptrace | [Support Matrix](docs/support-matrix.md) |
 
-## Requirements
+## Tech Stack & Requirements
 
+- **Runtime:** Go 1.24+
+- **Observation:** eBPF (CO-RE)
 - **Linux kernel 5.8+** with BTF support.
 - **Root** privileges or specific eBPF capabilities.
 - **Architectures:** amd64, arm64.
