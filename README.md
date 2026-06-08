@@ -95,15 +95,9 @@ See [Support Matrix](docs/support-matrix.md) for details.
 
 `procscope` is community-driven. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) to get involved.
 
-## Star History & Growth
+## Star History
 
-<p align="center">
-  <a href="https://github.com/Mutasem-mk4">
-    <img src="https://img.shields.io/github/stars/Mutasem-mk4?style=flat-square&label=Total%20Stars&color=yellow&logo=github" alt="Total GitHub Stars">
-  </a>
-</p>
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Mutasem-mk4/procscope,Mutasem-mk4/gspy,Mutasem-mk4/Vex,Mutasem-mk4/AuthSniper,Mutasem-mk4/aura,Mutasem-mk4/kharma,Mutasem-mk4/RepoPulse&type=Date)](https://star-history.com/#Mutasem-mk4/procscope&Mutasem-mk4/gspy&Mutasem-mk4/Vex&Mutasem-mk4/AuthSniper&Mutasem-mk4/aura&Mutasem-mk4/kharma&Mutasem-mk4/RepoPulse&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Mutasem-mk4/procscope&type=Date)](https://star-history.com/#Mutasem-mk4/procscope&Date)
 
 ## License
 
