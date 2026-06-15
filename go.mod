@@ -5,10 +5,10 @@ go 1.26.2
 require (
 	github.com/cilium/ebpf v0.21.0
 	github.com/spf13/cobra v1.10.2
-	golang.org/x/sys v0.44.0
-	k8s.io/api v0.36.1
-	k8s.io/apimachinery v0.36.1
-	k8s.io/client-go v0.36.1
+	golang.org/x/sys v0.46.0
+	k8s.io/api v0.36.2
+	k8s.io/apimachinery v0.36.2
+	k8s.io/client-go v0.36.2
 )
 
 require (
