@@ -1,6 +1,8 @@
-procscope (0.1.0-1) unstable; urgency=medium
+procscope (1.1.0-1) unstable; urgency=medium
 
-  * Initial release.
+  * Initial release for Parrot and Debian packaging.
+  * Align the package version with upstream v1.1.0.
+  * Require Go 1.26, matching the module and direct dependencies.
   * Process lifecycle tracing (exec, fork, exit)
   * File activity tracing (openat, rename, unlink, chmod, chown)
   * Network activity tracing (connect, accept, bind, listen)
@@ -9,4 +11,4 @@ procscope (0.1.0-1) unstable; urgency=medium
   * Evidence bundle and Markdown report generation
   * JSONL event stream output
 
- -- Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>  Wed, 16 Apr 2026 12:00:00 +0000
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Fri, 24 Jul 2026 14:00:00 +0300

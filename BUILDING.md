@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Go 1.24 or newer
+- Go 1.26 or newer
 - Linux (kernel 5.8+ with BTF for runtime)
 - clang with BPF target support (only when refreshing the committed eBPF object)
 - llvm-strip (optional, when refreshing the committed eBPF object)
@@ -91,7 +91,7 @@ targets (amd64, arm64).
 ### Debian / Kali / Parrot
 
 ```bash
-# Build-Depends: debhelper-compat (= 13), golang-go
+# Build-Depends: debhelper-compat (= 13), golang-go (>= 2:1.26~)
 dpkg-buildpackage -us -uc -b
 ```
 
