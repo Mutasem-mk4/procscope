@@ -150,8 +150,8 @@ jobs:
         run: |
           useradd -m builduser
           chown -R builduser:builduser .
-          version=$(sed -n 's/^pkgver=//p' arch/PKGBUILD)
-          tar --exclude=.git --exclude=arch --exclude=vendor --transform "s,^\./,procscope-$version/," -czf "arch/procscope-$version.tar.gz" .
+          commit=$(sed -n 's/^_commit=//p' arch/PKGBUILD)
+          tar --exclude=.git --exclude=arch --exclude=vendor --transform "s,^\./,procscope-$commit/," -czf "arch/procscope-$commit.tar.gz" .
           su builduser -c "cd arch && makepkg -sf --skipchecksums"
       - name: Upload Arch Package
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

@@ -1,3 +1,12 @@
+procscope (1.1.1-1) unstable; urgency=medium
+
+  * Generate BPF from source with declared compiler dependencies.
+  * Propagate evidence write failures and coordinate reader shutdown.
+  * Update Go and affected dependencies; enforce CI security checks.
+  * Validate offline Debian builds and current Arch package sources.
+
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Fri, 02 Oct 2026 22:00:00 +0300
+
 procscope (1.1.0-1) unstable; urgency=medium
 
   * Initial release for Parrot and Debian packaging.
