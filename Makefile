@@ -1,5 +1,5 @@
 # procscope — Makefile
-# Requires: Go 1.26+
+# Requires: Go 1.26.8+
 # Building the BPF object requires clang with BPF support; bpftool is optional.
 
 BINARY      := procscope

@@ -47,10 +47,12 @@ Launch a command under observation — or attach to an existing process — and 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=flat-square&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
-### 1-Minute Install (Go 1.26.8+)
+### Build from source (Go 1.26.8+)
 ```bash
-go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
-sudo procscope -- ./suspicious-binary
+git clone https://github.com/Mutasem-mk4/procscope.git
+cd procscope
+make build
+sudo ./bin/procscope -- /bin/true
 ```
 
 [Full Installation Guide](docs/install.md) | [Usage & Output Formats](docs/usage.md)

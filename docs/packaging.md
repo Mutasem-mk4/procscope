@@ -57,7 +57,7 @@ The repository is structured to support a Kali package request and Debian-style 
 | Description | Process-scoped runtime investigation tool using eBPF |
 | Similar tools | strace, ltrace, sysdig |
 | Activity | Active development |
-| Current install path | GitHub release asset or `go install` |
+| Current install path | GitHub release asset or `make build` |
 | Usage | `sudo procscope -- ./binary` |
 
 Before opening Kali packaging outreach, have these artifacts ready:

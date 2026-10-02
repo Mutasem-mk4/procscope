@@ -6,6 +6,6 @@
 // This package is Linux-only and requires kernel 5.8+ with BTF support.
 package tracer
 
-// The committed BPF object lives next to this package so source builds and
-// package builds do not need to invoke code generation. Refresh it with
-// `make generate` after editing ../../bpf/procscope.c.
+// The generated BPF object lives next to this package for embedding.
+// `make build` compiles it from ../../bpf/procscope.c when missing or stale;
+// Debian packaging forces regeneration from source.

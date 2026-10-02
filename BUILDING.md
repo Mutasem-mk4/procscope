@@ -71,17 +71,18 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o bin/procscope-linux-
 CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -o bin/procscope-linux-arm64 ./cmd/procscope
 ```
 
-Note: eBPF generation (`go generate`) must run on a Linux host.
-Cross-compilation of the Go binary works from any platform because the source
-tree already includes the committed BPF object for the supported little-endian
-targets (amd64, arm64).
+Generate the embedded BPF object with `make generate` on Linux before
+cross-compiling the Go binary from another platform. Both supported targets
+(amd64 and arm64) consume the same little-endian BPF object.
 
 ## Packaging
 
 ### Debian / Kali / Parrot
 
 ```bash
-# Build-Depends: debhelper-compat (= 13), golang-go (>= 2:1.26~)
+# First prepare a vendored source release, then extract it into a clean directory.
+make source-dist
+# Run inside the extracted archive with Debian build dependencies installed:
 dpkg-buildpackage -us -uc -b
 ```
 
