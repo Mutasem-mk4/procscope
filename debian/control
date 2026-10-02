@@ -5,6 +5,9 @@ Maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
 Build-Depends:
  debhelper-compat (= 13),
  golang-go (>= 2:1.26~),
+ clang,
+ llvm,
+ libbpf-dev,
 Rules-Requires-Root: no
 Standards-Version: 4.7.0
 Homepage: https://github.com/Mutasem-mk4/procscope

@@ -2,6 +2,11 @@
 
 export DH_VERBOSE = 1
 export CGO_ENABLED = 0
+export GOFLAGS = -mod=vendor
+export GOPROXY = off
+export GOSUMDB = off
+export GOTOOLCHAIN = local
+export GOCACHE = $(CURDIR)/debian/.cache/go-build
 
 # Version from changelog
 VERSION := $(shell dpkg-parsechangelog -S Version)
@@ -13,10 +18,11 @@ LDFLAGS := -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=$(VERSI
 	dh $@
 
 override_dh_auto_configure:
-	@# No configure step needed
+	test -f vendor/modules.txt
 
 override_dh_auto_build:
-	# Build binary from the committed eBPF object
+	# Regenerate BPF from source; use only vendored Go dependencies
+	make -B generate
 	go build -trimpath -ldflags "-s -w $(LDFLAGS)" -o bin/procscope ./cmd/procscope
 
 override_dh_auto_test:
@@ -34,7 +40,7 @@ override_dh_auto_install:
 		debian/procscope/usr/share/fish/vendor_completions.d/procscope.fish
 
 override_dh_auto_clean:
-	rm -rf bin/
+	rm -rf bin/ debian/.cache/
 	dh_auto_clean
 
 # Skip dwz tool — static Go binaries don't have DWARF to compress

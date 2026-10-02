@@ -9,7 +9,7 @@ arch=('x86_64' 'aarch64')
 groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
 url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
-makedepends=('go>=1.26.2')
+makedepends=('go>=1.26.8' 'clang' 'llvm' 'libbpf')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 sha512sums=('f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd')
 
@@ -18,6 +18,8 @@ build() {
 
   export CGO_ENABLED=0
   export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+  clang -O2 -g -Wall -Werror -target bpfel -I./bpf/headers -c bpf/procscope.c -o internal/tracer/procscope_bpfel.o
 
   go build \
     -ldflags "-s -w \

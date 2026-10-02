@@ -2,15 +2,15 @@
 
 ## Requirements
 
-- Go 1.26 or newer
+- Go 1.26.8 or newer
 - Linux (kernel 5.8+ with BTF for runtime)
-- clang with BPF target support (only when refreshing the committed eBPF object)
-- llvm-strip (optional, when refreshing the committed eBPF object)
+- clang with BPF target support and libbpf development headers
+- llvm-strip (optional)
 
 ## Quick Build
 
 ```bash
-# Build the binary from the committed eBPF object
+# Build the embedded BPF object and binary from source
 make build
 
 # The binary is at ./bin/procscope
@@ -36,22 +36,12 @@ This should report `all modules verified`.
 ### 3. Build
 
 ```bash
-CGO_ENABLED=0 go build -trimpath -ldflags "-s -w" -o bin/procscope ./cmd/procscope
+make build
 ```
 
-Fresh checkouts already include the committed BPF object at
-`internal/tracer/procscope_bpfel.o`, so normal source builds and package builds
-do not need to run code generation.
-
-### 4. Refresh the eBPF object after editing `bpf/procscope.c`
-
-```bash
-make generate
-```
-
-This recompiles `bpf/procscope.c` into the committed
-`internal/tracer/procscope_bpfel.o` artifact. Use it only when the eBPF C
-source changes.
+Fresh checkouts generate `internal/tracer/procscope_bpfel.o` from
+`bpf/procscope.c`. `make build` handles this prerequisite. Run `make -B generate`
+to force regeneration after changes to compilation flags or the toolchain.
 
 If your kernel's `vmlinux.h` differs from the bundled minimal subset, refresh it first:
 

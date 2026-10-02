@@ -32,8 +32,8 @@ debian/
     └── runtime-smoke    # Launch-mode smoke test on root+BTF hosts
 ```
 
-The Debian package builds from the committed `internal/tracer/procscope_bpfel.o`
-artifact and does not run `go generate` during package build.
+The Debian package builds the BPF object from `bpf/procscope.c` with clang.
+Prepare vendored source using `make source-dist` before an offline package build.
 
 ### Current DEP-8 Coverage
 
@@ -83,8 +83,8 @@ makepkg -si
 ### PKGBUILD Notes
 
 - Follows Arch Go packaging guidelines
-- Consumes the committed `internal/tracer/procscope_bpfel.o` artifact instead of invoking `go generate`
-- No network access during build (offline build)
+- Compiles the BPF object from source with clang
+- Offline builds require the vendored source distribution from `make source-dist`; Debian rules disable Go network access
 - Respects system build flags
 - Installs to standard paths (`/usr/bin`, `/usr/share/man`, `/usr/share/licenses`)
 
