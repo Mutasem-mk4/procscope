@@ -133,9 +133,9 @@ func (r *CheckResult) Summary() string {
 	var sb strings.Builder
 
 	_, _ = sb.WriteString("procscope privilege check:\n")
-	_, _ = sb.WriteString(fmt.Sprintf("  Kernel:  %s\n", r.KernelVersion))
-	_, _ = sb.WriteString(fmt.Sprintf("  Root:    %v\n", r.IsRoot))
-	_, _ = sb.WriteString(fmt.Sprintf("  BTF:     %v\n", r.BTFAvailable))
+	_, _ = fmt.Fprintf(&sb, "  Kernel:  %s\n", r.KernelVersion)
+	_, _ = fmt.Fprintf(&sb, "  Root:    %v\n", r.IsRoot)
+	_, _ = fmt.Fprintf(&sb, "  BTF:     %v\n", r.BTFAvailable)
 
 	if !r.IsRoot {
 		_, _ = sb.WriteString("  Capabilities:\n")
@@ -144,21 +144,21 @@ func (r *CheckResult) Summary() string {
 			if has {
 				marker = "ok"
 			}
-			_, _ = sb.WriteString(fmt.Sprintf("    [%s] %s\n", marker, cap))
+			_, _ = fmt.Fprintf(&sb, "    [%s] %s\n", marker, cap)
 		}
 	}
 
 	if len(r.Warnings) > 0 {
 		_, _ = sb.WriteString("\n  Warnings:\n")
 		for _, w := range r.Warnings {
-			_, _ = sb.WriteString(fmt.Sprintf("    - %s\n", w))
+			_, _ = fmt.Fprintf(&sb, "    - %s\n", w)
 		}
 	}
 
 	if len(r.Errors) > 0 {
 		_, _ = sb.WriteString("\n  Errors:\n")
 		for _, e := range r.Errors {
-			_, _ = sb.WriteString(fmt.Sprintf("    - %s\n", e))
+			_, _ = fmt.Fprintf(&sb, "    - %s\n", e)
 		}
 	}
 
@@ -172,7 +172,9 @@ func parseCapEffective(status string) uint64 {
 			fields := strings.Fields(line)
 			if len(fields) >= 2 {
 				var val uint64
-				fmt.Sscanf(fields[1], "%x", &val)
+				if _, err := fmt.Sscanf(fields[1], "%x", &val); err != nil {
+					return 0
+				}
 				return val
 			}
 		}
@@ -188,7 +190,9 @@ func hasCapBit(caps uint64, bit int) bool {
 // parseKernelVersion extracts major.minor from a kernel release string.
 func parseKernelVersion(release string) (int, int) {
 	var major, minor int
-	fmt.Sscanf(release, "%d.%d", &major, &minor)
+	if n, err := fmt.Sscanf(release, "%d.%d", &major, &minor); err != nil || n != 2 {
+		return 0, 0
+	}
 	return major, minor
 }
 

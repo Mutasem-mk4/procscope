@@ -6,6 +6,7 @@ package process
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"os/exec"
 	"strconv"
@@ -46,7 +47,7 @@ func NewLauncher(args []string) (*Launcher, error) {
 	}
 	wrapperArgs = append(wrapperArgs, args[1:]...)
 
-	cmd := exec.Command("/bin/sh", wrapperArgs...)
+	cmd := exec.Command("/bin/sh", wrapperArgs...) //nolint:gosec // Command is explicitly requested by the operator; arguments remain positional.
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -84,6 +85,9 @@ func (l *Launcher) Start() (uint32, error) {
 		close(l.done)
 	}()
 
+	if l.cmd.Process.Pid <= 0 || int64(l.cmd.Process.Pid) > math.MaxUint32 {
+		return 0, fmt.Errorf("kernel PID out of range")
+	}
 	pid := uint32(l.cmd.Process.Pid)
 	if err := waitForStop(pid, 2*time.Second); err != nil {
 		return 0, err
@@ -136,6 +140,9 @@ func (l *Launcher) PID() uint32 {
 	defer l.mu.Unlock()
 
 	if !l.started || l.cmd.Process == nil {
+		return 0
+	}
+	if l.cmd.Process.Pid <= 0 || int64(l.cmd.Process.Pid) > math.MaxUint32 {
 		return 0
 	}
 	return uint32(l.cmd.Process.Pid)

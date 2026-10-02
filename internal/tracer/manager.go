@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
+	"log"
+	"math"
 	"net"
 	"os"
 	"strings"
@@ -172,7 +174,9 @@ func (m *Manager) ReadEvents(ctx context.Context) error {
 	// Close reader when context is done (interrupts blocking read)
 	go func() {
 		<-ctx.Done()
-		rd.Close()
+		if err := rd.Close(); err != nil {
+			log.Printf("close ring buffer: %v", err)
+		}
 	}()
 
 	for {
@@ -196,10 +200,14 @@ func (m *Manager) ReadEvents(ctx context.Context) error {
 // Close releases all eBPF resources.
 func (m *Manager) Close() {
 	if m.reader != nil {
-		_ = m.reader.Close()
+		if err := m.reader.Close(); err != nil {
+			log.Printf("close ring buffer: %v", err)
+		}
 	}
 	for _, l := range m.links {
-		_ = l.Close()
+		if err := l.Close(); err != nil {
+			log.Printf("close BPF link: %v", err)
+		}
 	}
 	m.objs.Close()
 }
@@ -215,6 +223,9 @@ func (m *Manager) parseEvent(raw []byte) (*events.Event, error) {
 		return nil, fmt.Errorf("failed to parse event: %w", err)
 	}
 
+	if bpfEvt.Timestamp > math.MaxInt64 {
+		return nil, fmt.Errorf("event timestamp out of range")
+	}
 	evt := &events.Event{
 		Timestamp: m.bootTime.Add(time.Duration(bpfEvt.Timestamp)),
 		MonoNanos: bpfEvt.Timestamp,
@@ -244,7 +255,7 @@ func (m *Manager) parseEvent(raw []byte) (*events.Event, error) {
 		evt.Type = events.EventExit
 		evt.Confidence = events.ConfidenceExact
 		evt.Process = &events.ProcessData{
-			ExitCode: int32(bpfEvt.ExitCode),
+			ExitCode: int32(bpfEvt.ExitCode), //nolint:gosec // Preserve the signed 32-bit kernel exit-code bit pattern.
 		}
 	case bpfEventFileOpen:
 		evt.Type = events.EventFileOpen

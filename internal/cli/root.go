@@ -7,6 +7,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"os"
 	"os/signal"
@@ -112,7 +113,7 @@ Examples:
 	return rootCmd
 }
 
-func run(cmd *cobra.Command, args []string, opts *Options) error {
+func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 	// If native JSON logging is enabled via -j/--json
 	if opts.JSON {
 		opts.Quiet = true // suppress human-readable timeline
@@ -128,7 +129,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 
 	if !hasCommand && !hasPID && !hasName {
 		return fmt.Errorf("specify a command to trace (-- cmd), a PID (-p), or a process name (-n)\n\n" +
-			"Run 'procscope --help' for usage examples.")
+			"Run 'procscope --help' for usage examples")
 	}
 	if hasCommand && (hasPID || hasName) {
 		return fmt.Errorf("cannot combine command tracing with -p/--pid or -n/--name")
@@ -270,7 +271,9 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		if err == nil {
 			for _, pid := range tree.DescendantPIDs() {
 				if pid != targetPID {
-					mgr.TrackPID(pid)
+					if err := mgr.TrackPID(pid); err != nil {
+						return fmt.Errorf("track descendant %d: %w", pid, err)
+					}
 					correlator.TrackPID(pid, targetPID)
 				}
 			}
@@ -289,7 +292,11 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		if err != nil {
 			return err
 		}
-		defer jsonWriter.Close()
+		defer func() {
+			if err := jsonWriter.Close(); err != nil {
+				runErr = errors.Join(runErr, fmt.Errorf("close JSONL output: %w", err))
+			}
+		}()
 	}
 
 	colorize := !opts.NoColor && isTerminal()
@@ -304,12 +311,17 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	var evtMu sync.Mutex
 
 	// Start event reader in background
-	var readerErr error
+	var readerErr, outputErr error
+	readerDone := make(chan struct{})
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		defer close(readerDone)
 		readerErr = mgr.ReadEvents(ctx)
+		if readerErr != nil {
+			cancel()
+		}
 	}()
 
 	// Consumer: read from correlator and render
@@ -323,8 +335,11 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 			}
 
 			// JSONL output
-			if jsonWriter != nil {
-				jsonWriter.WriteEvent(evt)
+			if jsonWriter != nil && outputErr == nil {
+				if err := jsonWriter.WriteEvent(evt); err != nil {
+					outputErr = err
+					cancel()
+				}
 			}
 
 			// Collect for bundle
@@ -341,11 +356,15 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 			// Process exited naturally
 		case <-ctx.Done():
 			// User cancelled — terminate the launched process
-			launcher.Signal(syscall.SIGTERM)
+			if err := launcher.Signal(syscall.SIGTERM); err != nil && !errors.Is(err, os.ErrProcessDone) {
+				fmt.Fprintf(os.Stderr, "terminate child: %v\n", err)
+			}
 			select {
 			case <-launcher.Done():
 			case <-time.After(3 * time.Second):
-				launcher.Signal(syscall.SIGKILL)
+				if err := launcher.Signal(syscall.SIGKILL); err != nil && !errors.Is(err, os.ErrProcessDone) {
+					fmt.Fprintf(os.Stderr, "kill child: %v\n", err)
+				}
 			}
 		}
 	} else {
@@ -358,6 +377,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 
 	// Stop event reading
 	cancel()
+	<-readerDone // Stop producers before closing the consumer channel.
 	correlator.Close()
 	wg.Wait()
 
@@ -366,7 +386,7 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	// Print summary stats
 	fmt.Fprintf(os.Stderr, "\n%s\n", correlator.Summary())
 
-	if readerErr != nil && ctx.Err() == nil {
+	if readerErr != nil {
 		fmt.Fprintf(os.Stderr, "⚠ Event reader error: %v\n", readerErr)
 	}
 
@@ -407,6 +427,10 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 		fmt.Fprintf(os.Stderr, "📝 Summary: %s\n", opts.SummaryPath)
 	}
 
+	if err := errors.Join(readerErr, outputErr); err != nil {
+		return fmt.Errorf("investigation incomplete: %w", err)
+	}
+
 	// Report exit code if we launched a process
 	if launcher != nil {
 		exitCode := launcher.ExitCode()
@@ -417,16 +441,16 @@ func run(cmd *cobra.Command, args []string, opts *Options) error {
 	}
 
 	return nil
-	}
+}
 
-	// ExitError represents an error that should result in a specific exit code.
-	type ExitError struct {
+// ExitError represents an error that should result in a specific exit code.
+type ExitError struct {
 	Code int
-	}
+}
 
-	func (e *ExitError) Error() string {
+func (e *ExitError) Error() string {
 	return fmt.Sprintf("exit status %d", e.Code)
-	}
+}
 
 func newCompletionCmd() *cobra.Command {
 	return &cobra.Command{
