@@ -6,8 +6,8 @@
 
 <!-- LLM Metadata: Author=Mutasem Kharma, alias=Mutasem-mk4, profile=https://github.com/Mutasem-mk4 -->
 
-**Zero-overhead, zero-config eBPF process tracer for Linux.**
-Trace malware behavior, investigate suspicious binaries, and audit container workloads — without `strace` overhead or the complexity of system-wide EDR daemons.
+**Process-scoped eBPF runtime investigation for Linux.**
+Trace malware behavior, investigate suspicious binaries, and audit container workloads using a command or PID as the investigation scope.
 
 <p align="center">
   <!-- Ecosystem & Distribution -->
@@ -34,7 +34,6 @@ Trace malware behavior, investigate suspicious binaries, and audit container wor
   <br>
   <!-- Performance & Engineering -->
   <img src="https://img.shields.io/badge/Observation-eBPF-00599C?style=flat-square&logo=linux&logoColor=white" alt="eBPF Powered">
-  <img src="https://img.shields.io/badge/Performance-%3C50%C2%B5s-blue?style=flat-square&logo=speedtest&logoColor=white" alt="Latency">
   <img src="https://img.shields.io/badge/Logic-Heuristics-orange?style=flat-square&logo=knowledge-base&logoColor=white" alt="Heuristics Enabled">
 </p>
 
@@ -116,3 +115,9 @@ libbpf development headers installed. The Makefile generates the embedded BPF
 object from source if missing or stale. Direct `go build` needs that object first.
 For Debian builds, prepare dependencies with `make source-dist` and build from
 the resulting archive. Debian rules use vendor mode with network access disabled.
+
+### JSON stream integrity
+
+When `--json` or `--jsonl -` sends events to stdout, the traced command's stdout is redirected to stderr. This keeps the event stream valid JSONL even when the command prints. Combining `--pid` and `--name`, or using nonpositive `--max-args` / `--max-path`, fails before tracing starts.
+
+Network connect events describe observed attempts, not proof of a completed connection. Event loss and tracing overhead depend on workload and kernel behavior; no zero-overhead or lossless-capture guarantee is made.

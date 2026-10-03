@@ -238,6 +238,21 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		fmt.Fprintln(os.Stderr, "✅ Kubernetes integration established")
 	}
 
+	// Set up output sinks
+	var jsonWriter *output.JSONWriter
+	if opts.JSONLPath != "" {
+		var err error
+		jsonWriter, err = output.NewJSONWriter(opts.JSONLPath)
+		if err != nil {
+			return err
+		}
+		defer func() {
+			if err := jsonWriter.Close(); err != nil {
+				runErr = errors.Join(runErr, fmt.Errorf("close JSONL output: %w", err))
+			}
+		}()
+	}
+
 	// Initialize eBPF tracer
 	mgr := tracer.NewManager(correlator)
 	if err := mgr.Load(); err != nil {
@@ -295,21 +310,6 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
 		fmt.Fprintf(os.Stderr, "   Attached to PID: %d\n", targetPID)
 		fmt.Fprintf(os.Stderr, "   Press Ctrl+C to stop.\n\n")
-	}
-
-	// Set up output sinks
-	var jsonWriter *output.JSONWriter
-	if opts.JSONLPath != "" {
-		var err error
-		jsonWriter, err = output.NewJSONWriter(opts.JSONLPath)
-		if err != nil {
-			return err
-		}
-		defer func() {
-			if err := jsonWriter.Close(); err != nil {
-				runErr = errors.Join(runErr, fmt.Errorf("close JSONL output: %w", err))
-			}
-		}()
 	}
 
 	colorize := !opts.NoColor && isTerminal()
