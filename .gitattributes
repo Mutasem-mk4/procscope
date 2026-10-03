@@ -1,2 +1,4 @@
 *.go text eol=lf
 *.o binary
+PKGBUILD text eol=lf
+.SRCINFO text eol=lf
