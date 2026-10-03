@@ -1,7 +1,7 @@
 pkgbase = procscope
 	pkgdesc = Process-scoped runtime investigation tool using eBPF
-	pkgver = 1.1.1
-	pkgrel = 2
+	pkgver = 1.1.2
+	pkgrel = 1
 	url = https://github.com/Mutasem-mk4/procscope
 	arch = x86_64
 	arch = aarch64

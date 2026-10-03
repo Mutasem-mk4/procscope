@@ -2,9 +2,9 @@
 # See COPYING for license details.
 
 pkgname=procscope
-pkgver=1.1.1
+pkgver=1.1.2
 _commit=caa6e59eb35200c3760a54cc86b6541cf88ebbfe
-pkgrel=2
+pkgrel=1
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
 groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')

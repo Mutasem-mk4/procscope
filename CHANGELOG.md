@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-10-04
+
+### Changed
+- Replace unmeasured performance and comparison claims with documented investigation limits.
+- Pin Arch packages to the reviewed source.
+
 ## [1.1.1] - 2026-10-02
 
 ### Fixed
