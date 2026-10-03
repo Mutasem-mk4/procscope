@@ -60,3 +60,29 @@ case-001/
 ### Markdown Summary
 
 Team-ready report with overview, process tree, event breakdown, file/network activity tables, notable events, and honest limitations.
+
+### Reading and exporting evidence
+
+When tracing with sudo, evidence files are owned by root and saved with mode
+0600. The bundle directory uses mode 0750 when newly created. Read them through
+sudo rather than making the originals world-readable:
+
+```bash
+sudo cat report.md
+sudo less case-001/summary.md
+sudo less case-001/process-tree.txt
+```
+
+To create an archive owned by your current user, run this from a normal user
+shell in the directory containing `case-001`:
+
+```bash
+umask 077
+sudo tar -C case-001 -cf - . > case-001-share.tar
+```
+
+Shell redirection creates the archive as your user; sudo reads the private
+originals. The archive stays private and the original ownership and permissions
+remain unchanged. Captured paths and arguments may contain sensitive information;
+review the archive's contents before sharing it. If the destination archive
+already exists, choose a new filename so you do not overwrite earlier evidence.
