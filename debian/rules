@@ -6,6 +6,7 @@ export GOFLAGS = -mod=vendor
 export GOPROXY = off
 export GOSUMDB = off
 export GOTOOLCHAIN = local
+export PATH := /usr/lib/go-1.26/bin:$(PATH)
 export GOCACHE = $(CURDIR)/debian/.cache/go-build
 
 # Version from changelog
