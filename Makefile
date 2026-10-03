@@ -1,6 +1,6 @@
 # procscope — Makefile
-# Requires: Go 1.26+
-# Optional for refreshing the committed BPF object: clang, llvm-strip, bpftool
+# Requires: Go 1.26.8+
+# Building the BPF object requires clang with BPF support; bpftool is optional.
 
 BINARY      := procscope
 MODULE      := github.com/Mutasem-mk4/procscope
@@ -46,17 +46,19 @@ help: ## Show this help
 vmlinux: ## Generate vmlinux.h from running kernel BTF
 	$(BPFTOOL) btf dump file /sys/kernel/btf/vmlinux format c > bpf/headers/vmlinux.h
 
-generate: ## Refresh the committed eBPF object (requires clang with BPF target support)
+generate: $(BPF_OBJ) ## Build the eBPF object from source
+
+$(BPF_OBJ): $(BPF_SRC) $(wildcard bpf/headers/*.h)
 	$(CLANG) $(BPF_CFLAGS) -target bpfel -I./bpf/headers -c $(BPF_SRC) -o $(BPF_OBJ)
 	@which $(STRIP) >/dev/null 2>&1 && $(STRIP) -g $(BPF_OBJ) || true
 
 # --- Build ---
 
-build: ## Build the procscope binary
+build: $(BPF_OBJ) ## Build the procscope binary
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=$(GOARCH) \
 	  $(GO) build $(GOFLAGS) -ldflags "$(LDFLAGS)" -o bin/$(BINARY) ./cmd/procscope
 
-build-all: ## Cross-compile for amd64 and arm64
+build-all: $(BPF_OBJ) ## Cross-compile for amd64 and arm64
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 	  $(GO) build $(GOFLAGS) -ldflags "$(LDFLAGS)" -o bin/$(BINARY)-linux-amd64 ./cmd/procscope
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
@@ -131,3 +133,9 @@ arch-pkg: ## Build Arch package (requires makepkg)
 clean: ## Remove build artifacts
 	rm -rf bin/ dist/ coverage.out coverage.html
 	$(MAKE) -C test/fixtures clean 2>/dev/null || true
+
+# Source distributions include vendored dependencies for offline package builds.
+source-dist:
+	$(GO) mod vendor
+	mkdir -p dist
+	tar --exclude=.git --exclude=dist --exclude=bin --exclude=debian/procscope --exclude=debian/.cache --exclude=debian/.debhelper -czf dist/procscope-$(VERSION)-source.tar.gz .

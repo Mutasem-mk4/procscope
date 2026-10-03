@@ -2,6 +2,7 @@ package output
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -31,15 +32,15 @@ type Bundle struct {
 
 // BundleMetadata is written to metadata.json.
 type BundleMetadata struct {
-	SchemaVersion   string    `json:"schema_version"`
-	InvestigationID string    `json:"investigation_id"`
-	StartTime       time.Time `json:"start_time"`
-	EndTime         time.Time `json:"end_time"`
-	Duration        string    `json:"duration"`
-	CommandLine     string    `json:"command_line,omitempty"`
-	TargetPID       uint32    `json:"target_pid"`
-	TotalEvents     int       `json:"total_events"`
-	ProcessCount    int       `json:"process_count"`
+	SchemaVersion   string            `json:"schema_version"`
+	InvestigationID string            `json:"investigation_id"`
+	StartTime       time.Time         `json:"start_time"`
+	EndTime         time.Time         `json:"end_time"`
+	Duration        string            `json:"duration"`
+	CommandLine     string            `json:"command_line,omitempty"`
+	TargetPID       uint32            `json:"target_pid"`
+	TotalEvents     int               `json:"total_events"`
+	ProcessCount    int               `json:"process_count"`
 	EventCounts     map[string]uint64 `json:"event_counts"`
 }
 
@@ -110,42 +111,25 @@ func (b *Bundle) writeMetadata() error {
 	return writeJSON(filepath.Join(b.Dir, "metadata.json"), meta)
 }
 
-func (b *Bundle) writeEventsJSONL() error {
-	f, err := os.Create(filepath.Join(b.Dir, "events.jsonl"))
+func (b *Bundle) writeEventsJSONL() (err error) {
+	f, err := os.OpenFile(filepath.Join(b.Dir, "events.jsonl"), os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0600)
 	if err != nil {
 		return err
 	}
-	defer func() { _ = f.Close() }()
-
+	defer func() { err = errors.Join(err, f.Close()) }()
+	encoder := json.NewEncoder(f)
 	for _, evt := range b.Events {
-		data, err := json.Marshal(evt)
-		if err != nil {
-			continue
+		if err := encoder.Encode(evt); err != nil {
+			return err
 		}
-		f.Write(data)
-		f.Write([]byte("\n"))
 	}
 	return nil
 }
 
 func (b *Bundle) writeProcessTree() error {
 	procs := b.Correlator.ProcessTree()
-
-	f, err := os.Create(filepath.Join(b.Dir, "process-tree.txt"))
-	if err != nil {
-		return err
-	}
-	defer func() { _ = f.Close() }()
-
-	fmt.Fprintf(f, "Process Tree — Investigation %s\n", b.Correlator.InvestigationID())
-	fmt.Fprintf(f, "Root PID: %d\n", b.TargetPID)
-	fmt.Fprintf(f, "═══════════════════════════════════════════════════════\n\n")
-
-	// Sort by PID for deterministic output
-	sort.Slice(procs, func(i, j int) bool {
-		return procs[i].PID < procs[j].PID
-	})
-
+	data := fmt.Appendf(nil, "Process Tree — Investigation %s\nRoot PID: %d\n═══════════════════════════════════════════════════════\n\n", b.Correlator.InvestigationID(), b.TargetPID)
+	sort.Slice(procs, func(i, j int) bool { return procs[i].PID < procs[j].PID })
 	for _, p := range procs {
 		indent := ""
 		for i := 0; i < p.Depth; i++ {
@@ -155,12 +139,12 @@ func (b *Bundle) writeProcessTree() error {
 		if p.Exited {
 			status = fmt.Sprintf("exited(%d)", p.ExitCode)
 		}
-		fmt.Fprintf(f, "%s[%d] %s — ppid=%d %s\n", indent, p.PID, p.Comm, p.PPID, status)
+		data = fmt.Appendf(data, "%s[%d] %s — ppid=%d %s\n", indent, p.PID, p.Comm, p.PPID, status)
 		if len(p.Args) > 0 {
-			fmt.Fprintf(f, "%s  args: %v\n", indent, p.Args)
+			data = fmt.Appendf(data, "%s  args: %v\n", indent, p.Args)
 		}
 	}
-	return nil
+	return os.WriteFile(filepath.Join(b.Dir, "process-tree.txt"), data, 0600)
 }
 
 func (b *Bundle) writeFileSummary() error {
@@ -246,13 +230,9 @@ func (b *Bundle) writeSummary() error {
 }
 
 func writeJSON(path string, v interface{}) error {
-	f, err := os.Create(path)
+	data, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {
 		return err
 	}
-	defer func() { _ = f.Close() }()
-
-	enc := json.NewEncoder(f)
-	enc.SetIndent("", "  ")
-	return enc.Encode(v)
+	return os.WriteFile(path, append(data, '\n'), 0600)
 }

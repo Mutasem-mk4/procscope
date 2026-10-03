@@ -25,7 +25,8 @@ func NewJSONWriter(path string) (*JSONWriter, error) {
 		return &JSONWriter{writer: os.Stdout}, nil
 	}
 
-	f, err := os.Create(path)
+	// The CLI explicitly selects the destination for potentially sensitive evidence.
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0600) //nolint:gosec // User-selected output path.
 	if err != nil {
 		return nil, fmt.Errorf("failed to create JSONL output file: %w", err)
 	}

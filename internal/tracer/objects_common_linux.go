@@ -2,7 +2,10 @@
 
 package tracer
 
-import "github.com/cilium/ebpf"
+import (
+	"github.com/cilium/ebpf"
+	"log"
+)
 
 type procscopeObjects struct {
 	procscopePrograms
@@ -68,12 +71,16 @@ func (m *procscopeMaps) Close() {
 
 func closeProgram(prog *ebpf.Program) {
 	if prog != nil {
-		_ = prog.Close()
+		if err := prog.Close(); err != nil {
+			log.Printf("close BPF program: %v", err)
+		}
 	}
 }
 
 func closeMap(m *ebpf.Map) {
 	if m != nil {
-		_ = m.Close()
+		if err := m.Close(); err != nil {
+			log.Printf("close BPF map: %v", err)
+		}
 	}
 }

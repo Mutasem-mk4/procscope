@@ -1,0 +1,2 @@
+# Go produces a static binary (CGO_ENABLED=0); there is no libc linkage.
+procscope: statically-linked-binary [usr/bin/procscope]

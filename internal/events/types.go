@@ -59,9 +59,9 @@ const (
 
 // Privilege-relevant events.
 const (
-	EventPrivSetUID  EventType = "priv.setuid"
-	EventPrivSetGID  EventType = "priv.setgid"
-	EventPrivPtrace  EventType = "priv.ptrace"
+	EventPrivSetUID EventType = "priv.setuid"
+	EventPrivSetGID EventType = "priv.setgid"
+	EventPrivPtrace EventType = "priv.ptrace"
 )
 
 // Namespace-relevant events.
@@ -95,8 +95,8 @@ type Event struct {
 	InvestigationID string `json:"investigation_id"`
 
 	// Timing
-	Timestamp  time.Time `json:"timestamp"`
-	MonoNanos  uint64    `json:"mono_nanos"` // monotonic clock for ordering
+	Timestamp time.Time `json:"timestamp"`
+	MonoNanos uint64    `json:"mono_nanos"` // monotonic clock for ordering
 
 	// Event classification
 	Type       EventType  `json:"type"`
@@ -134,7 +134,7 @@ type ProcessData struct {
 	Args     []string `json:"args,omitempty"`     // argv (bounded)
 	ExitCode int32    `json:"exit_code,omitempty"`
 	ChildPID uint32   `json:"child_pid,omitempty"` // for fork events
-	Signal   int32    `json:"signal,omitempty"`     // if killed by signal
+	Signal   int32    `json:"signal,omitempty"`    // if killed by signal
 }
 
 // AccessMode describes whether a file operation is read-like or write-like.
@@ -159,14 +159,14 @@ type FileData struct {
 
 // NetworkData carries network activity details.
 type NetworkData struct {
-	Family   string `json:"family"`            // "ipv4", "ipv6", "unix", "other"
-	Protocol string `json:"protocol"`          // "tcp", "udp", "other"
-	SrcAddr  string `json:"src_addr,omitempty"`
-	SrcPort  uint16 `json:"src_port,omitempty"`
-	DstAddr  string `json:"dst_addr,omitempty"`
-	DstPort  uint16 `json:"dst_port,omitempty"`
-	Backlog  uint32 `json:"backlog,omitempty"` // for listen
-	ReturnCode int32 `json:"return_code,omitempty"`
+	Family     string `json:"family"`   // "ipv4", "ipv6", "unix", "other"
+	Protocol   string `json:"protocol"` // "tcp", "udp", "other"
+	SrcAddr    string `json:"src_addr,omitempty"`
+	SrcPort    uint16 `json:"src_port,omitempty"`
+	DstAddr    string `json:"dst_addr,omitempty"`
+	DstPort    uint16 `json:"dst_port,omitempty"`
+	Backlog    uint32 `json:"backlog,omitempty"` // for listen
+	ReturnCode int32  `json:"return_code,omitempty"`
 }
 
 // DNSData carries best-effort DNS query observations.
@@ -181,20 +181,20 @@ type DNSData struct {
 
 // PrivilegeData carries privilege transition details.
 type PrivilegeData struct {
-	Operation    string `json:"operation"`           // "setuid", "setgid", "ptrace"
-	OldUID       uint32 `json:"old_uid,omitempty"`
-	NewUID       uint32 `json:"new_uid,omitempty"`
-	OldGID       uint32 `json:"old_gid,omitempty"`
-	NewGID       uint32 `json:"new_gid,omitempty"`
-	TargetPID    uint32 `json:"target_pid,omitempty"`  // ptrace target
-	PtraceReq    uint64 `json:"ptrace_request,omitempty"`
-	ReturnCode   int32  `json:"return_code,omitempty"`
+	Operation  string `json:"operation"` // "setuid", "setgid", "ptrace"
+	OldUID     uint32 `json:"old_uid,omitempty"`
+	NewUID     uint32 `json:"new_uid,omitempty"`
+	OldGID     uint32 `json:"old_gid,omitempty"`
+	NewGID     uint32 `json:"new_gid,omitempty"`
+	TargetPID  uint32 `json:"target_pid,omitempty"` // ptrace target
+	PtraceReq  uint64 `json:"ptrace_request,omitempty"`
+	ReturnCode int32  `json:"return_code,omitempty"`
 }
 
 // NamespaceData carries namespace change details.
 type NamespaceData struct {
-	Operation  string `json:"operation"`            // "setns", "unshare"
-	NSType     uint32 `json:"ns_type,omitempty"`    // CLONE_NEW* flags
+	Operation  string `json:"operation"`         // "setns", "unshare"
+	NSType     uint32 `json:"ns_type,omitempty"` // CLONE_NEW* flags
 	CloneFlags uint64 `json:"clone_flags,omitempty"`
 	ReturnCode int32  `json:"return_code,omitempty"`
 }
@@ -217,23 +217,20 @@ func (e *Event) MarshalJSON() ([]byte, error) {
 
 // CategoryString returns a human-readable category for the event type.
 func (t EventType) CategoryString() string {
-	switch {
-	case t == EventExec || t == EventFork || t == EventExit:
+	switch t {
+	case EventExec, EventFork, EventExit:
 		return "process"
-	case t == EventFileOpen || t == EventFileCreate ||
-		t == EventFileRename || t == EventFileUnlink ||
-		t == EventFileChmod || t == EventFileChown:
+	case EventFileOpen, EventFileCreate, EventFileRename, EventFileUnlink, EventFileChmod, EventFileChown:
 		return "file"
-	case t == EventNetConnect || t == EventNetAccept ||
-		t == EventNetBind || t == EventNetListen:
+	case EventNetConnect, EventNetAccept, EventNetBind, EventNetListen:
 		return "network"
-	case t == EventDNSQuery:
+	case EventDNSQuery:
 		return "dns"
-	case t == EventPrivSetUID || t == EventPrivSetGID || t == EventPrivPtrace:
+	case EventPrivSetUID, EventPrivSetGID, EventPrivPtrace:
 		return "privilege"
-	case t == EventNSSetns || t == EventNSUnshare:
+	case EventNSSetns, EventNSUnshare:
 		return "namespace"
-	case t == EventMount:
+	case EventMount:
 		return "mount"
 	default:
 		return "unknown"

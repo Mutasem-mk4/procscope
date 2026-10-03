@@ -30,12 +30,11 @@ Thumbs.db
 # Build artifacts
 /build/
 
-# eBPF artifacts (the committed runtime object is kept in-tree)
+# Generated eBPF artifacts
 *_bpfel.go
 *_bpfeb.go
 *_bpfeb.o
 *_bpfel.o
-!internal/tracer/procscope_bpfel.o
 
 # Evidence bundles (output)
 /case-*/
@@ -65,3 +64,6 @@ test/fixtures/ns_ops
 arch/pkg/
 arch/src/
 arch/*.pkg.tar.*
+
+/debian/.cache/
+.golangci.bck.yml

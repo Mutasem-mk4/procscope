@@ -2,22 +2,25 @@
 # See COPYING for license details.
 
 pkgname=procscope
-pkgver=1.1.0
+pkgver=1.1.1
+_commit=3940b7cf4099140ee5bd761754163d4ec0ac742a
 pkgrel=1
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
 groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
 url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
-makedepends=('go>=1.26.2')
-source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
-sha512sums=('f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd')
+makedepends=('go>=1.26.8' 'clang' 'llvm' 'libbpf')
+source=("${pkgname}-${_commit}.tar.gz::${url}/archive/${_commit}.tar.gz")
+sha512sums=('0ba88af559a87f9c54b8f2a31b384e56e4c011b3afe4ba01e769f9f042a5853a41cd16e4f8e7e6a0e6945c41c8242bdc3725f471f41a06597444190c6e49df79')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${pkgname}-${_commit}"
 
   export CGO_ENABLED=0
   export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+  clang -O2 -g -Wall -Werror -target bpfel -I./bpf/headers -c bpf/procscope.c -o internal/tracer/procscope_bpfel.o
 
   go build \
     -ldflags "-s -w \
@@ -28,13 +31,13 @@ build() {
 }
 
 check() {
-  cd "${pkgname}-${pkgver}"
+  cd "${pkgname}-${_commit}"
 
   go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${pkgname}-${_commit}"
 
   install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
   install -Dm644 "man/${pkgname}.1" "${pkgdir}/usr/share/man/man1/${pkgname}.1"

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-02
+
+### Fixed
+- Generate the embedded BPF object during source builds and declare compiler dependencies.
+- Propagate evidence write/close failures and restrict output file permissions.
+- Coordinate tracing shutdown before closing the event correlator.
+- Update Go and affected dependencies; enforce lint, vulnerability, and runtime CI checks.
+- Build vendored Debian sources without network access and validate current Arch sources.
+
 ## [0.1.0] - 2026-04-16
 
 ### Added

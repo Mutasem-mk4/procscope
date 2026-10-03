@@ -11,11 +11,11 @@ brew tap Mutasem-mk4/kharma
 brew install procscope
 ```
 
-## 2. Go Install (Requires Go 1.26+)
+## 2. Source prerequisites
 
-```bash
-go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
-```
+Use Go 1.26.8 or newer, make, clang with BPF support, llvm, and libbpf
+headers. A clean checkout generates its embedded BPF object through `make build`.
+See the source installation below.
 
 ## 3. Direct Download
 
@@ -29,7 +29,7 @@ Available assets include:
 
 ## 4. Build from Source
 
-Ensure you have Go 1.26+ and `make` installed.
+Install the prerequisites listed above.
 
 ```bash
 git clone https://github.com/Mutasem-mk4/procscope.git

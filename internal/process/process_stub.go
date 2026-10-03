@@ -14,14 +14,14 @@ func NewLauncher(_ []string) (*Launcher, error) {
 	return nil, fmt.Errorf("process launcher requires Linux")
 }
 
-func (l *Launcher) Start() (uint32, error)      { return 0, fmt.Errorf("requires Linux") }
-func (l *Launcher) Wait() error                 { return fmt.Errorf("requires Linux") }
-func (l *Launcher) Done() <-chan struct{}        { ch := make(chan struct{}); close(ch); return ch }
-func (l *Launcher) ExitCode() int               { return -1 }
-func (l *Launcher) Signal(_ os.Signal) error     { return fmt.Errorf("requires Linux") }
-func (l *Launcher) PID() uint32                 { return 0 }
-func (l *Launcher) Args() []string              { return nil }
-func (l *Launcher) CommandString() string        { return "" }
+func (l *Launcher) Start() (uint32, error)   { return 0, fmt.Errorf("requires Linux") }
+func (l *Launcher) Wait() error              { return fmt.Errorf("requires Linux") }
+func (l *Launcher) Done() <-chan struct{}    { ch := make(chan struct{}); close(ch); return ch }
+func (l *Launcher) ExitCode() int            { return -1 }
+func (l *Launcher) Signal(_ os.Signal) error { return fmt.Errorf("requires Linux") }
+func (l *Launcher) PID() uint32              { return 0 }
+func (l *Launcher) Args() []string           { return nil }
+func (l *Launcher) CommandString() string    { return "" }
 
 // Tree represents a snapshot of a process tree.
 type Tree struct {

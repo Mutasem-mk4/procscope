@@ -1,6 +1,6 @@
 pkgbase = procscope
 	pkgdesc = Process-scoped runtime investigation tool using eBPF
-	pkgver = 1.1.0
+	pkgver = 1.1.1
 	pkgrel = 1
 	url = https://github.com/Mutasem-mk4/procscope
 	arch = x86_64
@@ -9,8 +9,11 @@ pkgbase = procscope
 	groups = blackarch-defensive
 	groups = blackarch-forensic
 	license = MIT
-	makedepends = go>=1.26.2
-	source = procscope-1.1.0.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/v1.1.0.tar.gz
-	sha512sums = f8483681b1f3b6349e65d668aec67ab02bb7a0dced4f86478280561f23cdffbf139d50ba275cbf1ce17062c045b2e944f674c5c108efa38d50e752cc2e5d48bd
+	makedepends = go>=1.26.8
+	makedepends = clang
+	makedepends = llvm
+	makedepends = libbpf
+	source = procscope-3940b7cf4099140ee5bd761754163d4ec0ac742a.tar.gz::https://github.com/Mutasem-mk4/procscope/archive/3940b7cf4099140ee5bd761754163d4ec0ac742a.tar.gz
+	sha512sums = 0ba88af559a87f9c54b8f2a31b384e56e4c011b3afe4ba01e769f9f042a5853a41cd16e4f8e7e6a0e6945c41c8242bdc3725f471f41a06597444190c6e49df79
 
 pkgname = procscope

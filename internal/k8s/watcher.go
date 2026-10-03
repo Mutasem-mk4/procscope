@@ -37,7 +37,10 @@ func NewWatcher(ctx context.Context) (*Watcher, error) {
 		// Fallback to kubeconfig
 		kubeconfig := os.Getenv("KUBECONFIG")
 		if kubeconfig == "" {
-			home, _ := os.UserHomeDir()
+			home, homeErr := os.UserHomeDir()
+			if homeErr != nil {
+				return nil, fmt.Errorf("locate kubeconfig: %w", homeErr)
+			}
 			kubeconfig = home + "/.kube/config"
 		}
 		config, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
@@ -53,7 +56,10 @@ func NewWatcher(ctx context.Context) (*Watcher, error) {
 
 	nodeName := os.Getenv("NODE_NAME")
 	if nodeName == "" {
-		nodeName, _ = os.Hostname() // Best effort if flag is omitted
+		nodeName, err = os.Hostname()
+		if err != nil {
+			return nil, fmt.Errorf("determine local node: %w", err)
+		}
 	}
 
 	w := &Watcher{
@@ -77,7 +83,7 @@ func NewWatcher(ctx context.Context) (*Watcher, error) {
 				w.updatePod(pod)
 			}
 		},
-		UpdateFunc: func(old, new interface{}) {
+		UpdateFunc: func(_, new interface{}) {
 			if pod, ok := new.(*corev1.Pod); ok {
 				w.updatePod(pod)
 			}

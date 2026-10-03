@@ -47,10 +47,12 @@ Launch a command under observation — or attach to an existing process — and 
 
 [![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=flat-square&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
 
-### 1-Minute Install (Go 1.26+)
+### Build from source (Go 1.26.8+)
 ```bash
-go install github.com/Mutasem-mk4/procscope/cmd/procscope@latest
-sudo procscope -- ./suspicious-binary
+git clone https://github.com/Mutasem-mk4/procscope.git
+cd procscope
+make build
+sudo ./bin/procscope -- /bin/true
 ```
 
 [Full Installation Guide](docs/install.md) | [Usage & Output Formats](docs/usage.md)
@@ -66,7 +68,7 @@ sudo procscope -- ./suspicious-binary
 
 ## Tech Stack & Requirements
 
-- **Build from source:** Go 1.26+
+- **Build from source:** Go 1.26.8+
 - **Observation:** eBPF (CO-RE)
 - **Linux kernel 5.8+** with BTF support.
 - **Root** privileges or specific eBPF capabilities.
@@ -106,3 +108,11 @@ See [Support Matrix](docs/support-matrix.md) for details.
 ---
 
 Developed by [Mutasem Kharma (معتصم خرما)](https://github.com/Mutasem-mk4).
+
+### Building from a clean checkout
+
+Use `make build` with Go 1.26.8 or newer, clang with BPF support, llvm, and
+libbpf development headers installed. The Makefile generates the embedded BPF
+object from source if missing or stale. Direct `go build` needs that object first.
+For Debian builds, prepare dependencies with `make source-dist` and build from
+the resulting archive. Debian rules use vendor mode with network access disabled.

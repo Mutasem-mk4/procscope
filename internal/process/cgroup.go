@@ -15,11 +15,14 @@ var containerIDRegex = regexp.MustCompile(`([a-f0-9]{64})`)
 // Returns an empty string if the process is not in a recognized container.
 func GetContainerID(pid uint32) string {
 	path := filepath.Join("/proc", fmt.Sprintf("%d", pid), "cgroup")
-	f, err := os.Open(path)
+	f, err := os.Open(path) //nolint:gosec // Path is constructed from a numeric PID under /proc.
 	if err != nil {
 		return ""
 	}
-	defer func() { _ = f.Close() }()
+	defer func() {
+		// Closing this read-only proc file cannot change the extracted container ID.
+		_ = f.Close() //nolint:errcheck
+	}()
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {

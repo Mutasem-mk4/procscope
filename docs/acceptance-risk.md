@@ -32,7 +32,7 @@ This is useful, but it is not enough for distro submission because neither packa
 | Public upstream | ✅ | GitHub repo and release tags exist |
 | Debian metadata | ✅ | `debian/control`, `debian/rules`, `debian/watch`, DEP-8 tests present |
 | Arch metadata | ✅ | `arch/PKGBUILD` and `arch/.SRCINFO` present |
-| Build reproducibility direction | ✅ | committed BPF object, `CGO_ENABLED=0`, `-trimpath` |
+| Build reproducibility direction | ✅ | BPF object generated from source, `CGO_ENABLED=0`, `-trimpath` |
 | User docs | ✅ | README, BUILDING, packaging, support matrix, architecture docs |
 | Maintainer docs | ✅ | submission playbook, security policy, contribution guide |
 | Quality gates | ✅ | CI, packaging workflow, release preflight script |

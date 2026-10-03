@@ -13,7 +13,7 @@ import (
 
 // Tree represents a snapshot of a process tree rooted at a given PID.
 type Tree struct {
-	Root     *TreeNode
+	Root       *TreeNode
 	NodesByPID map[uint32]*TreeNode
 }
 
@@ -71,13 +71,13 @@ func BuildTreeFromPID(rootPID uint32) (*Tree, error) {
 
 		// Read comm
 		commPath := filepath.Join("/proc", entry.Name(), "comm")
-		if data, err := os.ReadFile(commPath); err == nil {
+		if data, err := os.ReadFile(commPath); err == nil { //nolint:gosec // Numeric /proc PID path.
 			info.comm = strings.TrimSpace(string(data))
 		}
 
 		// Read cmdline
 		cmdlinePath := filepath.Join("/proc", entry.Name(), "cmdline")
-		if data, err := os.ReadFile(cmdlinePath); err == nil {
+		if data, err := os.ReadFile(cmdlinePath); err == nil { //nolint:gosec // Numeric /proc PID path.
 			// cmdline is null-separated
 			info.cmdline = strings.ReplaceAll(strings.TrimRight(string(data), "\x00"), "\x00", " ")
 		}
@@ -198,11 +198,13 @@ func printNode(sb *strings.Builder, node *TreeNode, prefix string, isLast bool) 
 // readPPID parses the PPID from /proc/[pid]/stat.
 // Format: pid (comm) state ppid ...
 func readPPID(statPath string) (uint32, error) {
-	f, err := os.Open(statPath)
+	f, err := os.Open(statPath) //nolint:gosec // Internal path constructed from a numeric PID.
 	if err != nil {
 		return 0, err
 	}
-	defer func() { _ = f.Close() }()
+	defer func() {
+		_ = f.Close() //nolint:errcheck // Read-only proc descriptor; close cannot change parsed data.
+	}()
 
 	scanner := bufio.NewScanner(f)
 	if !scanner.Scan() {
@@ -250,7 +252,7 @@ func FindPIDByName(name string) ([]uint32, error) {
 		}
 
 		commPath := filepath.Join("/proc", entry.Name(), "comm")
-		data, err := os.ReadFile(commPath)
+		data, err := os.ReadFile(commPath) //nolint:gosec // Numeric /proc PID path.
 		if err != nil {
 			continue
 		}
