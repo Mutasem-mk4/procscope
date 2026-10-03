@@ -1,10 +1,10 @@
 Source: procscope
 Section: utils
 Priority: optional
-Maintainer: Mutasem-mk4 <140179052+Mutasem-mk4@users.noreply.github.com>
+Maintainer: Mutasem Kharma <kharma.mutasem@gmail.com>
 Build-Depends:
  debhelper-compat (= 13),
- golang-go (>= 2:1.26~),
+ golang-1.26-go (>= 1.26.8~),
  clang,
  llvm,
  libbpf-dev,
@@ -15,7 +15,7 @@ Vcs-Browser: https://github.com/Mutasem-mk4/procscope
 Vcs-Git: https://github.com/Mutasem-mk4/procscope.git
 
 Package: procscope
-Architecture: linux-any
+Architecture: amd64 arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Process-scoped runtime investigation tool using eBPF
  procscope lets you launch a command under observation, or attach to an
