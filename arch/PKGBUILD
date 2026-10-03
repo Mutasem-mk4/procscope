@@ -3,8 +3,8 @@
 
 pkgname=procscope
 pkgver=1.1.1
-_commit=48da81941bd27eedb2b21dee1ca9bfeca0814115
-pkgrel=1
+_commit=caa6e59eb35200c3760a54cc86b6541cf88ebbfe
+pkgrel=2
 pkgdesc='Process-scoped runtime investigation tool using eBPF'
 arch=('x86_64' 'aarch64')
 groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
@@ -12,7 +12,7 @@ url='https://github.com/Mutasem-mk4/procscope'
 license=('MIT')
 makedepends=('go>=1.26.8' 'clang' 'llvm' 'libbpf')
 source=("${pkgname}-${_commit}.tar.gz::${url}/archive/${_commit}.tar.gz")
-sha512sums=('0e2951192a93e2f028c80329042696f2c879df98c28654fd8a4cbfd7afdd07a4a4ffcc9faec41593dc7038f2b70339b248fdddeca8c6fff662f0399eb3cad6ac')
+sha512sums=('1a8c8820684f7606fd4b14ac131c5ffc49f6d10fbd21d4277dc1721c78e2d50429227fbeddb1f4bd366c86338d43ac7e2d8e4e20ffb9df60f3c555d118967ae7')
 
 build() {
   cd "${pkgname}-${_commit}"
