@@ -134,6 +134,15 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 	if hasCommand && (hasPID || hasName) {
 		return fmt.Errorf("cannot combine command tracing with -p/--pid or -n/--name")
 	}
+	if hasPID && hasName {
+		return fmt.Errorf("cannot combine -p/--pid and -n/--name")
+	}
+	if opts.MaxArgs <= 0 {
+		return fmt.Errorf("--max-args must be positive")
+	}
+	if opts.MaxPathLen <= 0 {
+		return fmt.Errorf("--max-path must be positive")
+	}
 
 	// Privilege check
 	if !opts.SkipChecks {
@@ -169,7 +178,11 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		commandLine = strings.Join(cmdArgs, " ")
 
 		var err error
-		launcher, err = process.NewLauncher(cmdArgs)
+		targetOutput := os.Stdout
+		if opts.JSONLPath == "-" {
+			targetOutput = os.Stderr
+		}
+		launcher, err = process.NewLauncher(cmdArgs, targetOutput)
 		if err != nil {
 			return fmt.Errorf("failed to create launcher: %w", err)
 		}
@@ -223,6 +236,21 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		}
 		correlator.SetK8sResolver(watcher)
 		fmt.Fprintln(os.Stderr, "✅ Kubernetes integration established")
+	}
+
+	// Set up output sinks
+	var jsonWriter *output.JSONWriter
+	if opts.JSONLPath != "" {
+		var err error
+		jsonWriter, err = output.NewJSONWriter(opts.JSONLPath)
+		if err != nil {
+			return err
+		}
+		defer func() {
+			if err := jsonWriter.Close(); err != nil {
+				runErr = errors.Join(runErr, fmt.Errorf("close JSONL output: %w", err))
+			}
+		}()
 	}
 
 	// Initialize eBPF tracer
@@ -282,21 +310,6 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		fmt.Fprintf(os.Stderr, "🔍 procscope investigation %s\n", investigationID)
 		fmt.Fprintf(os.Stderr, "   Attached to PID: %d\n", targetPID)
 		fmt.Fprintf(os.Stderr, "   Press Ctrl+C to stop.\n\n")
-	}
-
-	// Set up output sinks
-	var jsonWriter *output.JSONWriter
-	if opts.JSONLPath != "" {
-		var err error
-		jsonWriter, err = output.NewJSONWriter(opts.JSONLPath)
-		if err != nil {
-			return err
-		}
-		defer func() {
-			if err := jsonWriter.Close(); err != nil {
-				runErr = errors.Join(runErr, fmt.Errorf("close JSONL output: %w", err))
-			}
-		}()
 	}
 
 	colorize := !opts.NoColor && isTerminal()
