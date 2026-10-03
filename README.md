@@ -92,7 +92,7 @@ See [Support Matrix](docs/support-matrix.md) for details.
 - **Zero Config:** No complex policies or yaml files.
 - **Focused:** Automatically follows forks but stays scoped to your target tree.
 - **Evidence Ready:** Generates structured evidence bundles and Markdown reports for IR teams.
-- **Low Overhead:** eBPF-powered observation with minimal performance impact.
+- **Tracing limits:** eBPF observation has overhead and may lose events; measure on your workload.
 
 [Compare with Tracee, Tetragon, and strace](docs/comparison.md)
 
