@@ -26,6 +26,6 @@ Under the hood, `procscope` injects kprobes and tracepoints into the kernel, but
 
 Tetragon monitors the entire host. `procscope` monitors the blast radius.
 
-The result? Absolute zero noise. The timeline spit out on your terminal contains exactly every file the binary touched, every IP address it beaconed out to, and every child process it forked, with Kubernetes Namespace resolution stitched right in.
+The result? Absolute zero noise. The timeline spit out on your terminal contains observed file events, network connection attempts and child-process events, with Kubernetes Namespace resolution stitched right in.
 
 If you are an incident responder or malware reverse engineer tired of deploying massive agents just to trace a single shell script, rip the binary from GitHub here: [github.com/Mutasem-mk4/procscope](https://github.com/Mutasem-mk4/procscope).

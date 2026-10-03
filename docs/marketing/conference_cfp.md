@@ -11,7 +11,7 @@ In this Demo Lab, I will introduce `procscope`—an open-source, eBPF-powered pr
 
 ### Speaker Outline
 1. **The Problem (2 mins):** Why modern malware easily evades `strace` and how host-wide security daemons create paralyzing signal-to-noise ratios.
-2. **The eBPF Solution (5 mins):** Walking through the architecture of `procscope`. How it safely attaches `kprobes` and uses bounded ring-buffers to maintain 0% CPU overhead while observing `execve`, `connect`, and `setuid` events.
+2. **The eBPF Solution (5 mins):** Walking through the architecture of `procscope`. How it safely attaches `kprobes` and uses bounded ring-buffers to maintain workload-dependent CPU overhead while observing `execve`, `connect`, and `setuid` events.
 3. **Live Arsenal Demo (5 mins):** Launching a highly obfuscated script. I will demonstrate how `procscope` instantly catches the script downloading a secondary payload and pivoting to a reverse shell, complete with automatic Kubernetes Pod resolution.
 4. **Q&A (3 mins)**
 

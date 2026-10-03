@@ -14,8 +14,8 @@ Use eBPF tracepoints for runtime observation.
 ## Rationale
 
 ### Performance
-- ptrace intercepts every syscall with SIGSTOP/SIGCONT, causing 10-100x slowdown
-- eBPF runs inline in the kernel with near-zero overhead for unmatched events
+- ptrace syscall tracing changes execution timing; no comparative slowdown is measured here
+- eBPF runs inline in the kernel with workload-dependent overhead for unmatched events
 - For investigation of potentially malicious binaries, minimal interference is critical
 
 ### Visibility
@@ -37,5 +37,5 @@ Use eBPF tracepoints for runtime observation.
 ## Consequences
 - Kernel 5.8+ is a hard requirement
 - Root or specific capabilities are required
-- Lower performance overhead during investigation
+- Different performance tradeoffs that must be measured on the workload
 - More natural process tree observation

@@ -25,6 +25,6 @@ Hey everyone! 👋 Maker here.
 
 As a cybersecurity engineer, I got sick of relying on `strace` (which freezes malware with ptrace overhead) or trying to parse massive `auditd` logs just to see if a script was making a malicious network call. 
 
-I built `procscope` using eBPF to fix this. It runs with zero runtime overhead, traces *only* the process you tell it to, and spits out a beautiful timeline of exactly what a process is trying to hide from you. I just rolled out native Kubernetes support in v1.1.0 today!
+I built `procscope` using eBPF to fix this. It runs with workload-dependent runtime overhead, traces *only* the process you tell it to, and spits out a beautiful timeline of exactly what a process is trying to hide from you. I just rolled out native Kubernetes support in v1.1.0 today!
 
 I’d love to hear your feedback on the JSON pipelines or any new syscalls you want hooked! Happy to answer any technical questions.

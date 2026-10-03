@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ═══════════ PRIMARY META ═══════════ -->
-    <title>procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)</title>
-    <meta name="description" content="procscope is a zero-config, single-binary eBPF process tracer for Linux malware triage and incident response. Built by Mutasem Kharma (معتصم خرما). Trace syscalls, network, file and privilege events per-process without strace overhead.">
+    <title>procscope — Process-Scoped eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)</title>
+    <meta name="description" content="procscope is a zero-config, single-binary eBPF process tracer for Linux malware triage and incident response. Built by Mutasem Kharma (معتصم خرما). Trace syscalls, network, file and privilege events per-process without using ptrace.">
     <meta name="keywords" content="procscope, Mutasem Kharma, معتصم خرما, Mutasem, Kharma, معتصم, خرما, eBPF, process tracer, malware triage, Linux security, incident response, strace alternative, Falco alternative, Tracee alternative, container security, Kubernetes security, syscall monitoring, runtime security, Go security tool, open source security">
     <meta name="author" content="Mutasem Kharma (معتصم خرما)">
     <meta name="creator" content="Mutasem Kharma (معتصم خرما)">
@@ -24,7 +24,7 @@
       "name": "procscope",
       "operatingSystem": "Linux",
       "applicationCategory": "SecurityApplication",
-      "description": "Zero-overhead eBPF process tracer for Linux malware triage and incident response.",
+      "description": "Process-scoped eBPF process tracer for Linux malware triage and incident response.",
       "author": {
         "@type": "Person",
         "name": "Mutasem Kharma",
@@ -47,8 +47,8 @@
 
     <!-- ═══════════ OPEN GRAPH (Facebook, LinkedIn, Slack, Discord) ═══════════ -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="procscope — Zero-Overhead eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)">
-    <meta property="og:description" content="Trace malware behavior in real time with zero overhead. Single binary, zero config. Built by Mutasem Kharma (معتصم خرما).">
+    <meta property="og:title" content="procscope — Process-Scoped eBPF Process Tracer for Linux | Mutasem Kharma (معتصم خرما)">
+    <meta property="og:description" content="Trace malware behavior in real time with workload-dependent overhead. Single binary, zero config. Built by Mutasem Kharma (معتصم خرما).">
     <meta property="og:url" content="https://mutasem-mk4.github.io/procscope/">
     <meta property="og:site_name" content="procscope by Mutasem Kharma (معتصم خرما)">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png">
@@ -62,8 +62,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mutasem_mk4">
     <meta name="twitter:creator" content="@mutasem_mk4">
-    <meta name="twitter:title" content="procscope — Zero-Overhead eBPF Process Tracer">
-    <meta name="twitter:description" content="Trace malware behavior in real time with zero overhead. A single binary, zero-config eBPF tracer for Linux incident response.">
+    <meta name="twitter:title" content="procscope — Process-Scoped eBPF Process Tracer">
+    <meta name="twitter:description" content="Trace malware behavior in real time with workload-dependent overhead. A single binary, zero-config eBPF tracer for Linux incident response.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/Mutasem-mk4/procscope/master/docs/procscope_header.png">
     <meta name="twitter:image:alt" content="procscope by Mutasem Kharma">
 
@@ -87,7 +87,7 @@
           "@type": "SoftwareApplication",
           "name": "procscope",
           "alternateName": ["procscope eBPF tracer", "procscope malware triage"],
-          "description": "Zero-overhead eBPF process tracer for Linux malware triage and incident response. Traces syscalls, network connections, file activity and privilege escalations per-process tree.",
+          "description": "Process-scoped eBPF process tracer for Linux malware triage and incident response. Traces syscalls, network connections, file activity and privilege escalations per-process tree.",
           "applicationCategory": "SecurityApplication",
           "applicationSubCategory": "Malware Analysis",
           "operatingSystem": "Linux",
@@ -185,7 +185,7 @@
         <div class="hero-content">
             <div class="badge">v1.1.0 — Now with Kubernetes Pod Resolution</div>
             <h1>Surgical Process Tracing<br>Powered by <span class="highlight">eBPF</span></h1>
-            <p class="subtitle">A zero-overhead, single-binary process tracer for Linux malware triage and incident response. Built by <strong>Mutasem Kharma</strong>.</p>
+            <p class="subtitle">A process-scoped, single-binary process tracer for Linux malware triage and incident response. Built by <strong>Mutasem Kharma</strong>.</p>
 
             <div class="cta-group">
                 <a href="https://killercoda.com/mutasem04/scenario/procscope-scenario" class="btn-primary large">Try in Browser — Free</a>
@@ -204,8 +204,8 @@
             </div>
             <div class="feature-card glass">
                 <div class="icon">⚡</div>
-                <h3>Zero Overhead</h3>
-                <p>eBPF kernel-level filtering means zero performance impact. No ptrace. No anti-debug detection by malware.</p>
+                <h3>Tracing tradeoffs</h3>
+                <p>eBPF kernel-level filtering means workload-dependent performance impact. No ptrace. Observation can be detected; no evasion guarantee is made.</p>
             </div>
             <div class="feature-card glass">
                 <div class="icon">🛡️</div>

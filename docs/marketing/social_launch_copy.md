@@ -3,7 +3,7 @@
 ## HackerNews (Show HN)
 
 **Title:**
-`Show HN: procscope – eBPF process tracer for malware triage without strace overhead`
+`Show HN: procscope – eBPF process tracer for malware triage without using ptrace`
 
 **Body to paste in comments:**
 ```
@@ -13,7 +13,7 @@ just to figure out what one suspicious binary is doing.
 
 It's a single static binary. You prefix it to any command and get a clean timeline of 
 every file, network connection, and privilege escalation that process tree triggers — 
-using eBPF at the kernel level with zero overhead.
+using eBPF at the kernel level with workload-dependent overhead.
 
 v1.1.0 now resolves Kubernetes Pod/Namespace metadata automatically.
 

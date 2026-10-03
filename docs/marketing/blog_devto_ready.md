@@ -43,7 +43,7 @@ The timeline spit out on your terminal contains:
 - 🔐 Every privilege escalation attempt (`setuid`/`chown`)
 - ☸️ The Kubernetes Pod and Namespace it belongs to (v1.1.0+)
 
-**Zero noise. Zero host-wide overhead.**
+**Zero noise. Workload-dependent tracing overhead.**
 
 ## Try it right now — in your browser
 
