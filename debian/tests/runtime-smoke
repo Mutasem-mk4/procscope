@@ -1,0 +1,33 @@
+#!/bin/sh
+# DEP-8 runtime smoke test: exercise launch mode and bundle output on kernels that
+# satisfy procscope's documented prerequisites.
+set -eu
+
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT INT TERM
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo "SKIP: runtime-smoke requires root"
+  exit 77
+fi
+
+if [ ! -r /sys/kernel/btf/vmlinux ]; then
+  echo "SKIP: kernel BTF is unavailable"
+  exit 77
+fi
+
+run_stderr="$tmpdir/stderr.log"
+
+if ! timeout 20 procscope --out "$tmpdir/case" -- /bin/true >"$tmpdir/stdout.log" 2>"$run_stderr"; then
+  cat "$run_stderr"
+  exit 1
+fi
+
+test -d "$tmpdir/case"
+test -s "$tmpdir/case/metadata.json"
+test -s "$tmpdir/case/events.jsonl"
+test -s "$tmpdir/case/process-tree.txt"
+test -s "$tmpdir/case/summary.md"
+grep -q "investigation_id" "$tmpdir/case/metadata.json"
+
+echo "PASS: runtime-smoke"

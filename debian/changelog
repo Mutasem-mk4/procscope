@@ -1,0 +1,43 @@
+procscope (1.1.2-2) unstable; urgency=medium
+
+  * Use the maintainer contact documented in the Parrot submission.
+  * Declare the AMD64 and ARM64 architectures covered by acceptance tests.
+  * Record vendored component and bundled BPF header licenses and notices.
+  * Require and select the versioned Go compiler at the module's patch level.
+  * Correct the preceding release date to its verified publication time.
+  * Install existing vendored Apache NOTICE files and record their provenance.
+  * Check compressed man pages and the completion subcommand in DEP-8.
+  * Report missing runtime prerequisites as SKIP and fail tracing errors.
+
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Sat, 03 Oct 2026 23:52:00 +0000
+
+procscope (1.1.2-1) unstable; urgency=medium
+
+  * Correct unmeasured performance claims and tool comparisons.
+  * Pin Arch packaging to the reviewed documentation source.
+
+ -- Mutasem Kharma <140179052+Mutasem-mk4@users.noreply.github.com>  Sat, 03 Oct 2026 23:12:22 +0000
+
+procscope (1.1.1-1) unstable; urgency=medium
+
+  * Generate BPF from source with declared compiler dependencies.
+  * Propagate evidence write failures and coordinate reader shutdown.
+  * Update Go and affected dependencies; enforce CI security checks.
+  * Validate offline Debian builds and current Arch package sources.
+
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Fri, 02 Oct 2026 22:00:00 +0300
+
+procscope (1.1.0-1) unstable; urgency=medium
+
+  * Initial release for Parrot and Debian packaging.
+  * Align the package version with upstream v1.1.0.
+  * Require Go 1.26, matching the module and direct dependencies.
+  * Process lifecycle tracing (exec, fork, exit)
+  * File activity tracing (openat, rename, unlink, chmod, chown)
+  * Network activity tracing (connect, accept, bind, listen)
+  * Privilege transition detection (setuid, setgid, ptrace)
+  * Namespace change detection (setns, unshare)
+  * Evidence bundle and Markdown report generation
+  * JSONL event stream output
+
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Fri, 24 Jul 2026 14:00:00 +0300
