@@ -5,7 +5,7 @@ procscope (1.1.2-2) unstable; urgency=medium
   * Record vendored component licenses and their upstream copyright notices.
   * Require and select the versioned Go compiler at the module's patch level.
 
- -- Mutasem Kharma <kharma.mutasem@gmail.com>  Sun, 04 Oct 2026 12:30:00 +0300
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Sat, 03 Oct 2026 23:52:00 +0000
 
 procscope (1.1.2-1) unstable; urgency=medium
 
