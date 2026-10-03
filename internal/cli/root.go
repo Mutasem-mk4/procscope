@@ -134,6 +134,15 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 	if hasCommand && (hasPID || hasName) {
 		return fmt.Errorf("cannot combine command tracing with -p/--pid or -n/--name")
 	}
+	if hasPID && hasName {
+		return fmt.Errorf("cannot combine -p/--pid and -n/--name")
+	}
+	if opts.MaxArgs <= 0 {
+		return fmt.Errorf("--max-args must be positive")
+	}
+	if opts.MaxPathLen <= 0 {
+		return fmt.Errorf("--max-path must be positive")
+	}
 
 	// Privilege check
 	if !opts.SkipChecks {
@@ -169,7 +178,11 @@ func run(cmd *cobra.Command, args []string, opts *Options) (runErr error) {
 		commandLine = strings.Join(cmdArgs, " ")
 
 		var err error
-		launcher, err = process.NewLauncher(cmdArgs)
+		targetOutput := os.Stdout
+		if opts.JSONLPath == "-" {
+			targetOutput = os.Stderr
+		}
+		launcher, err = process.NewLauncher(cmdArgs, targetOutput)
 		if err != nil {
 			return fmt.Errorf("failed to create launcher: %w", err)
 		}

@@ -6,6 +6,7 @@ package process
 
 import (
 	"fmt"
+	"io"
 	"math"
 	"os"
 	"os/exec"
@@ -28,7 +29,7 @@ type Launcher struct {
 
 // NewLauncher creates a Launcher for the given command and arguments.
 // The command is NOT started until Start() is called.
-func NewLauncher(args []string) (*Launcher, error) {
+func NewLauncher(args []string, stdout io.Writer) (*Launcher, error) {
 	if len(args) == 0 {
 		return nil, fmt.Errorf("no command specified")
 	}
@@ -49,7 +50,7 @@ func NewLauncher(args []string) (*Launcher, error) {
 
 	cmd := exec.Command("/bin/sh", wrapperArgs...) //nolint:gosec // Command is explicitly requested by the operator; arguments remain positional.
 	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
+	cmd.Stdout = stdout
 	cmd.Stderr = os.Stderr
 
 	// Create a new process group so we can track all children.

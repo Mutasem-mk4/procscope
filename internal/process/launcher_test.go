@@ -2,10 +2,14 @@
 
 package process
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
 func TestLauncherStartSuspendedAndContinue(t *testing.T) {
-	launcher, err := NewLauncher([]string{"sh", "-c", "exit 7"})
+	var output bytes.Buffer
+	launcher, err := NewLauncher([]string{"sh", "-c", "printf target-output; exit 7"}, &output)
 	if err != nil {
 		t.Fatalf("NewLauncher() error = %v", err)
 	}
@@ -34,5 +38,8 @@ func TestLauncherStartSuspendedAndContinue(t *testing.T) {
 	}
 	if exitCode := launcher.ExitCode(); exitCode != 7 {
 		t.Fatalf("ExitCode() = %d, want 7", exitCode)
+	}
+	if output.String() != "target-output" {
+		t.Fatalf("target output = %q, want target-output", output.String())
 	}
 }

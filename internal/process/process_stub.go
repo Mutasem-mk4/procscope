@@ -4,13 +4,14 @@ package process
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
 // Launcher manages launching a command under observation.
 type Launcher struct{}
 
-func NewLauncher(_ []string) (*Launcher, error) {
+func NewLauncher(_ []string, _ io.Writer) (*Launcher, error) {
 	return nil, fmt.Errorf("process launcher requires Linux")
 }
 
