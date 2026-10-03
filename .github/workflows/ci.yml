@@ -118,7 +118,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y debhelper lintian clang llvm libbpf-dev
       - name: Vendor dependencies for offline source build
-        run: make source-dist VERSION=$(dpkg-parsechangelog -SVersion | sed 's/-.*//')
+        run: |
+          make source-dist VERSION=$(dpkg-parsechangelog -SVersion | sed 's/-.*//')
+          mkdir -p release-source
+          mv dist/*-source.tar.gz release-source/
       - name: Build Debian Package without network access
         run: sudo env PATH="$PATH" unshare --net dpkg-buildpackage -us -uc -b -d
       - name: Move Debian Package
@@ -131,7 +134,7 @@ jobs:
           name: procscope-deb
           path: |
             ./procscope_*.deb
-            dist/*-source.tar.gz
+            release-source/*-source.tar.gz
 
   build-arch:
     name: Build Arch Linux Package
