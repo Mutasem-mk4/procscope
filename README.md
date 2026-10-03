@@ -56,6 +56,18 @@ sudo ./bin/procscope -- /bin/true
 
 [Full Installation Guide](docs/install.md) | [Usage & Output Formats](docs/usage.md)
 
+### Capture and read an investigation
+
+```bash
+sudo procscope --out case-001 --summary report.md -- /bin/true
+sudo less report.md
+sudo less case-001/process-tree.txt
+```
+
+Evidence files are private and normally owned by root when tracing with sudo.
+See [Reading and exporting evidence](docs/usage.md#reading-and-exporting-evidence)
+for creating a private copy without changing the original permissions.
+
 ## Features & Capabilities
 
 | Category | Events | Details |
