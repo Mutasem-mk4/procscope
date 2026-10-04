@@ -8,23 +8,17 @@ trap 'rm -rf "$tmpdir"' EXIT INT TERM
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "SKIP: runtime-smoke requires root"
-  exit 0
+  exit 77
 fi
 
 if [ ! -r /sys/kernel/btf/vmlinux ]; then
   echo "SKIP: kernel BTF is unavailable"
-  exit 0
+  exit 77
 fi
 
 run_stderr="$tmpdir/stderr.log"
 
 if ! timeout 20 procscope --out "$tmpdir/case" -- /bin/true >"$tmpdir/stdout.log" 2>"$run_stderr"; then
-  if grep -Eq "BTF not available|Kernel < 5\.8|Insufficient privileges|no tracepoints could be attached|failed to load eBPF objects|eBPF load failed|eBPF attach failed" "$run_stderr"; then
-    echo "SKIP: runtime environment does not satisfy procscope prerequisites"
-    cat "$run_stderr"
-    exit 0
-  fi
-
   cat "$run_stderr"
   exit 1
 fi

@@ -1,9 +1,22 @@
+procscope (1.1.2-2) unstable; urgency=medium
+
+  * Use the maintainer contact documented in the Parrot submission.
+  * Declare the AMD64 and ARM64 architectures covered by acceptance tests.
+  * Record vendored component and bundled BPF header licenses and notices.
+  * Require and select the versioned Go compiler at the module's patch level.
+  * Correct the preceding release date to its verified publication time.
+  * Install existing vendored Apache NOTICE files and record their provenance.
+  * Check compressed man pages and the completion subcommand in DEP-8.
+  * Report missing runtime prerequisites as SKIP and fail tracing errors.
+
+ -- Mutasem Kharma <kharma.mutasem@gmail.com>  Sat, 03 Oct 2026 23:52:00 +0000
+
 procscope (1.1.2-1) unstable; urgency=medium
 
   * Correct unmeasured performance claims and tool comparisons.
   * Pin Arch packaging to the reviewed documentation source.
 
- -- Mutasem Kharma <140179052+Mutasem-mk4@users.noreply.github.com>  Sun, 04 Oct 2026 12:00:00 +0300
+ -- Mutasem Kharma <140179052+Mutasem-mk4@users.noreply.github.com>  Sat, 03 Oct 2026 23:12:22 +0000
 
 procscope (1.1.1-1) unstable; urgency=medium
 

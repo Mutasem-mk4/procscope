@@ -6,6 +6,7 @@ export GOFLAGS = -mod=vendor
 export GOPROXY = off
 export GOSUMDB = off
 export GOTOOLCHAIN = local
+export PATH := /usr/lib/go-1.26/bin:$(PATH)
 export GOCACHE = $(CURDIR)/debian/.cache/go-build
 
 # Version from changelog
@@ -38,6 +39,9 @@ override_dh_auto_install:
 		debian/procscope/usr/share/zsh/vendor-completions/_procscope
 	install -Dm644 completions/procscope.fish \
 		debian/procscope/usr/share/fish/vendor_completions.d/procscope.fish
+	for module in github.com/go-openapi/jsonpointer github.com/go-openapi/jsonreference go.yaml.in/yaml/v2 go.yaml.in/yaml/v3; do \
+		install -Dm644 vendor/$$module/NOTICE debian/procscope/usr/share/doc/procscope/third-party-notices/$$module/NOTICE; \
+	done
 
 override_dh_auto_clean:
 	rm -rf bin/ debian/.cache/

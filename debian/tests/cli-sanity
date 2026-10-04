@@ -11,6 +11,7 @@ help_output="$(procscope --help)"
 printf '%s\n' "$help_output" | grep -F "Launch a command under observation"
 printf '%s\n' "$help_output" | grep -F -- "--jsonl"
 printf '%s\n' "$help_output" | grep -F -- "--summary"
-printf '%s\n' "$help_output" | grep -F -- "completion [bash|zsh|fish]"
+completion_help="$(procscope completion --help)"
+printf '%s\n' "$completion_help" | grep -F -- "completion [bash|zsh|fish]"
 
 echo "PASS: cli-sanity"

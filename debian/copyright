@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: procscope
-Upstream-Contact: 140179052+Mutasem-mk4@users.noreply.github.com
+Upstream-Contact: Mutasem Kharma <kharma.mutasem@gmail.com>
 Source: https://github.com/Mutasem-mk4/procscope
 
 Files: *
@@ -29,3 +29,1240 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+
+Files: vendor/google.golang.org/protobuf/*
+Copyright: Copyright (c) 2018 The Go Authors. All rights reserved.
+ Copyright 2008 Google Inc.  All rights reserved.
+ Copyright 2018 The Go Authors. All rights reserved.
+ Copyright 2019 The Go Authors. All rights reserved.
+ Copyright 2020 The Go Authors. All rights reserved.
+ Copyright 2022 The Go Authors. All rights reserved.
+ Copyright 2024 The Go Authors. All rights reserved.
+ Copyright 2025 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2018 The Go Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/google.golang.org/protobuf/LICENSE.
+
+Files: vendor/gopkg.in/inf.v0/*
+Copyright: Copyright (c) 2012 Péter Surányi. Portions Copyright (c) 2009 The Go
+License: BSD-3-Clause
+ Copyright (c) 2012 Péter Surányi. Portions Copyright (c) 2009 The Go
+ Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/gopkg.in/inf.v0/LICENSE.
+
+Files: vendor/k8s.io/api/*
+Copyright: Copyright 2015 The Kubernetes Authors.
+ Copyright 2016 The Kubernetes Authors.
+ Copyright 2017 The Kubernetes Authors.
+ Copyright 2018 The Kubernetes Authors.
+ Copyright 2019 The Kubernetes Authors.
+ Copyright 2020 The Kubernetes Authors.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2022 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+ Copyright 2024 The Kubernetes Authors.
+ Copyright 2025 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/api/LICENSE.
+
+Files: vendor/k8s.io/apimachinery/*
+Copyright: Copyright 2014 The Kubernetes Authors.
+ Copyright 2015 The Kubernetes Authors.
+ Copyright 2016 The Kubernetes Authors.
+ Copyright 2017 The Kubernetes Authors.
+ Copyright 2018 The Kubernetes Authors.
+ Copyright 2019 The Kubernetes Authors.
+ Copyright 2020 The Kubernetes Authors.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2022 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+ Copyright 2024 The Kubernetes Authors.
+ Copyright 2025 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/apimachinery/LICENSE.
+
+Files: vendor/k8s.io/client-go/*
+Copyright: Copyright 2014 The Kubernetes Authors.
+ Copyright 2015 The Kubernetes Authors.
+ Copyright 2016 The Kubernetes Authors.
+ Copyright 2017 The Kubernetes Authors.
+ Copyright 2018 The Kubernetes Authors.
+ Copyright 2019 The Kubernetes Authors.
+ Copyright 2020 The Kubernetes Authors.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2022 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+ Copyright 2024 The Kubernetes Authors.
+ Copyright 2025 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/client-go/LICENSE.
+
+Files: vendor/k8s.io/kube-openapi/*
+Copyright: Copyright 2016 The Kubernetes Authors.
+ Copyright 2017 The Kubernetes Authors.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2022 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/kube-openapi/LICENSE.
+
+Files: vendor/k8s.io/utils/*
+Copyright: Copyright 2014 The Kubernetes Authors.
+ Copyright 2015 The Kubernetes Authors.
+ Copyright 2016 The Kubernetes Authors.
+ Copyright 2017 The Kubernetes Authors.
+ Copyright 2018 The Kubernetes Authors.
+ Copyright 2020 The Kubernetes Authors.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+ Copyright 2024 The Kubernetes Authors.
+ Copyright 2025 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/utils/LICENSE.
+
+Files: vendor/sigs.k8s.io/json/*
+Copyright: Copyright 2010 The Go Authors. All rights reserved.
+ Copyright 2011 The Go Authors. All rights reserved.
+ Copyright 2013 The Go Authors. All rights reserved.
+ Copyright 2016 The Go Authors. All rights reserved.
+ Copyright 2019 The Go Authors. All rights reserved.
+ Copyright 2021 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/sigs.k8s.io/json/LICENSE.
+
+Files: vendor/sigs.k8s.io/randfill/*
+Copyright: Copyright 2014 Google Inc. All rights reserved.
+ Copyright 2014 The gofuzz Authors.
+ Copyright 2025 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/sigs.k8s.io/randfill/LICENSE.
+ Upstream NOTICE:
+ When donating the randfill project to the CNCF, we could not reach all the
+ gofuzz contributors to sign the CNCF CLA. As such, according to the CNCF rules
+ to donate a repository, we must add a NOTICE referencing section 7 of the CLA
+ with a list of developers who could not be reached.
+ .
+ `7. Should You wish to submit work that is not Your original creation, You may
+ submit it to the Foundation separately from any Contribution, identifying the
+ complete details of its source and of any license or other restriction
+ (including, but not limited to, related patents, trademarks, and license
+ agreements) of which you are personally aware, and conspicuously marking the
+ work as "Submitted on behalf of a third-party: [named here]".`
+ .
+ Submitted on behalf of a third-party: @dnephin (Daniel Nephin)
+ Submitted on behalf of a third-party: @AlekSi (Alexey Palazhchenko)
+ Submitted on behalf of a third-party: @bbigras (Bruno Bigras)
+ Submitted on behalf of a third-party: @samirkut (Samir)
+ Submitted on behalf of a third-party: @posener (Eyal Posener)
+ Submitted on behalf of a third-party: @Ashikpaul (Ashik Paul)
+ Submitted on behalf of a third-party: @kwongtailau (Kwongtai)
+ Submitted on behalf of a third-party: @ericcornelissen (Eric Cornelissen)
+ Submitted on behalf of a third-party: @eclipseo (Robert-André Mauchin)
+ Submitted on behalf of a third-party: @yanzhoupan (Andrew Pan)
+ Submitted on behalf of a third-party: @STRRL (Zhiqiang ZHOU)
+ Submitted on behalf of a third-party: @disconnect3d (Disconnect3d)
+
+Files: vendor/sigs.k8s.io/yaml/*
+Copyright: Copyright (c) 2006-2010 Kirill Simonov
+ Copyright (c) 2006-2011 Kirill Simonov
+ Copyright (c) 2011-2019 Canonical Ltd
+ Copyright (c) 2012 The Go Authors. All rights reserved.
+ Copyright (c) 2014 Sam Ghods
+ Copyright 2013 The Go Authors. All rights reserved.
+ Copyright 2021 The Kubernetes Authors.
+ copyright staring in 2011 when the project was ported over:
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/sigs.k8s.io/yaml/LICENSE.
+
+Files: vendor/github.com/cilium/ebpf/*
+Copyright: Copyright (c) 2017 Nathan Sweet
+ Copyright (c) 2018, 2019 Cloudflare
+ Copyright (c) 2019 Authors of Cilium
+ Copyright 2009 The Go Authors. All rights reserved.
+License: MIT
+ MIT License
+ .
+ Copyright (c) 2017 Nathan Sweet
+ Copyright (c) 2018, 2019 Cloudflare
+ Copyright (c) 2019 Authors of Cilium
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+Comment: License terms copied from vendor/github.com/cilium/ebpf/LICENSE.
+
+Files: vendor/github.com/davecgh/go-spew/*
+Copyright: Copyright (c) 2012-2016 Dave Collins <dave@davec.name>
+ Copyright (c) 2013-2016 Dave Collins <dave@davec.name>
+ Copyright (c) 2015-2016 Dave Collins <dave@davec.name>
+License: ISC
+ ISC License
+ .
+ Copyright (c) 2012-2016 Dave Collins <dave@davec.name>
+ .
+ Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+Comment: License terms copied from vendor/github.com/davecgh/go-spew/LICENSE.
+
+Files: vendor/github.com/go-logr/logr/*
+Copyright: Copyright 2019 The logr Authors.
+ Copyright 2020 The logr Authors.
+ Copyright 2023 The logr Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-logr/logr/LICENSE.
+
+Files: vendor/github.com/go-openapi/jsonpointer/*
+Copyright: Copyright (c) 2015-2025 go-swagger maintainers
+ Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/jsonpointer/LICENSE.
+ Upstream NOTICE:
+ Copyright 2015-2025 go-swagger maintainers
+ .
+ // SPDX-FileCopyrightText: Copyright 2015-2025 go-swagger maintainers
+ // SPDX-License-Identifier: Apache-2.0
+ .
+ This software library, github.com/go-openapi/jsonpointer, includes software developed
+ by the go-swagger and go-openapi maintainers ("go-swagger maintainers").
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this software except in compliance with the License.
+ .
+ You may obtain a copy of the License at
+ .
+   http://www.apache.org/licenses/LICENSE-2.0.
+ .
+ This software is copied from, derived from, and inspired by other original software products.
+ It ships with copies of other software which license terms are recalled below.
+ .
+ The original software was authored on 25-02-2013 by sigu-399 (https://github.com/sigu-399, sigu.399@gmail.com).
+ .
+ github.com/sigu-399/jsonpointer
+ ===========================
+ .
+ // SPDX-FileCopyrightText: Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ // SPDX-License-Identifier: Apache-2.0
+ .
+ Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+   http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: vendor/github.com/go-openapi/jsonreference/*
+Copyright: Copyright (c) 2015-2025 go-swagger maintainers
+ Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/jsonreference/LICENSE.
+ Upstream NOTICE:
+ Copyright 2015-2025 go-swagger maintainers
+ .
+ // SPDX-FileCopyrightText: Copyright 2015-2025 go-swagger maintainers
+ // SPDX-License-Identifier: Apache-2.0
+ .
+ This software library, github.com/go-openapi/jsonreference, includes software developed
+ by the go-swagger and go-openapi maintainers ("go-swagger maintainers").
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this software except in compliance with the License.
+ .
+ You may obtain a copy of the License at
+ .
+   http://www.apache.org/licenses/LICENSE-2.0.
+ .
+ This software is copied from, derived from, and inspired by other original software products.
+ It ships with copies of other software which license terms are recalled below.
+ .
+ The original software was authored on 25-02-2013 by sigu-399 (https://github.com/sigu-399, sigu.399@gmail.com).
+ .
+ github.com/sigh-399/jsonreference
+ ===========================
+ .
+ // SPDX-FileCopyrightText: Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ // SPDX-License-Identifier: Apache-2.0
+ .
+ Copyright 2013 sigu-399 ( https://github.com/sigu-399 )
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+   http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: vendor/github.com/go-openapi/swag/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/LICENSE.
+
+Files: vendor/github.com/google/gnostic-models/*
+Copyright: Copyright 2017 Google LLC. All Rights Reserved.
+ Copyright 2020 Google LLC. All Rights Reserved.
+ Copyright 2022 Google LLC. All Rights Reserved.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/google/gnostic-models/LICENSE.
+
+Files: vendor/github.com/google/uuid/*
+Copyright: Copyright (c) 2009,2014 Google Inc. All rights reserved.
+ Copyright 2016 Google Inc.  All rights reserved.
+ Copyright 2017 Google Inc.  All rights reserved.
+ Copyright 2018 Google Inc.  All rights reserved.
+ Copyright 2021 Google Inc.  All rights reserved.
+ Copyright 2023 Google Inc.  All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2009,2014 Google Inc. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/github.com/google/uuid/LICENSE.
+
+Files: vendor/github.com/inconshreveable/mousetrap/*
+Copyright: No explicit copyright notice in the included upstream files.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/inconshreveable/mousetrap/LICENSE.
+
+Files: vendor/github.com/json-iterator/go/*
+Copyright: Copyright (c) 2016 json-iterator
+License: MIT
+ MIT License
+ .
+ Copyright (c) 2016 json-iterator
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+Comment: License terms copied from vendor/github.com/json-iterator/go/LICENSE.
+
+Files: vendor/github.com/modern-go/concurrent/*
+Copyright: No explicit copyright notice in the included upstream files.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/modern-go/concurrent/LICENSE.
+
+Files: vendor/github.com/modern-go/reflect2/*
+Copyright: No explicit copyright notice in the included upstream files.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/modern-go/reflect2/LICENSE.
+
+Files: vendor/github.com/munnerz/goautoneg/*
+Copyright: Copyright (c) 2011, Open Knowledge Foundation Ltd.
+License: BSD-3-Clause
+ Copyright (c) 2011, Open Knowledge Foundation Ltd.
+ All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+     Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+ .
+     Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+ .
+     Neither the name of the Open Knowledge Foundation Ltd. nor the
+     names of its contributors may be used to endorse or promote
+     products derived from this software without specific prior written
+     permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/github.com/munnerz/goautoneg/LICENSE.
+
+Files: vendor/github.com/pmezard/go-difflib/*
+Copyright: Copyright (c) 2013, Patrick Mezard
+License: BSD-2-Clause
+ Copyright (c) 2013, Patrick Mezard
+ All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+     Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+     Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+     The names of its contributors may not be used to endorse or promote
+ products derived from this software without specific prior written
+ permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/github.com/pmezard/go-difflib/LICENSE.
+
+Files: vendor/github.com/spf13/cobra/*
+Copyright: Copyright 2013-2023 The Cobra Authors
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/spf13/cobra/LICENSE.txt.
+
+Files: vendor/github.com/spf13/pflag/*
+Copyright: Copyright (c) 2012 Alex Ogier. All rights reserved.
+ Copyright (c) 2012 The Go Authors. All rights reserved.
+ Copyright 2009 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2012 Alex Ogier. All rights reserved.
+ Copyright (c) 2012 The Go Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/github.com/spf13/pflag/LICENSE.
+
+Files: vendor/github.com/x448/float16/*
+Copyright: Copyright (c) 2019 Montgomery Edwards⁴⁴⁸ and Faye Amacker
+ Copyright 2019 Montgomery Edwards⁴⁴⁸ and Faye Amacker
+License: MIT
+ MIT License
+ .
+ Copyright (c) 2019 Montgomery Edwards⁴⁴⁸ and Faye Amacker
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+Comment: License terms copied from vendor/github.com/x448/float16/LICENSE.
+
+Files: vendor/go.yaml.in/yaml/v2/*
+Copyright: Copyright (c) 2006 Kirill Simonov
+ Copyright 2011-2016 Canonical Ltd.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/go.yaml.in/yaml/v2/LICENSE.
+ Upstream NOTICE:
+ Copyright 2011-2016 Canonical Ltd.
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: vendor/go.yaml.in/yaml/v3/*
+Copyright: Copyright (c) 2006-2010 Kirill Simonov
+ Copyright (c) 2006-2011 Kirill Simonov
+ Copyright (c) 2011-2019 Canonical Ltd
+ Copyright 2011-2016 Canonical Ltd.
+ copyright staring in 2011 when the project was ported over:
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/go.yaml.in/yaml/v3/LICENSE.
+ Upstream NOTICE:
+ Copyright 2011-2016 Canonical Ltd.
+ .
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+     http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: vendor/golang.org/x/net/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2014 The Go Authors. All rights reserved.
+ Copyright 2015 The Go Authors. All rights reserved.
+ Copyright 2016 The Go Authors. All rights reserved.
+ Copyright 2017 The Go Authors. All rights reserved.
+ Copyright 2018 The Go Authors. All rights reserved.
+ Copyright 2021 The Go Authors. All rights reserved.
+ Copyright 2023 The Go Authors. All rights reserved.
+ Copyright 2024 The Go Authors. All rights reserved.
+ Copyright 2025 The Go Authors. All rights reserved.
+ Copyright 2026 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/net/LICENSE.
+
+Files: vendor/golang.org/x/oauth2/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2014 The Go Authors. All rights reserved.
+ Copyright 2017 The Go Authors. All rights reserved.
+ Copyright 2023 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/oauth2/LICENSE.
+
+Files: vendor/golang.org/x/sys/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2009 The Go Authors. All rights reserved.
+ Copyright 2009,2010 The Go Authors. All rights reserved.
+ Copyright 2010 The Go Authors. All rights reserved.
+ Copyright 2011 The Go Authors. All rights reserved.
+ Copyright 2012 The Go Authors. All rights reserved.
+ Copyright 2013 The Go Authors. All rights reserved.
+ Copyright 2014 The Go Authors. All rights reserved.
+ Copyright 2015 The Go Authors. All rights reserved.
+ Copyright 2016 The Go Authors. All rights reserved.
+ Copyright 2017 The Go Authors. All rights reserved.
+ Copyright 2018 The Go Authors. All rights reserved.
+ Copyright 2019 The Go Authors. All rights reserved.
+ Copyright 2020 The Go Authors. All rights reserved.
+ Copyright 2021 The Go Authors. All rights reserved.
+ Copyright 2022 The Go Authors. All rights reserved.
+ Copyright 2023 The Go Authors. All rights reserved.
+ Copyright 2024 The Go Authors. All rights reserved.
+ Copyright 2025 The Go Authors. All rights reserved.
+ Copyright 2026 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/sys/LICENSE.
+
+Files: vendor/golang.org/x/term/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2011 The Go Authors. All rights reserved.
+ Copyright 2013 The Go Authors. All rights reserved.
+ Copyright 2019 The Go Authors. All rights reserved.
+ Copyright 2021 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/term/LICENSE.
+
+Files: vendor/golang.org/x/text/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2011 The Go Authors. All rights reserved.
+ Copyright 2013 The Go Authors. All rights reserved.
+ Copyright 2015 The Go Authors. All rights reserved.
+ Copyright 2016 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/text/LICENSE.
+
+Files: vendor/golang.org/x/time/*
+Copyright: Copyright 2009 The Go Authors.
+ Copyright 2015 The Go Authors. All rights reserved.
+ Copyright 2022 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright 2009 The Go Authors.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google LLC nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/golang.org/x/time/LICENSE.
+
+Files: vendor/gopkg.in/evanphx/json-patch.v4/*
+Copyright: Copyright (c) 2014, Evan Phoenix
+License: BSD-3-Clause
+ Copyright (c) 2014, Evan Phoenix
+ All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ * Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ * Neither the name of the Evan Phoenix nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/gopkg.in/evanphx/json-patch.v4/LICENSE.
+
+Files: vendor/k8s.io/klog/v2/*
+Copyright: Copyright 2013 Google Inc. All Rights Reserved.
+ Copyright 2014 The Kubernetes Authors.
+ Copyright 2019 The Kubernetes Authors.
+ Copyright 2020 Intel Corporation.
+ Copyright 2021 The Kubernetes Authors.
+ Copyright 2022 The Kubernetes Authors.
+ Copyright 2023 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/klog/v2/LICENSE.
+
+Files: vendor/sigs.k8s.io/structured-merge-diff/v6/*
+Copyright: Copyright 2018 The Kubernetes Authors.
+ Copyright 2019 The Kubernetes Authors.
+ Copyright 2020 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/sigs.k8s.io/structured-merge-diff/v6/LICENSE.
+
+Files: vendor/github.com/emicklei/go-restful/v3/*
+Copyright: Copyright (c) 2012,2013 Ernest Micklei
+ Copyright 2013 Ernest Micklei. All rights reserved.
+ Copyright 2014 Ernest Micklei. All rights reserved.
+ Copyright 2015 Ernest Micklei. All rights reserved.
+ Copyright 2018 Ernest Micklei. All rights reserved.
+ Copyright 2021 Ernest Micklei. All rights reserved.
+ Copyright 2025 Ernest Micklei. All rights reserved.
+License: MIT
+ Copyright (c) 2012,2013 Ernest Micklei
+ .
+ MIT License
+ .
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Comment: License terms copied from vendor/github.com/emicklei/go-restful/v3/LICENSE.
+
+Files: vendor/github.com/fxamacker/cbor/v2/*
+Copyright: Copyright (c) 2019-present Faye Amacker
+ Copyright (c) Faye Amacker. All rights reserved.
+License: MIT
+ MIT License
+ .
+ Copyright (c) 2019-present Faye Amacker
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+Comment: License terms copied from vendor/github.com/fxamacker/cbor/v2/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/cmdutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/cmdutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/conv/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/conv/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/fileutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/fileutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/jsonname/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/jsonname/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/jsonutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/jsonutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/loading/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/loading/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/mangling/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/mangling/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/netutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/netutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/stringutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/stringutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/typeutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/typeutils/LICENSE.
+
+Files: vendor/github.com/go-openapi/swag/yamlutils/*
+Copyright: Copyright 2015-2025 go-swagger maintainers
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/github.com/go-openapi/swag/yamlutils/LICENSE.
+
+Files: vendor/k8s.io/apimachinery/third_party/forked/golang/*
+Copyright: Copyright (c) 2009 The Go Authors. All rights reserved.
+ Copyright 2009 The Go Authors. All rights reserved.
+ Copyright 2013 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2009 The Go Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/k8s.io/apimachinery/third_party/forked/golang/LICENSE.
+
+Files: vendor/k8s.io/kube-openapi/pkg/validation/spec/*
+Copyright: Copyright 2015 go-swagger maintainers
+ Copyright 2022 The Kubernetes Authors.
+License: Apache-2.0
+ On Debian systems, the complete Apache License version 2.0 is in /usr/share/common-licenses/Apache-2.0.
+Comment: License terms copied from vendor/k8s.io/kube-openapi/pkg/validation/spec/LICENSE.
+
+Files: vendor/k8s.io/utils/internal/third_party/forked/golang/*
+Copyright: Copyright (c) 2012 The Go Authors. All rights reserved.
+ Copyright 2009 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2012 The Go Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/k8s.io/utils/internal/third_party/forked/golang/LICENSE.
+
+Files: vendor/k8s.io/kube-openapi/pkg/internal/third_party/go-json-experiment/json/*
+Copyright: Copyright (c) 2020 The Go Authors. All rights reserved.
+ Copyright 2020 The Go Authors. All rights reserved.
+ Copyright 2021 The Go Authors. All rights reserved.
+ Copyright 2022 The Go Authors. All rights reserved.
+License: BSD-3-Clause
+ Copyright (c) 2020 The Go Authors. All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are
+ met:
+ .
+    * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+ copyright notice, this list of conditions and the following disclaimer
+ in the documentation and/or other materials provided with the
+ distribution.
+    * Neither the name of Google Inc. nor the names of its
+ contributors may be used to endorse or promote products derived from
+ this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+Comment: License terms copied from vendor/k8s.io/kube-openapi/pkg/internal/third_party/go-json-experiment/json/LICENSE.
+
+Files: vendor/go.yaml.in/yaml/v2/apic.go
+ vendor/go.yaml.in/yaml/v2/emitterc.go
+ vendor/go.yaml.in/yaml/v2/parserc.go
+ vendor/go.yaml.in/yaml/v2/readerc.go
+ vendor/go.yaml.in/yaml/v2/scannerc.go
+ vendor/go.yaml.in/yaml/v2/writerc.go
+ vendor/go.yaml.in/yaml/v2/yamlh.go
+ vendor/go.yaml.in/yaml/v2/yamlprivateh.go
+Copyright: Copyright (c) 2006 Kirill Simonov
+License: MIT
+ The following files were ported to Go from C files of libyaml, and thus
+ are still covered by their original copyright and license:
+ .
+     apic.go
+     emitterc.go
+     parserc.go
+     readerc.go
+     scannerc.go
+     writerc.go
+     yamlh.go
+     yamlprivateh.go
+ .
+ Copyright (c) 2006 Kirill Simonov
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy of
+ this software and associated documentation files (the "Software"), to deal in
+ the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+Files: bpf/procscope.c bpf/headers/vmlinux.h
+Copyright: 2026 Mutasem-mk4
+License: MIT or GPL-2.0-only
+Comment: These project files declare MIT OR GPL-2.0-only in their SPDX headers.
+
+License: GPL-2.0-only
+ On Debian systems, the complete GNU General Public License version 2 is
+ available in /usr/share/common-licenses/GPL-2.
+
+Files: bpf/headers/bpf/* bpf/headers/LICENSE.BSD-2-Clause
+Copyright: No explicit copyright notice in the copied libbpf header files.
+License: BSD-2-Clause
+ Copyright (c) <year> <owner> . All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+Comment: The headers declare LGPL-2.1 OR BSD-2-Clause; this package uses the
+ BSD-2-Clause alternative. Terms are copied from bpf/headers/LICENSE.BSD-2-Clause.
+ The autogenerated bpf_helper_defs.h is part of the same bundled header set.
