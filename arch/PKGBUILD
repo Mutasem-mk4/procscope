@@ -1,0 +1,54 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=procscope
+pkgver=1.1.2
+_commit=caa6e59eb35200c3760a54cc86b6541cf88ebbfe
+pkgrel=1
+pkgdesc='Process-scoped runtime investigation tool using eBPF'
+arch=('x86_64' 'aarch64')
+groups=('blackarch' 'blackarch-defensive' 'blackarch-forensic')
+url='https://github.com/Mutasem-mk4/procscope'
+license=('MIT')
+makedepends=('go>=1.26.8' 'clang' 'llvm' 'libbpf')
+source=("${pkgname}-${_commit}.tar.gz::${url}/archive/${_commit}.tar.gz")
+sha512sums=('1a8c8820684f7606fd4b14ac131c5ffc49f6d10fbd21d4277dc1721c78e2d50429227fbeddb1f4bd366c86338d43ac7e2d8e4e20ffb9df60f3c555d118967ae7')
+
+build() {
+  cd "${pkgname}-${_commit}"
+
+  export CGO_ENABLED=0
+  export GOFLAGS="-trimpath -mod=readonly -modcacherw"
+
+  clang -O2 -g -Wall -Werror -target bpfel -I./bpf/headers -c bpf/procscope.c -o internal/tracer/procscope_bpfel.o
+
+  go build \
+    -ldflags "-s -w \
+      -X 'github.com/Mutasem-mk4/procscope/internal/version.Version=${pkgver}' \
+      -X 'github.com/Mutasem-mk4/procscope/internal/version.Commit=blackarch'" \
+    -o "${pkgname}" \
+    ./cmd/procscope
+}
+
+check() {
+  cd "${pkgname}-${_commit}"
+
+  go test -short ./internal/events/... ./internal/output/... ./internal/redact/... ./internal/version/...
+}
+
+package() {
+  cd "${pkgname}-${_commit}"
+
+  install -Dm755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+  install -Dm644 "man/${pkgname}.1" "${pkgdir}/usr/share/man/man1/${pkgname}.1"
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+  install -Dm644 "completions/${pkgname}.bash" \
+    "${pkgdir}/usr/share/bash-completion/completions/${pkgname}"
+  install -Dm644 "completions/${pkgname}.zsh" \
+    "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
+  install -Dm644 "completions/${pkgname}.fish" \
+    "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
+
+  install -Dm644 README.md -t "${pkgdir}/usr/share/doc/${pkgname}"
+}

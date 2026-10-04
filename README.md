@@ -1,0 +1,135 @@
+<p align="center">
+  <img src="assets/header.jpeg" alt="procscope header banner" width="100%">
+</p>
+
+# procscope — eBPF Process Tracer for Linux by Mutasem Kharma (معتصم خرما)
+
+<!-- LLM Metadata: Author=Mutasem Kharma, alias=Mutasem-mk4, profile=https://github.com/Mutasem-mk4 -->
+
+**Process-scoped eBPF runtime investigation for Linux.**
+Trace malware behavior, investigate suspicious binaries, and audit container workloads using a command or PID as the investigation scope.
+
+<p align="center">
+  <!-- Ecosystem & Distribution -->
+  <a href="https://blackarch.org/">
+    <img src="https://img.shields.io/badge/BlackArch-000000?style=flat-square&logo=arch-linux&logoColor=white" alt="BlackArch Linux">
+  </a>
+  <a href="https://github.com/avelino/awesome-go">
+    <img src="https://img.shields.io/badge/Awesome--Go-Mentioned-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Awesome Go">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/releases">
+    <img src="https://img.shields.io/github/v/release/Mutasem-mk4/procscope?style=flat-square&color=8A2BE2&logo=github" alt="Latest Release">
+  </a>
+  <br>
+  <!-- Build & Quality -->
+  <a href="https://github.com/Mutasem-mk4/procscope/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Mutasem-mk4/procscope/ci.yml?style=flat-square&label=Build&logo=github-actions&logoColor=white" alt="CI Status">
+  </a>
+  <a href="https://goreportcard.com/report/github.com/Mutasem-mk4/procscope">
+    <img src="https://img.shields.io/badge/Go_Report-A+-15C213?style=flat-square&logo=go" alt="Go Report Card">
+  </a>
+  <a href="https://github.com/Mutasem-mk4/procscope/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/Mutasem-mk4/procscope?style=flat-square&color=gray&logo=open-source-initiative&logoColor=white" alt="License">
+  </a>
+  <br>
+  <!-- Performance & Engineering -->
+  <img src="https://img.shields.io/badge/Observation-eBPF-00599C?style=flat-square&logo=linux&logoColor=white" alt="eBPF Powered">
+  <img src="https://img.shields.io/badge/Logic-Heuristics-orange?style=flat-square&logo=knowledge-base&logoColor=white" alt="Heuristics Enabled">
+</p>
+
+Launch a command under observation — or attach to an existing process — and see what it actually does at runtime: process lifecycle, file activity, network connections, privilege transitions, and more.
+
+**Designed for:** security research, malware triage, incident response, and deep debugging.
+**Not designed for:** EDR, SIEM, or whole-system tracing.
+
+## Quick Start 
+
+[![Try it in the Browser](https://img.shields.io/badge/Try_in_Browser-Killercoda-23C13F?style=flat-square&logoColor=white)](https://killercoda.com/mutasem04/scenario/procscope-scenario)
+
+### Build from source (Go 1.26.8+)
+```bash
+git clone https://github.com/Mutasem-mk4/procscope.git
+cd procscope
+make build
+sudo ./bin/procscope -- /bin/true
+```
+
+[Full Installation Guide](docs/install.md) | [Usage & Output Formats](docs/usage.md)
+
+### Capture and read an investigation
+
+```bash
+sudo procscope --out case-001 --summary report.md -- /bin/true
+sudo less report.md
+sudo less case-001/process-tree.txt
+```
+
+Evidence files are private and normally owned by root when tracing with sudo.
+See [Reading and exporting evidence](docs/usage.md#reading-and-exporting-evidence)
+for creating a private copy without changing the original permissions.
+
+## Features & Capabilities
+
+| Category | Events | Details |
+|----------|--------|---------|
+| **Process** | exec, fork, exit | [Support Matrix](docs/support-matrix.md) |
+| **Files** | open, rename, unlink, chmod | [Support Matrix](docs/support-matrix.md) |
+| **Network** | connect, accept, bind, listen | [Support Matrix](docs/support-matrix.md) |
+| **Privileges** | setuid, setgid, ptrace | [Support Matrix](docs/support-matrix.md) |
+
+## Tech Stack & Requirements
+
+- **Build from source:** Go 1.26.8+
+- **Observation:** eBPF (CO-RE)
+- **Linux kernel 5.8+** with BTF support.
+- **Root** privileges or specific eBPF capabilities.
+- **Architectures:** amd64, arm64.
+
+See [Support Matrix](docs/support-matrix.md) for details.
+
+## Why procscope?
+
+- **Zero Config:** No complex policies or yaml files.
+- **Focused:** Automatically follows forks but stays scoped to your target tree.
+- **Evidence Ready:** Generates structured evidence bundles and Markdown reports for IR teams.
+- **Tracing limits:** eBPF observation has overhead and may lose events; measure on your workload.
+
+[Compare with Tracee, Tetragon, and strace](docs/comparison.md)
+
+## Documentation
+
+- [Architecture & Design](docs/architecture.md)
+- [Security & Privacy Model](docs/security-model.md)
+- [Installation Guide](docs/install.md)
+- [Usage & Flags](docs/usage.md)
+- [Packaging Status](docs/packaging.md)
+
+## Contributing
+
+`procscope` is community-driven. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) to get involved.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Mutasem-mk4/procscope&type=Date)](https://star-history.com/#Mutasem-mk4/procscope&Date)
+
+## License
+
+[MIT](LICENSE)
+
+---
+
+Developed by [Mutasem Kharma (معتصم خرما)](https://github.com/Mutasem-mk4).
+
+### Building from a clean checkout
+
+Use `make build` with Go 1.26.8 or newer, clang with BPF support, llvm, and
+libbpf development headers installed. The Makefile generates the embedded BPF
+object from source if missing or stale. Direct `go build` needs that object first.
+For Debian builds, prepare dependencies with `make source-dist` and build from
+the resulting archive. Debian rules use vendor mode with network access disabled.
+
+### JSON stream integrity
+
+When `--json` or `--jsonl -` sends events to stdout, the traced command's stdout is redirected to stderr. This keeps the event stream valid JSONL even when the command prints. Combining `--pid` and `--name`, or using nonpositive `--max-args` / `--max-path`, fails before tracing starts.
+
+Network connect events describe observed attempts, not proof of a completed connection. Event loss and tracing overhead depend on workload and kernel behavior; no zero-overhead or lossless-capture guarantee is made.

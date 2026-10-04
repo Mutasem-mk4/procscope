@@ -1,0 +1,24 @@
+name: ✨ Feature Request
+description: Suggest an idea or new event type for procscope.
+title: "[Feature] <title here>"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Features generally require writing a new eBPF kernel program hook.
+        Please describe your ideal solution clearly!
+  - type: textarea
+    id: description
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear and concise description of what the problem is.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: What new telemetry or CLI capability do you want?
+    validations:
+      required: true
