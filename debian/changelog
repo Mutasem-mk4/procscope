@@ -5,7 +5,7 @@ procscope (1.1.2-2) unstable; urgency=medium
   * Record vendored component licenses and their upstream copyright notices.
   * Require and select the versioned Go compiler at the module's patch level.
   * Correct the preceding release date to its verified publication time.
-  * Restore vendored Apache NOTICE files and ship them with the binary.
+  * Install existing vendored Apache NOTICE files and record their provenance.
   * Check compressed man pages and the completion subcommand in DEP-8.
   * Report missing runtime prerequisites as SKIP and fail tracing errors.
 

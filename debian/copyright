@@ -1227,15 +1227,3 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
-
-Files: debian/patches/restore-vendor-notices.patch
-Copyright: 2011-2016 Canonical Ltd.
- 2013 sigu-399
- 2015-2025 go-swagger maintainers
- 2026 Mutasem Kharma
-License: Apache-2.0
- On Debian systems, the complete Apache License, Version 2.0 is available
- in /usr/share/common-licenses/Apache-2.0.
-Comment: The patch restores verbatim NOTICE files for the versions in go.mod.
- Their source URLs and SHA256 values are recorded in debian/notice-provenance.json.
- Copies are installed in /usr/share/doc/procscope/third-party-notices/.
