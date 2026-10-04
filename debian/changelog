@@ -2,7 +2,7 @@ procscope (1.1.2-2) unstable; urgency=medium
 
   * Use the maintainer contact documented in the Parrot submission.
   * Declare the AMD64 and ARM64 architectures covered by acceptance tests.
-  * Record vendored component licenses and their upstream copyright notices.
+  * Record vendored component and bundled BPF header licenses and notices.
   * Require and select the versioned Go compiler at the module's patch level.
   * Correct the preceding release date to its verified publication time.
   * Install existing vendored Apache NOTICE files and record their provenance.
