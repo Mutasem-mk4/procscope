@@ -7,6 +7,7 @@ procscope (1.1.2-2) unstable; urgency=medium
   * Correct the preceding release date to its verified publication time.
   * Restore vendored Apache NOTICE files and ship them with the binary.
   * Check compressed man pages and the completion subcommand in DEP-8.
+  * Report missing runtime prerequisites as SKIP and fail tracing errors.
 
  -- Mutasem Kharma <kharma.mutasem@gmail.com>  Sat, 03 Oct 2026 23:52:00 +0000
 

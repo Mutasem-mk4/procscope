@@ -7,4 +7,4 @@ Depends: procscope
 
 Tests: runtime-smoke
 Depends: procscope
-Restrictions: needs-root, isolation-machine, allow-stderr
+Restrictions: needs-root, isolation-machine, allow-stderr, skippable
